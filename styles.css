@@ -1,0 +1,40 @@
+body{
+    margin: 0px;
+ 
+   background-image: url("coderain.jpg"); 
+   background-position: center; 
+   background-attachment: fixed;
+}
+.content{
+gap:1%;
+    display: flex;
+  padding-top: 10%;
+  padding-left: 1%;
+  padding-right: 1%;
+
+}
+.content img{
+    width:100%;
+}
+.left{ width:40%;
+  background-color: white;
+ box-shadow: 0 0 10px #001aff;
+
+
+}
+.right{ 
+  padding:2%;
+ box-shadow: 0 0 10px #001aff;
+
+
+    background-color: white;
+  width:60%;
+}
+.center{ 
+    padding:2%;
+   box-shadow: 0 0 10px #001aff;
+  
+  
+      background-color: white;
+ 
+  }
