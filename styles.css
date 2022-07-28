@@ -1,6 +1,6 @@
 body{
     margin: 0px;
- 
+ color: white;
    background-image: url("coderain.jpg"); 
    background-position: center; 
    background-attachment: fixed;
@@ -17,7 +17,7 @@ gap:1%;
     width:100%;
 }
 .left{ width:40%;
-  background-color: white;
+  background-color: rgba(0, 0, 0, 0.85);
  box-shadow: 0 0 10px #001aff;
 
 
@@ -27,7 +27,7 @@ gap:1%;
  box-shadow: 0 0 10px #001aff;
 
 
-    background-color: white;
+    background-color: rgba(0, 0, 0, 0.85);
   width:60%;
 }
 .center{ 
@@ -35,6 +35,6 @@ gap:1%;
    box-shadow: 0 0 10px #001aff;
   
   
-      background-color: white;
+      background-color: rgba(0, 0, 0, 0.85);
  
   }
