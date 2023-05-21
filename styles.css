@@ -11,7 +11,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  text-align: center;
+  text-align: left;
   min-height: 100vh;
   margin: 0;
   transition: background 0.2s linear;
@@ -19,7 +19,7 @@ body {
 
 body.dark {background-color: #000000;} /* #9b59b6 */
 
-body.dark h1, body.dark p, body.dark .socials a {color: #fff;}
+body.dark h1, body.dark p, body.dark h2, body.dark hr,  body.dark h3, body.dark .socials a {color: #fff;}
 
  body.dark .right, body.dark .center {box-shadow:0 0 10px #3bdf85;}
 
