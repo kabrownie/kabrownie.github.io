@@ -109,3 +109,29 @@ body.dark h1, body.dark p, body.dark h2, body.dark hr,  body.dark h3, body.dark 
         border-radius: 4px;
         background: rgb(0, 0, 0);
       }
+      @media screen and (max-width: 999px) {
+       body{
+    
+       }
+       .left{
+        visibility:hidden;
+        width: 0%;
+       }
+       .right{
+        width: 100%;
+     
+        margin: 0%;
+       }
+       .center{
+        width: 100%;
+     
+        margin: 0%;
+       }
+      }
+      @media screen and (min-width: 999px) {
+        .small{
+          visibility: hidden;
+          width: 0%;
+          height: 0%;
+        }
+      }
