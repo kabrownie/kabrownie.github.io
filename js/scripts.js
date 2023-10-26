@@ -104,7 +104,7 @@
 
         $(".typing").typed({
         
-            strings: ["Hello there👋", "Welcome to Tekla Events😊"],    
+            strings: ["Hello there", "Welcome","This is Where Kabrownie's works reside"],    
             typeSpeed: 100
           });
          });
