@@ -166,7 +166,7 @@ fieldset {
 
 .button:before {
 	font-family: 'FontAwesome';
-	speak: none;
+	
 	font-style: normal;
 	font-weight: normal;
 	font-variant: normal;
@@ -348,7 +348,7 @@ body.loaded #preloader{
     vertical-align: middle;
 }
 
-.header-text {}
+
 
 .home-section-background h2 {
     color: #f8f8f8;
@@ -484,7 +484,7 @@ body.loaded #preloader{
 	position: absolute;
 }
 
-.about-me {}
+
 
 .about-me h2 {
 	padding: 0px 50px;
@@ -1457,15 +1457,3 @@ ul.portfolio li.active {
 
 
 /* UiPasta Credit */
-
-.uipasta-credit {
-}
-
-.uipasta-credit a {
-    color: #7a7a7a;
-    font-weight: 600;
-}
-
-.uipasta-credit a:hover {
-    color: #ffffff;
-}
