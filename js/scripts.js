@@ -104,8 +104,8 @@
 
         $(".typing").typed({
         
-            strings: ["Hello there", "Welcome","This is Where Kabrownie's works reside"],    
-            typeSpeed: 100
+            strings: ["Hello there", "scroll down"],    
+            typeSpeed: 50
           });
          });
         
