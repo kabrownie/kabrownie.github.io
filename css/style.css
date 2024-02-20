@@ -653,87 +653,28 @@ body.loaded #preloader{
 
 .social-icon li a {
   display: block;
-  width: 60px;
-  height: 60px;
-  line-height: 60px;
-  color: #fff;
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
+  color: #000000;
   text-align: center;
   border: 0 none;
   border-radius: 4px;
   font-size: 30px;
-  box-shadow: 0px 1px 2px 0px rgba(90, 91, 95, 0.15);
+  box-shadow: 0px 2px 4px 0px rgba(61, 61, 61, 0.15);
   transition: all 0.3s ease-in-out;
+  background-color: #a8a8a8;
 }
 
 .social-icon li a:hover {
    box-shadow: 0px 8px 15px 0px rgba(90, 91, 95, 0.33);
+   background-color: #616161;
+   color: #ffffff;
 }
 
 .social-icon li a .fa {
   line-height: inherit;
 }
-
-.facebook {
-   background-color: #3b5998;
-}
-
-.twitter {
-   background-color: #1da1f2;
-}
-
-.google-plus {
-   background-color: #dd4b39;
-}
-
-.instagram {
-   background-color: #464545;
-}
-
-.linkedin {
-   background-color: #0077b5;
-}
-
-.pinterest {
-   background-color: #bd081c;
-}
-
-.youtube {
-   background-color: #cd201f;
-}
-
-.vimeo {
-   background-color: #1ab7ea;
-}
-
-.dribbble {
-   background-color: #ea4c89;
-}
-
-.behance {
-   background-color: #1769ff;
-}
-
-.flickr {
-   background-color: #ff0084;
-}
-
-.tumblr {
-   background-color: #35465c;
-}
-
-.foursquare {
-   background-color: #f94877;
-}
-
-.github {
-   background-color: #333333;
-}
-
-.skype {
-   background-color: #00aff0;
-}
-
-
 
 
 
