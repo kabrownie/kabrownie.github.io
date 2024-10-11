@@ -320,7 +320,7 @@ body.loaded #preloader{
 
 .home-section-background {
 
-    
+
     position: relative;
     height: 100%;
     background: url(../images/bg/walk.png);
@@ -1286,4 +1286,5 @@ h1{
     -webkit-transition: all 0.2s;
     transition: all 0.2s;
   }
-  
+  /* frame */
+ 
