@@ -319,6 +319,8 @@ body.loaded #preloader{
 }
 
 .home-section-background {
+
+    
     position: relative;
     height: 100%;
     background: url(../images/bg/walk.png);
