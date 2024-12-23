@@ -327,7 +327,7 @@ body.loaded #preloader{
     top: 0;
     height: 100%;
     width: 100%; /* Make sure it spans the full width */
-    background: url(../images/bg/yon.png) no-repeat center center; /* Center the image */
+    background: url(../images/bg/yon.png) no-repeat center top; /* Center the image */
     background-size: cover; /* Scale to cover the container */
     z-index: 1;
 }
