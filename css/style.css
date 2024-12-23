@@ -315,13 +315,16 @@ body.loaded #preloader{
 /* Home Section and Navigation Menu */
 
 .home-section {
+    position: relative;
     height: 100vh; /* Ensure it fills the full viewport height */
     width: 100vw; /* Ensure it spans the full width */
     overflow: hidden; /* Prevent accidental scrollbars */
 }
 
 .home-section-background {
-    position: relative;
+    position: absolute;
+    left: 0;
+    top: 0;
     height: 100%;
     width: 100%; /* Make sure it spans the full width */
     background: url(../images/bg/yon.png) no-repeat center center; /* Center the image */
@@ -329,16 +332,6 @@ body.loaded #preloader{
     z-index: 1;
 }
 
-.home-section-background:after {
-    position: absolute;
-    background: rgba(0, 0, 0, .7); /* Add an overlay */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    content: "";
-    z-index: 0; /* Ensure it’s below the main content */
-}
 
 .display-table {
     display: table;
