@@ -316,8 +316,8 @@ body.loaded #preloader{
 
 .home-section {
     position: relative;
-    height: 100vh; /* Ensure it fills the full viewport height */
-    width: 100vw; /* Ensure it spans the full width */
+    height: 100%; /* Ensure it fills the full viewport height */
+    width: 100%; /* Ensure it spans the full width */
     overflow: hidden; /* Prevent accidental scrollbars */
 }
 
