@@ -318,16 +318,25 @@ body.loaded #preloader{
     height: 100%;
 }
 
-.home-section-background {
+/* .home-section-background {
 
 
-    position: relative;
+  
     height: 100%;
     background: url(../images/bg/yon.png);
 
-    background-size: cover;
+background-position: center;
+    background-size:cover;
+    z-index: 1;
+} */
+.home-section-background {
+    height: 100vh; /* Ensure it takes the full height of the viewport */
+    width: 100%; /* Full width for responsiveness */
+    background: url(../images/bg/yon.png) no-repeat center center; /* Center the image */
+    background-size: cover; /* Ensure it covers the container */
     z-index: 1;
 }
+
 
 .home-section-background:after {
     position: absolute;
