@@ -315,38 +315,29 @@ body.loaded #preloader{
 /* Home Section and Navigation Menu */
 
 .home-section {
-    height: 100%;
+    height: 100vh; /* Ensure it fills the full viewport height */
+    width: 100vw; /* Ensure it spans the full width */
+    overflow: hidden; /* Prevent accidental scrollbars */
 }
 
-/* .home-section-background {
-
-
-  
-    height: 100%;
-    background: url(../images/bg/yon.png);
-
-background-position: center;
-    background-size:cover;
-    z-index: 1;
-} */
 .home-section-background {
-    height: 100vh; /* Ensure it takes the full height of the viewport */
-    width: 100%; /* Full width for responsiveness */
+    position: relative;
+    height: 100%;
+    width: 100%; /* Make sure it spans the full width */
     background: url(../images/bg/yon.png) no-repeat center center; /* Center the image */
-    background-size: cover; /* Ensure it covers the container */
+    background-size: cover; /* Scale to cover the container */
     z-index: 1;
 }
-
 
 .home-section-background:after {
     position: absolute;
-    background: rgba(0, 0, 0, .7);
+    background: rgba(0, 0, 0, .7); /* Add an overlay */
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     content: "";
-    z-index: -1;
+    z-index: 0; /* Ensure it’s below the main content */
 }
 
 .display-table {
