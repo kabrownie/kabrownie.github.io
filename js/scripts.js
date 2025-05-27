@@ -1,27 +1,4 @@
 
-
-
-
-/*
-   
-   Table Of Content
-   
-   1. Preloader
-   2. Smooth Scroll
-   3. Scroll Naviagation Background Change with Sticky Navigation
-   4. Mobile Navigation Hide or Collapse on Click
-   5. Scroll To Top
-   6. Typed.js
-   7. Parallax Background
-   8. Portfolio Filtering
-   9. Magnific Popup
-  10. Testimonial Carousel/Slider
-  11. Statistics Counter
-  12. Google Map
- 
-
-*/
-// LATEAST VEDIO
 var channelID = "UClJQtVgkzmf_9P65QrVOq0A";
 var reqURL = "https://www.youtube.com/feeds/videos.xml?channel_id=";
 $.getJSON("https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(reqURL)+channelID, function(data) {
@@ -37,12 +14,7 @@ $("#youtube_video").attr("src","https://youtube.com/embed/"+id + "?controls=0&sh
     jQuery(document).ready(function () {
 
         
-       /* Preloader */
-		
-        $(window).on('load', function() {
-          $('body').addClass('loaded');
-        });
-		
+     
 		
 		
        /* Smooth Scroll */
