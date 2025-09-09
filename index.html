@@ -54,274 +54,893 @@
         "description": "Kevin Karanja (karanja3d) is considered one of the best animators in Kenya. He’s a talented 3D artist and developer who combines creativity and tech to create captivating animations."
       }
     </script>
-  </head>
-   
-
-
-    <!-- SEO -->
-   
-    <meta name="url" content="http://kabrownie.github.io">
-    <meta name="copyright" content="Kevin Karanja">
-    <meta name="robots" content="index,follow">
-    
- 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="images/favicon/favicon.ico">
-    <link rel="apple-touch-icon" sizes="144x144" type="image/x-icon" href="images/favicon/apple-touch-icon.png">
-    
-    <!-- All CSS Plugins -->
-    <link rel="stylesheet" type="text/css" href="css/plugin.css">
-    
-    <!-- Main CSS Stylesheet -->
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <script src="https://kit.fontawesome.com/c4b1e869c9.js" crossorigin="anonymous"></script>
-    <!-- Google Web Fonts  -->
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:400,300,500,600,700">
-    <link rel="preload" href="sinisaaamoja-ezgif.gif" as="image" type="image/gif" />
- 
-    <meta name="google-site-verification" content="0oKZDiSAmYP5awc8_vFsTRHCuZLGWJW_Rl8bUbfZpzc" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            background: #0a0a1a;
+            touch-action: none;
+        }
+        
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a1a;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            color: white;
+            font-size: 24px;
+            transition: opacity 1s ease;
+        }
+        
+        .progress-bar {
+            width: 300px;
+            height: 5px;
+            background: #333;
+            margin-top: 20px;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            width: 0%;
+            background: #4f8cff;
+            transition: width 0.5s ease;
+        }
+        
+        .ui-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+        
+        .section-panel {
+            position: absolute;
+            width: 400px;
+            background: rgba(10, 10, 26, 0.95);
+            border-radius: 10px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            pointer-events: all;
+            display: none;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .close-button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .close-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .social-icon {
+            margin: 10px 5px;
+            display: inline-block;
+        }
+        
+        .button {
+            padding: 10px 15px;
+            border-radius: 5px;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            margin: 5px;
+            pointer-events: all;
+            transition: all 0.3s ease;
+        }
+        
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .controls-info {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            pointer-events: none;
+        }
+        
+        /* Mobile controls */
+        .mobile-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            pointer-events: all;
+        }
+        
+        .control-button {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 5px;
+            font-size: 24px;
+            color: white;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .movement-controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .horizontal-controls {
+            display: flex;
+            justify-content: space-between;
+            width: 180px;
+        }
+        
+        .interaction-button {
+            position: fixed;
+            bottom: 100px;
+            left: 20px;
+            width: 60px;
+            height: 60px;
+            background: rgba(79, 140, 255, 0.7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: white;
+            pointer-events: all;
+            display: none;
+        }
+        
+        h2 {
+            margin-bottom: 15px;
+            color: #4f8cff;
+        }
+        
+        h3 {
+            margin: 15px 0 8px;
+            color: #6c9eff;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .services-detail {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+        
+        .highlight {
+            color: #4f8cff;
+            font-weight: 500;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .section-panel {
+                width: 90%;
+                left: 5%;
+                transform: none;
+                margin: 5% auto;
+            }
+            
+            .mobile-controls {
+                display: flex;
+            }
+            
+            .interaction-button {
+                display: flex;
+            }
+            
+            .controls-info {
+                display: none;
+            }
+        }
+    </style>
 </head>
+<body>
+    <div class="loading-screen" id="loading-screen">
+        <div>Loading 3D Portfolio...</div>
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+    </div>
 
-  <body>
-    	
-	
-  
-    <!-- Home & Menu Section Start -->
-    <header id="home" class="home-section">
-        
-        <div class="header-top-area">
-            <div class="container">
-                <div class="row">
+    <div id="canvas-container"></div>
+
+    <div class="ui-overlay">
+        <div id="about-panel" class="section-panel">
+            <button class="close-button">&times;</button>
+            <h2>Who is this?</h2>
+            <p>I'm <span class="highlight">Kevin Karanja</span>, a 3D animator, 3D artist, and software developer from Kenya. I developed an interest in creating animation while pursuing my degree in computer science. That curiosity eventually led me to earn a Certificate in Animation and Visual Effects.</p>
+            <p>I love creating stories with Blender, whether it's modelling, sculpting, rigging, or full 3D animation. On the tech side, I develop Android apps with Java/Kotlin and web projects with Laravel and Django.</p>
+        </div>
+
+        <div id="services-panel" class="section-panel">
+            <button class="close-button">&times;</button>
+            <h2>What can I do?</h2>
+            <div class="services-detail">
+                <h3>3D Arts and Animations</h3>
+                <p>Explore my 3D portfolio showcasing my skills in Blender for modeling, sculpting, rigging, and animation.</p>
+                <a href="https://kabrownie.github.io/3D/" class="button" style="background-color: #f59842;">View 3D Portfolio</a>
+            </div>
+            <div class="services-detail">
+                <h3>Software development</h3>
+                <p>Android apps with Java/Kotlin and web projects with Laravel and Django.</p>
+                <a href="https://github.com/kabrownie/" target="_blank" class="button" style="background-color: #34a853;">View GitHub</a>
+            </div>
+            <div class="services-detail">
+                <h3>Music production</h3>
+                <p>Listen to my beats and music productions.</p>
+                <a href="https://kabrownie.github.io/Kabrowniebeats/" target="_blank" class="button" style="background-color: #ea4335;">Listen to Beats</a>
+            </div>
+        </div>
+
+        <div id="contact-panel" class="section-panel">
+            <button class="close-button">&times;</button>
+            <h2>Contact Me</h2>
+            <div class="social-icon">
+                <a class="button" style="background-color: rgb(47, 56, 59);" href="mailto:karanja3d@gmail.com" title="Email" target="_blank">Email</a>
+                <a class="button" style="background-color: rgb(190, 112, 206);" href="https://instagram.com/karanja3d" title="instagram" target="_blank">Instagram</a>
+                <a class="button" style="background-color: rgb(73, 73, 73);" href="https://github.com/kabrownie" title="github" target="_blank">GitHub</a>
+                <a class="button" style="background-color: rgb(93, 150, 255);" href="https://linkedin.com/in/kabrownie" title="linkedin" target="_blank">LinkedIn</a>
+                <a class="button" style="background-color: rgb(93, 150, 255);" href="https://facebook.com/karanja3d" title="facebook" target="_blank">Facebook</a>
+                <a class="button" style="background-color: rgb(55, 60, 68);" href="https://tiktok.com/@karanja3d" title="Tiktok" target="_blank">Tiktok</a>
+                <a class="button" style="background-color: rgb(255, 77, 77);" href="https://m.youtube.com/@karanja3d" title="youtube" target="_blank">YouTube</a>
+                <a class="button" style="background-color: rgb(45, 125, 150);" href="https://t.me/karanja3d" title="Telegram" target="_blank">Telegram</a>
+                <a class="button" style="background-color: rgb(29, 39, 43);" href="https://lichess.org/@/karanja3d" title="Lichess" target="_blank">Lichess</a>
+                <a class="button" style="background-color: rgb(55, 57, 175);" href="https://discordapp.com/users/896352421171851316" title="discord" target="_blank">Discord</a>
+                <a class="button" style="background-color: rgb(47, 56, 59);" href="https://docs.google.com/document/d/1XS87i8TKxL9-BYXZ0SMG5nzsEIVCS59859iofD8Tu7Q/edit?tab=t.0#heading=h.k8ysck8q9mgf" title="Resume" target="_blank">View Resume</a>
+            </div>
+        </div>
+
+        <div id="art-panel" class="section-panel">
+            <button class="close-button">&times;</button>
+            <h2>My 3D Art & Animations</h2>
+            <p>Here is my Animation playlist:</p>
+            <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin: 15px 0;">
+                <iframe src="https://www.youtube.com/embed/?list=PLiNkLEq7cWM7p4sXHd0Ey6BrCfesOFE8d" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" allowfullscreen></iframe>
+            </div>
+            <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin: 15px 0;">
+                <iframe src="https://www.youtube.com/embed/?list=PLiNkLEq7cWM4CPexTNnBC3y5zEQwiwFVN" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" allowfullscreen></iframe>
+            </div>
+            <p>More animations can be found on <a href="https://m.youtube.com/@karanja3d" style="color: #4da6ff;">my YouTube channel</a></p>
+        </div>
+
+        <div class="controls-info">
+            Use WASD or Arrow Keys to move, mouse to look around, and click on interactive items
+        </div>
+
+        <!-- Mobile controls -->
+        <div class="mobile-controls">
+            <div class="movement-controls">
+                <div class="control-button" id="up-button">↑</div>
+                <div class="horizontal-controls">
+                    <div class="control-button" id="left-button">←</div>
+                    <div class="control-button" id="right-button">→</div>
+                </div>
+                <div class="control-button" id="down-button">↓</div>
+            </div>
+        </div>
+
+        <div class="interaction-button" id="interaction-button">F</div>
+    </div>
+
+    <script>
+        // Main Three.js implementation
+        let scene, camera, renderer, controls;
+        let room, sections = [];
+        let raycaster, mouse;
+        let moveForward = false, moveBackward = false, moveLeft = false, moveRight = false;
+        let velocity = new THREE.Vector3();
+        let direction = new THREE.Vector3();
+        let ready = false;
+        let interactiveObjects = [];
+        let loader = new THREE.GLTFLoader();
+        let isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+        // Section data
+        const sectionData = [
+            {
+                id: 'about',
+                title: 'About Me',
+                position: new THREE.Vector3(-5, 2, -4.9),
+                rotation: new THREE.Euler(0, 0, 0),
+                size: { width: 3, height: 2 }
+            },
+            {
+                id: 'services',
+                title: 'My Skills',
+                position: new THREE.Vector3(5, 2, -4.9),
+                rotation: new THREE.Euler(0, Math.PI, 0),
+                size: { width: 3, height: 2 }
+            },
+            {
+                id: 'contact',
+                title: 'Contact Me',
+                position: new THREE.Vector3(-4.9, 2, 5),
+                rotation: new THREE.Euler(0, Math.PI / 2, 0),
+                size: { width: 3, height: 2 }
+            },
+            {
+                id: 'art',
+                title: '3D Art',
+                position: new THREE.Vector3(4.9, 2, 5),
+                rotation: new THREE.Euler(0, -Math.PI / 2, 0),
+                size: { width: 3, height: 2 }
+            }
+        ];
+
+        // Initialize the scene
+        init();
+        animate();
+
+        function init() {
+            // Create scene
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x0a0a1a);
+            
+            // Create camera
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.set(0, 2, 8);
+            
+            // Create renderer
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            document.getElementById('canvas-container').appendChild(renderer.domElement);
+            
+            // Add controls
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.1;
+            controls.rotateSpeed = 0.5;
+            
+            // Add lighting
+            const ambientLight = new THREE.AmbientLight(0x404040, 1);
+            scene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(5, 10, 7);
+            directionalLight.castShadow = true;
+            scene.add(directionalLight);
+            
+            // Create room
+            createRoom();
+            
+            // Create sections
+            createSections();
+            
+            // Add decorative elements
+            addDecorations();
+            
+            // Initialize raycaster for interactions
+            raycaster = new THREE.Raycaster();
+            mouse = new THREE.Vector2();
+            
+            // Event listeners
+            window.addEventListener('resize', onWindowResize);
+            window.addEventListener('keydown', onKeyDown);
+            window.addEventListener('keyup', onKeyUp);
+            renderer.domElement.addEventListener('click', onMouseClick);
+            
+            // Mobile control event listeners
+            setupMobileControls();
+            
+            // Simulate loading progress
+            simulateLoading();
+        }
+
+        function simulateLoading() {
+            let progress = 0;
+            const progressElement = document.getElementById('progress');
+            const interval = setInterval(() => {
+                progress += Math.random() * 5;
+                progressElement.style.width = `${progress}%`;
                 
-                    <div class="col-sm-3">
-                        <div class="logo">
-                            <a href="index.html">KEVIN KARANJA</a>
-                         
-                        </div>
-                    </div>
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        document.getElementById('loading-screen').style.opacity = '0';
+                        setTimeout(() => {
+                            document.getElementById('loading-screen').style.display = 'none';
+                            ready = true;
+                        }, 1000);
+                    }, 500);
+                }
+            }, 100);
+        }
+
+        function createRoom() {
+            room = new THREE.Group();
+            
+            // Floor
+            const floorGeometry = new THREE.PlaneGeometry(20, 20);
+            const floorMaterial = new THREE.MeshStandardMaterial({ 
+                color: 0x111122,
+                roughness: 0.8,
+                metalness: 0.2
+            });
+            const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+            floor.rotation.x = -Math.PI / 2;
+            floor.receiveShadow = true;
+            room.add(floor);
+            
+            // Walls
+            const wallMaterial = new THREE.MeshStandardMaterial({ 
+                color: 0x0c0c1d,
+                roughness: 0.7,
+                metalness: 0.3
+            });
+            
+            // Back wall
+            const backWallGeometry = new THREE.PlaneGeometry(20, 10);
+            const backWall = new THREE.Mesh(backWallGeometry, wallMaterial);
+            backWall.position.z = -10;
+            backWall.position.y = 5;
+            backWall.receiveShadow = true;
+            room.add(backWall);
+            
+            // Front wall (with opening)
+            const frontWallGeometry = new THREE.PlaneGeometry(20, 10);
+            const frontWall = new THREE.Mesh(frontWallGeometry, wallMaterial);
+            frontWall.position.z = 10;
+            frontWall.position.y = 5;
+            frontWall.rotation.y = Math.PI;
+            frontWall.receiveShadow = true;
+            room.add(frontWall);
+            
+            // Left wall
+            const leftWallGeometry = new THREE.PlaneGeometry(20, 10);
+            const leftWall = new THREE.Mesh(leftWallGeometry, wallMaterial);
+            leftWall.position.x = -10;
+            leftWall.position.y = 5;
+            leftWall.rotation.y = Math.PI / 2;
+            leftWall.receiveShadow = true;
+            room.add(leftWall);
+            
+            // Right wall
+            const rightWallGeometry = new THREE.PlaneGeometry(20, 10);
+            const rightWall = new THREE.Mesh(rightWallGeometry, wallMaterial);
+            rightWall.position.x = 10;
+            rightWall.position.y = 5;
+            rightWall.rotation.y = -Math.PI / 2;
+            rightWall.receiveShadow = true;
+            room.add(rightWall);
+            
+            // Ceiling
+            const ceilingGeometry = new THREE.PlaneGeometry(20, 20);
+            const ceilingMaterial = new THREE.MeshStandardMaterial({ 
+                color: 0x080814,
+                roughness: 0.8,
+                metalness: 0.1
+            });
+            const ceiling = new THREE.Mesh(ceilingGeometry, ceilingMaterial);
+            ceiling.position.y = 10;
+            ceiling.rotation.x = Math.PI / 2;
+            ceiling.receiveShadow = true;
+            room.add(ceiling);
+            
+            scene.add(room);
+            
+            // Load custom room model if available
+            // Replace 'models/room.glb' with the path to your room model
+            /*
+            loader.load('models/room.glb', function(gltf) {
+                const model = gltf.scene;
+                model.position.set(0, 0, 0);
+                model.scale.set(1, 1, 1);
+                scene.add(model);
+            }, undefined, function(error) {
+                console.error('Error loading room model:', error);
+            });
+            */
+        }
+
+        function createSections() {
+            sectionData.forEach(data => {
+                // Create canvas for text
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                canvas.width = 512;
+                canvas.height = 256;
+                
+                // Draw background
+                context.fillStyle = 'rgba(15, 15, 35, 0.95)';
+                context.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Draw border
+                context.strokeStyle = '#4f8cff';
+                context.lineWidth = 4;
+                context.strokeRect(2, 2, canvas.width - 4, canvas.height - 4);
+                
+                // Draw title
+                context.font = 'Bold 40px Poppins';
+                context.fillStyle = '#ffffff';
+                context.textAlign = 'center';
+                context.fillText(data.title, canvas.width / 2, 60);
+                
+                // Draw instruction
+                context.font = '20px Poppins';
+                context.fillStyle = '#aaaaaa';
+                context.fillText('Click to explore', canvas.width / 2, 100);
+                
+                // Draw icon based on section type
+                context.font = '80px Arial';
+                context.fillStyle = '#4f8cff';
+                
+                switch(data.id) {
+                    case 'about':
+                        context.fillText('👨‍💻', canvas.width / 2, 180);
+                        break;
+                    case 'services':
+                        context.fillText('⚙️', canvas.width / 2, 180);
+                        break;
+                    case 'contact':
+                        context.fillText('📞', canvas.width / 2, 180);
+                        break;
+                    case 'art':
+                        context.fillText('🎨', canvas.width / 2, 180);
+                        break;
+                }
+                
+                // Create texture from canvas
+                const texture = new THREE.CanvasTexture(canvas);
+                
+                // Create material
+                const material = new THREE.MeshBasicMaterial({
+                    map: texture,
+                    transparent: true,
+                    side: THREE.DoubleSide
+                });
+                
+                // Create mesh
+                const geometry = new THREE.PlaneGeometry(data.size.width, data.size.height);
+                const mesh = new THREE.Mesh(geometry, material);
+                mesh.position.copy(data.position);
+                mesh.rotation.copy(data.rotation);
+                mesh.userData = { type: 'section', id: data.id };
+                
+                scene.add(mesh);
+                sections.push(mesh);
+                interactiveObjects.push(mesh);
+                
+                // Load custom model for this section if available
+                // Replace with your actual model paths
+                /*
+                loader.load(`models/${data.id}-panel.glb`, function(gltf) {
+                    const model = gltf.scene;
+                    model.position.copy(data.position);
+                    model.rotation.copy(data.rotation);
+                    model.scale.set(1, 1, 1);
+                    model.userData = { type: 'section', id: data.id };
+                    scene.add(model);
                     
-                    <div class="col-sm-9">
-                        <div class="navigation-menu">
-                            <div class="navbar">
-                                <div class="navbar-header">
-                                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                                        <span class="sr-only">Toggle navigation</span>
-                                        <span class="icon-bar"></span>
-                                        <span class="icon-bar"></span>
-                                        <span class="icon-bar"></span>
-                                    </button>
-                                </div>
-                                <div class="navbar-collapse collapse">
-                                    <ul class="nav navbar-nav navbar-right">
-                                        <li class="active"><a class="smoth-scroll" href="#home">Home <div class="ripple-wrapper"></div></a>
-                                        </li> 
-                                        <li><a class="smoth-scroll" href="https://kabrownie.github.io/3D/">3D art and Aniamtion</a>
-                                        <!-- <li><a class="smoth-scroll" href="#about">Who is this?</a>
-                                        </li> -->
-                                       
-                                        </li>
-                                        <!-- <li><a class="smoth-scroll" href="bio/index.html">Capstone</a>
-                                        </li> -->
-                                        <li><a class="smoth-scroll" href="#services">Skills</a>
-                                        </li>
-                                        <li><a class="smoth-scroll" href="#contact">talk to me</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="home-section-background" data-stellar-background-ratio="0.6">
-            <div class="display-table">
-                <div class="display-table-cell">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12 text-center">
-                                <div class="header-text">
-                        
-                                    <p>
-                                        <br><span class="typing"></span></p>
-                                    
-                                    <div class="margin-top-60">
-                         
+                    // Remove the placeholder
+                    scene.remove(mesh);
+                    
+                    // Add to interactive objects
+                    interactiveObjects.push(model);
+                }, undefined, function(error) {
+                    console.error(`Error loading ${data.id} model:`, error);
+                });
+                */
+            });
+        }
 
-                                  </div>
-                                
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-    </header>
-
-    <!-- About Start -->
-    <section id="about" class="about-section">
-       
-           
+        function addDecorations() {
+            // Add some decorative elements to make the room more interesting
             
-                <div class="about-me section-space-padding">
-                 
-                  <h2>Who is this?</h2>              
-                  <p>
-                    Kevin Karanja is a 3D animator, 3D artist, and developer from Kenya. He uses Blender to create visual storytelling. Kevin, a computer science graduate from Dedan Kimathi University of Technology, creates computer programs and animations. His technical skills include Blender <b>(3D modelling, sculpting, rigging, and 3D animation)</b>, Android development <b>(Java/Kotlin SDK)</b>, and web programming <b>( Laravel and Django)</b>. Kevin also creates original music with FL Studio. 
-                   
-               </p>
-               
-       
-       </section>
-       <!-- About End -->
-
-    <hr>
-    <!-- Services Start -->
-    <section id="services" class="services-section section-space-padding">
-        <div class="container">
-           <div class="row">
-                <div class="col-sm-12">
-                    <div class="section-title">
-                        <h2>What can I do?</h2>
-                        <p> This is what</p>
-                    </div>
-                </div>
-            </div>
+            // Table in the center
+            const tableGeometry = new THREE.BoxGeometry(4, 0.5, 2);
+            const tableMaterial = new THREE.MeshStandardMaterial({ color: 0x2a1e1e });
+            const table = new THREE.Mesh(tableGeometry, tableMaterial);
+            table.position.y = 0.25;
+            table.castShadow = true;
+            table.receiveShadow = true;
+            scene.add(table);
             
-            <div class="row">
+            // Computer on table
+            const monitorGeometry = new THREE.BoxGeometry(1.5, 0.8, 0.1);
+            const monitorMaterial = new THREE.MeshStandardMaterial({ color: 0x111111 });
+            const monitor = new THREE.Mesh(monitorGeometry, monitorMaterial);
+            monitor.position.set(0, 0.9, 0);
+            monitor.castShadow = true;
+            scene.add(monitor);
             
-            <div class="col-md-4 col-sm-6">
-				<div class="services-detail">
-					<img src="images/favicon/blender.png" alt="blender" style="height: 20%; width: 20%;">
-					<a href="https://kabrownie.github.io/3D/"><h3>3D Arts and Animations</h3>
-					<hr>
-					<p><b>Click Here</b> </a>to  Explore my 3D portfolio</p>
-				</div>
-			</div>
+            // Add some floating particles for visual interest
+            const particleGeometry = new THREE.SphereGeometry(0.05, 8, 8);
+            const particleMaterial = new THREE.MeshBasicMaterial({ color: 0x4f8cff });
+            
+            for (let i = 0; i < 50; i++) {
+                const particle = new THREE.Mesh(particleGeometry, particleMaterial);
+                particle.position.set(
+                    (Math.random() - 0.5) * 15,
+                    Math.random() * 8 + 1,
+                    (Math.random() - 0.5) * 15
+                );
+                particle.userData = { 
+                    originalY: particle.position.y,
+                    speed: Math.random() * 0.5 + 0.2
+                };
+                scene.add(particle);
+            }
+            
+            // Add a plant
+            const plantBaseGeometry = new THREE.CylinderGeometry(0.3, 0.4, 0.5, 16);
+            const plantBaseMaterial = new THREE.MeshStandardMaterial({ color: 0x3e2723 });
+            const plantBase = new THREE.Mesh(plantBaseGeometry, plantBaseMaterial);
+            plantBase.position.set(6, 0.25, 6);
+            scene.add(plantBase);
+            
+            const plantLeavesGeometry = new THREE.SphereGeometry(0.8, 16, 16);
+            const plantLeavesMaterial = new THREE.MeshStandardMaterial({ color: 0x2e7d32 });
+            const plantLeaves = new THREE.Mesh(plantLeavesGeometry, plantLeavesMaterial);
+            plantLeaves.position.set(6, 1.2, 6);
+            scene.add(plantLeaves);
+            
+            // Add a bookshelf
+            const bookshelfGeometry = new THREE.BoxGeometry(1.5, 3, 0.8);
+            const bookshelfMaterial = new THREE.MeshStandardMaterial({ color: 0x5d4037 });
+            const bookshelf = new THREE.Mesh(bookshelfGeometry, bookshelfMaterial);
+            bookshelf.position.set(-7, 1.5, -7);
+            scene.add(bookshelf);
+            
+            // Add some books
+            const bookColors = [0xe53935, 0x3949ab, 0xfdd835, 0x43a047, 0x8e24aa];
+            for (let i = 0; i < 5; i++) {
+                const bookGeometry = new THREE.BoxGeometry(1.2, 0.2, 0.6);
+                const bookMaterial = new THREE.MeshStandardMaterial({ color: bookColors[i] });
+                const book = new THREE.Mesh(bookGeometry, bookMaterial);
+                book.position.set(-7, 0.8 + i * 0.3, -6.6);
+                book.rotation.y = Math.PI / 4;
+                scene.add(book);
+            }
+            
+            // Load custom decorative models if available
+            // Replace with your actual model paths
+            /*
+            loader.load('models/decoration.glb', function(gltf) {
+                const model = gltf.scene;
+                model.position.set(3, 0, 3);
+                model.scale.set(1, 1, 1);
+                scene.add(model);
+            }, undefined, function(error) {
+                console.error('Error loading decoration model:', error);
+            });
+            */
+        }
 
-            <div class="col-md-4 col-sm-6">
-				<div class="services-detail">
-                    <img src="images/favicon/android.png" alt="android"style="height: 20%; width: 20%;">
-					<a href="https://github.com/kabrownie/" target="_blank"><h3>Software development</h3>
-					<hr>
-					<p><b>Click Here</b></a> to view my github </p>
-				</div>
-			</div>
-            <div class="col-md-4 col-sm-6">
-				<div class="services-detail">
-					<img src="images/favicon/favicon.ico" alt="blender"style="height: 20%; width: 20%;">
-					<a href="https://kabrownie.github.io/Kabrowniebeats/" target="_blank"><h3>music production</h3>
-					<hr>
-					<p><b>Click Here</b></a> to lisyen to my beats. </p>
-				</div>
+        function setupMobileControls() {
+            if (!isMobile) return;
+            
+            const upButton = document.getElementById('up-button');
+            const downButton = document.getElementById('down-button');
+            const leftButton = document.getElementById('left-button');
+            const rightButton = document.getElementById('right-button');
+            const interactionButton = document.getElementById('interaction-button');
+            
+            // Add event listeners for mobile controls
+            upButton.addEventListener('touchstart', () => moveForward = true);
+            upButton.addEventListener('touchend', () => moveForward = false);
+            
+            downButton.addEventListener('touchstart', () => moveBackward = true);
+            downButton.addEventListener('touchend', () => moveBackward = false);
+            
+            leftButton.addEventListener('touchstart', () => moveLeft = true);
+            leftButton.addEventListener('touchend', () => moveLeft = false);
+            
+            rightButton.addEventListener('touchstart', () => moveRight = true);
+            rightButton.addEventListener('touchend', () => moveRight = false);
+            
+            interactionButton.addEventListener('click', handleInteraction);
+        }
+
+        function handleInteraction() {
+            // Simulate a click at the center of the screen for mobile
+            mouse.x = 0;
+            mouse.y = 0;
+            
+            // Update the picking ray with the camera and mouse position
+            raycaster.setFromCamera(mouse, camera);
+            
+            // Calculate objects intersecting the picking ray
+            const intersects = raycaster.intersectObjects(interactiveObjects);
+            
+            if (intersects.length > 0) {
+                const object = intersects[0].object;
+                if (object.userData.type === 'section') {
+                    openSection(object.userData.id);
+                }
+            }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            if (ready) {
+                // Update controls
+                controls.update();
                 
-			</div>
-            <hr>
-        <h2>Here is my Animation playlist</h2>
-			</div>
-            <iframe src=" https://www.youtube.com/embed/?list=PLiNkLEq7cWM7p4sXHd0Ey6BrCfesOFE8d" width="100%" height="340" frameborder="0" allowfullscreen></iframe>
-            <div class="iframe-container">
+                // Move particles
+                scene.children.forEach(child => {
+                    if (child.userData.speed !== undefined) {
+                        child.position.y = child.userData.originalY + Math.sin(Date.now() * 0.001 * child.userData.speed) * 0.5;
+                    }
+                });
+                
+                // Handle movement with reduced speed
+                if (moveForward) velocity.z -= 0.05;
+                if (moveBackward) velocity.z += 0.05;
+                if (moveLeft) velocity.x -= 0.05;
+                if (moveRight) velocity.x += 0.05;
+                
+                // Apply velocity and friction
+                camera.position.add(velocity);
+                velocity.multiplyScalar(0.9);
+                
+                // Keep camera within room boundaries
+                camera.position.x = Math.max(-9, Math.min(9, camera.position.x));
+                camera.position.z = Math.max(-9, Math.min(9, camera.position.z));
+                camera.position.y = Math.max(1, Math.min(9, camera.position.y));
+            }
+            
+            renderer.render(scene, camera);
+        }
 
-       <iframe  src="https://www.youtube.com/embed/?list=PLiNkLEq7cWM4CPexTNnBC3y5zEQwiwFVN"  width="100%" height="340" frameborder="0" allowfullscreen></iframe>
-            <div class="iframe-container">
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
 
-            <hr>
-            <h3>more animations can be found on  <a  href="https://m.youtube.com/@karanja3d"> my youtube channel</a></h3>
-			</div>
-              
-            </div>
+        function onKeyDown(event) {
+            switch (event.keyCode) {
+                case 87: // W
+                case 38: // Up arrow
+                    moveForward = true;
+                    break;
+                case 65: // A
+                case 37: // Left arrow
+                    moveLeft = true;
+                    break;
+                case 83: // S
+                case 40: // Down arrow
+                    moveBackward = true;
+                    break;
+                case 68: // D
+                case 39: // Right arrow
+                    moveRight = true;
+                    break;
+                case 70: // F key for interaction
+                    handleInteraction();
+                    break;
+            }
+        }
 
+        function onKeyUp(event) {
+            switch (event.keyCode) {
+                case 87: // W
+                case 38: // Up arrow
+                    moveForward = false;
+                    break;
+                case 65: // A
+                case 37: // Left arrow
+                    moveLeft = false;
+                    break;
+                case 83: // S
+                case 40: // Down arrow
+                    moveBackward = false;
+                    break;
+                case 68: // D
+                case 39: // Right arrow
+                    moveRight = false;
+                    break;
+            }
+        }
 
-         
-        </div>
-    </section>
-    <!-- Services End -->
-    
+        function onMouseClick(event) {
+            if (!ready) return;
+            
+            // Calculate mouse position in normalized device coordinates
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+            
+            // Update the picking ray with the camera and mouse position
+            raycaster.setFromCamera(mouse, camera);
+            
+            // Calculate objects intersecting the picking ray
+            const intersects = raycaster.intersectObjects(interactiveObjects);
+            
+            if (intersects.length > 0) {
+                const object = intersects[0].object;
+                if (object.userData.type === 'section') {
+                    openSection(object.userData.id);
+                }
+            }
+        }
 
-<hr>
-    <!-- Contact Start -->
-    <section id="contact" class="contact-us section-space-padding">
-        <div class="container">
-           <div class="row">
-                 <div class="col-sm-12">
-                     <div class="section-title">
-                         <h2>Contact Me.</h2>
-                         <p>Talk to me</p>
-                     </div>
-                 </div>
-             </div>
-             
-             
-          
-     <!--  -->
-         
-      <!--social  -->
-      <div class="social-icon">
-       
-        <a style="background-color: rgb(47, 56, 59);" class="button button-style button-style-icon fa fa-mail-bulk"  href="mailto:karanja3d@gmail.com" title="Email"target="_blank">Email</a><br>
-        
-        <a style="background-color: rgb(190, 112, 206);" class="button button-style button-style-icon fa fa-instagram"  href="https://instagram.com/karanja3d" title="instagram"target="_blank">Instagram</a>
+        function openSection(sectionId) {
+            // Hide all panels first
+            document.querySelectorAll('.section-panel').forEach(panel => {
+                panel.style.display = 'none';
+            });
+            
+            // Show the selected panel
+            const panel = document.getElementById(`${sectionId}-panel`);
+            if (panel) {
+                panel.style.display = 'block';
+                
+                // Center the panel on screen
+                panel.style.left = `${(window.innerWidth - panel.offsetWidth) / 2}px`;
+                panel.style.top = `${(window.innerHeight - panel.offsetHeight) / 2}px`;
+            }
+        }
 
-        <a style="background-color: rgb(73, 73, 73);" class="button button-style button-style-icon fa fa-github"  href="https://github.com/kabrownie" title="github"target="_blank">GitHub</a>
-
-        <a style="background-color: rgb(93, 150, 255);" class="button button-style button-style-icon fa fa-linkedin"  href="https://linkedin.com/in/kabrownie" title="linkedin"target="_blank">linkedin</a>
-
-        <a style="background-color: rgb(93, 150, 255);" class="button button-style button-style-icon fa fa-facebook"  href="https://facebook.com/karanja3d" title="facebook"target="_blank">facebook</a>
-
-        <a style="background-color: rgb(55, 60, 68);" class="button button-style button-style-icon fa fa-tiktok"  href="https://tiktok.com/@karanja3d" title="Tiktok"target="_blank">Tiktok</a>
-
-        <a style="background-color: rgb(255, 77, 77);" class="button button-style button-style-icon fa fa-youtube"  href="https://m.youtube.com/@karanja3d" title="youtube"target="_blank">youtube</a>
-
-        <a style="background-color: rgb(45, 125, 150);" class="button button-style button-style-icon fa fa-telegram"  href="https://t.me/karanja3d" title="Telegram"target="_blank">Telegram</a>
-
-      
-
-        <a style="background-color: rgb(29, 39, 43);" class="button button-style button-style-icon fa fa-chess-knight"  href="https://lichess.org/@/karanja3d" title="Lichess"target="_blank">Lichess</a>
-       
-        <a style="background-color: rgb(55, 57, 175);" class="button button-style button-style-icon fa fa-discord"  href=" https://discordapp.com/users/896352421171851316" title="discord"target="_blank">discord</a>
-
-       
-
-      
-
-        
-   
-  <!--social  -->
-  
-  
-  </div>
-  
- 
- </div>
-        </ul>
-       </div>
-        
-      </section>
-      <!-- Contact End -->
-        
-         
-      
-     <!-- Footer End -->
-     
-     
-     <!-- Back to Top Start -->
-     <a href="#" class="scroll-to-top"><i class="fa fa-angle-up"></i></a>
-     <!-- Back to Top End -->
-     
-     
-     <!-- All Javascript Plugins  -->
-     <script type="text/javascript" src="js/jquery.min.js"></script>
-     <script type="text/javascript" src="js/plugin.js"></script>
-
-     <!-- Main Javascript File  -->
-     <script type="text/javascript" src="js/scripts.js"></script>
-   
-     <script type="module" src="js/main.js"></script>
-   </body>
-  </html>
+        // Close buttons functionality
+        document.querySelectorAll('.close-button').forEach(button => {
+            button.addEventListener('click', function() {
+                this.parentElement.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
