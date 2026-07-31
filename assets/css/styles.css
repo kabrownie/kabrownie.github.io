@@ -7,7 +7,7 @@
  */
 :root,
 [data-bs-theme=light] {
-  --bs-blue: #C1FF72;
+  --bs-blue: #8B5CF6;               /* purple primary */
   --bs-indigo: #6610f2;
   --bs-purple: #6f42c1;
   --bs-pink: #d63384;
@@ -21,28 +21,28 @@
   --bs-white: #fff;
   --bs-gray: #6c757d;
   --bs-gray-dark: #343a40;
-  --bs-gray-100: rgba(31, 42, 46, 0.12);
+  --bs-gray-100: rgba(93, 64, 55, 0.12);   /* light brown */
   --bs-gray-200: #F4F8FA;
-  --bs-gray-300: rgba(31, 42, 46, 0.6);
-  --bs-gray-400: rgba(31, 42, 46, 0.7);
-  --bs-gray-500: #1F2A2E;
+  --bs-gray-300: rgba(93, 64, 55, 0.6);
+  --bs-gray-400: rgba(93, 64, 55, 0.7);
+  --bs-gray-500: #4A2E1B;               /* dark brown */
   --bs-gray-600: #6c757d;
   --bs-gray-700: #495057;
   --bs-gray-800: #343a40;
   --bs-gray-900: #212529;
-  --bs-primary: #C1FF72;
-  --bs-secondary: #1f2a2e;
-  --bs-light: rgba(31, 42, 46, 0.12);
-  --bs-dark: #1F2A2E;
-  --bs-muted: rgba(31, 42, 46, 0.6);
-  --bs-dark-light: rgba(31, 42, 46, 0.7);
+  --bs-primary: #24063d;
+  --bs-secondary: #5D4037;
+  --bs-light: rgba(93, 64, 55, 0.12);
+  --bs-dark: #4A2E1B;
+  --bs-muted: rgba(93, 64, 55, 0.6);
+  --bs-dark-light: rgba(93, 64, 55, 0.7);
   --bs-light-gray: #F4F8FA;
-  --bs-primary-rgb: 193, 255, 114;
-  --bs-secondary-rgb: 31, 42, 46;
-  --bs-light-rgb: 31, 42, 46;
-  --bs-dark-rgb: 31, 42, 46;
-  --bs-muted-rgb: 31, 42, 46;
-  --bs-dark-light-rgb: 31, 42, 46;
+  --bs-primary-rgb: 139, 92, 246;
+  --bs-secondary-rgb: 93, 64, 55;
+  --bs-light-rgb: 93, 64, 55;
+  --bs-dark-rgb: 74, 46, 27;
+  --bs-muted-rgb: 93, 64, 55;
+  --bs-dark-light-rgb: 93, 64, 55;
   --bs-light-gray-rgb: 244, 248, 250;
   --bs-primary-text-emphasis: #4d662e;
   --bs-secondary-text-emphasis: #0c1112;
@@ -126,27 +126,27 @@
 
 [data-bs-theme=dark] {
   color-scheme: dark;
-  --bs-body-color: rgba(31, 42, 46, 0.6);
-  --bs-body-color-rgb: 31, 42, 46;
+  --bs-body-color: rgba(93, 64, 55, 0.6);
+  --bs-body-color-rgb: 93, 64, 55;
   --bs-body-bg: #212529;
   --bs-body-bg-rgb: 33, 37, 41;
   --bs-emphasis-color: #fff;
   --bs-emphasis-color-rgb: 255, 255, 255;
-  --bs-secondary-color: rgba(31, 42, 46, 0.75);
-  --bs-secondary-color-rgb: 31, 42, 46;
+  --bs-secondary-color: rgba(93, 64, 55, 0.75);
+  --bs-secondary-color-rgb: 93, 64, 55;
   --bs-secondary-bg: #343a40;
   --bs-secondary-bg-rgb: 52, 58, 64;
-  --bs-tertiary-color: rgba(31, 42, 46, 0.5);
-  --bs-tertiary-color-rgb: 31, 42, 46;
+  --bs-tertiary-color: rgba(93, 64, 55, 0.5);
+  --bs-tertiary-color-rgb: 93, 64, 55;
   --bs-tertiary-bg: #2b3035;
   --bs-tertiary-bg-rgb: 43, 48, 53;
-  --bs-primary-text-emphasis: #daffaa;
-  --bs-secondary-text-emphasis: #797f82;
+  --bs-primary-text-emphasis: #b79cf8;
+  --bs-secondary-text-emphasis: #b39b91;
   --bs-success-text-emphasis: #75b798;
   --bs-info-text-emphasis: #6edff6;
   --bs-warning-text-emphasis: #ffda6a;
   --bs-danger-text-emphasis: #ea868f;
-  --bs-light-text-emphasis: rgba(31, 42, 46, 0.12);
+  --bs-light-text-emphasis: rgba(93, 64, 55, 0.12);
   --bs-dark-text-emphasis: rgba(31, 42, 46, 0.6);
   --bs-primary-bg-subtle: #273317;
   --bs-secondary-bg-subtle: #060809;
@@ -204,7 +204,11 @@ body {
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-
+/* Limit logo size in header */
+.logo img {
+    max-height: 45px;   /* Adjust this value to your liking (e.g., 40px, 50px) */
+    width: auto;
+}
 hr {
   margin: 1rem 0;
   color: inherit;
