@@ -16650,11 +16650,6 @@ textarea.form-control-lg {
   color: var(--bs-primary);
 }
 
-.sign-in {
-  max-width: 520px;
-  width: 100%;
-}
-
 * {
   margin: 0;
   padding: 0;
