@@ -16788,4 +16788,63 @@ ul {
 .btn-dark:hover {
   color: var(--bs-dark);
   background-color: var(--bs-white);
-}/*# sourceMappingURL=styles.css.map */
+}
+
+/* ============================================
+   GLOBAL IMAGE SIZE CONTROLS
+   ============================================ */
+
+/* 1. LIMIT THE SPINNING LEAF ICONS */
+.banner-section .animate-spin,
+.stats-facts .animate-spin,
+.featured-projects .animate-spin,
+.services .animate-spin,
+.why-choose-us .animate-spin,
+.testimonial .animate-spin,
+.meet-our-team .animate-spin,
+.pricing-section .animate-spin,
+.faq .animate-spin,
+.Recent-news .animate-spin,
+.get-in-touch .animate-spin {
+  max-width: 50px !important;
+  height: auto;
+}
+
+/* 2. SERVICES TAB IMAGES (prevents stretching) */
+.services-tab .tab-pane img {
+  max-height: 350px;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* 3. PARTNER / CLIENT LOGOS (marquee) */
+.marquee-tag img {
+  max-height: 50px;
+  width: auto;
+}
+
+/* 4. TEAM MEMBER IMAGES - ensure they fit nicely */
+.meet-team-img img {
+  object-fit: cover;
+}
+
+/* 5. PORTFOLIO / PROJECT IMAGES - ensure they fit nicely */
+.portfolio-img img,
+.resources-img img {
+  object-fit: cover;
+}
+
+/* 6. BLOG & RESOURCES FEATURED IMAGES - keep them from getting too tall */
+.resources-img-blog img {
+  object-fit: cover;
+}
+
+/* 7. AVATARS / PROFILE PICS - already have inline width/height, just in case */
+img[width="60"],
+img[width="64"],
+img[width="44"] {
+  max-width: 100%;
+  height: auto;
+}
+
+/*# sourceMappingURL=styles.css.map */
