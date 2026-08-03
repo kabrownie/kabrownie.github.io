@@ -16406,6 +16406,87 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+/* ============================================
+   REMOVE HAMBURGER MENU ON BIG SCREENS
+   ============================================ */
+
+@media (min-width: 992px) {
+  
+  /* 1. Hide the hamburger toggle button */
+  .header .btn-group .toggle-menu {
+    display: none !important;
+  }
+
+  /* 2. Make the dropdown menu visible and inline */
+  .header .btn-group .dropdown-menu {
+    display: block !important;
+    position: static !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+    width: auto !important;
+    min-width: auto !important;
+    border: none !important;
+    border-radius: 0 !important;
+  }
+
+  /* 3. Hide the "Menu" header and close button */
+  .header .btn-group .dropdown-menu .hstack.justify-content-between.border-bottom {
+    display: none !important;
+  }
+
+  /* 4. Layout: make the menu items and buttons horizontal */
+  .header .btn-group .dropdown-menu .d-flex.flex-column.gap-6 {
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 2rem !important;
+  }
+
+  /* 5. The main navigation links */
+  .header .btn-group .dropdown-menu .header-menu {
+    flex-direction: row !important;
+    gap: 1.5rem !important;
+    margin-bottom: 0 !important;
+  }
+
+  .header .btn-group .dropdown-menu .header-item {
+    display: inline-block !important;
+  }
+
+  /* 6. Sign In / Sign Up buttons */
+  .header .btn-group .dropdown-menu .hstack.gap-3 {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 0.75rem !important;
+  }
+
+  /* 7. Hide the phone/email section (optional) */
+  .header .btn-group .dropdown-menu > .d-flex.flex-column.gap-6 > div:last-child {
+    display: none !important;
+  }
+
+  /* 8. Adjust the container that holds everything */
+  .header .btn-group .dropdown-menu .d-flex.flex-column.gap-3 {
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 2rem !important;
+  }
+
+  /* 9. Ensure the dropdown doesn't have a background or padding issues */
+  .header .btn-group .dropdown-menu.show {
+    display: block !important;
+  }
+
+  /* 10. Adjust the main header to keep alignment */
+  .header .header-wrapper {
+    flex-wrap: wrap !important;
+  }
+
+  .header .header-wrapper .d-flex.align-items-center.gap-4 {
+    flex: 1 1 auto !important;
+    justify-content: flex-end !important;
+  }
+}
 .header {
   padding: 28px 0;
   z-index: 99;
@@ -16460,7 +16541,14 @@ textarea.form-control-lg {
   width: 100%;
   height: 100%;
   z-index: 1;
-  background-color: rgba(0, 0, 0, 0.5);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.55) 100%);
+}
+.banner-section > video {
+  z-index: 0;
+}
+.banner-section .container {
+  position: relative;
+  z-index: 2;
 }
 
 .banner-inner-section {
