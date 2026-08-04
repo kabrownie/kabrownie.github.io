@@ -16854,7 +16854,7 @@ ul {
   padding-inline-end: 15px;
 }
 .btn:hover .btn-text {
-  color: var(--bs-white);
+  color: var(--bs-secondary);
   transform: translateX(2.5rem);
 }
 .btn .btn-icon {
