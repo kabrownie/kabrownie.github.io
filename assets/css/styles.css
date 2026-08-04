@@ -25,13 +25,13 @@
   --bs-gray-200: #F4F8FA;
   --bs-gray-300: rgba(93, 64, 55, 0.6);
   --bs-gray-400: rgba(93, 64, 55, 0.7);
-  --bs-gray-500: #4A2E1B;               /* dark brown */
+  --bs-gray-500: #573b29;               /* dark brown */
   --bs-gray-600: #6c757d;
   --bs-gray-700: #495057;
   --bs-gray-800: #343a40;
   --bs-gray-900: #212529;
-  --bs-primary: #24063d;
-  --bs-secondary: #5D4037;
+  --bs-primary: #180329;
+  --bs-secondary: #694e46;
   --bs-light: rgba(93, 64, 55, 0.12);
   --bs-dark: #4A2E1B;
   --bs-muted: rgba(93, 64, 55, 0.6);
@@ -16934,5 +16934,38 @@ img[width="44"] {
   max-width: 100%;
   height: auto;
 }
+/* ============================================
+   HEADER NAVIGATION LINKS (Black Background)
+   ============================================ */
 
+/* 1. Default link color – WHITE on black header */
+.header .header-link {
+
+    color: #8B5CF6 !important;
+}
+
+/* 2. Hover and active state – PURPLE */
+.header .header-link:hover,
+.header .header-link.active {
+  
+    color: #fffdfd !important;
+}
+
+/* 3. The spinning leaf icon next to the link – make it visible */
+.header .header-link .animate-spin {
+    filter: brightness(0) invert(1); /* Turns the leaf white */
+}
+
+.header .header-link:hover .animate-spin,
+.header .header-link.active .animate-spin {
+    filter: none; /* Returns to original color on hover/active (purple leaf) */
+}
+
+.header .dropdown-menu {
+    background-color: #0f0227 !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 16px !important;
+    padding: 1.5rem !important;
+    margin-top: 0.5rem !important;
+}
 /*# sourceMappingURL=styles.css.map */
