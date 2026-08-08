@@ -4,11 +4,96 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kabrownie Digital — Web, Apps, Animation &amp; Graphics</title>
-    <link rel="shortcut icon" type="image/png" href=" assets/images/logos/favicon.svg" />
-    <link rel="stylesheet" href=" assets/libs/owl.carousel/dist/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href=" assets/libs/aos-master/dist/aos.css">
-    <link rel="stylesheet" href=" assets/css/styles.css" />
+
+    <!-- ====== PRIMARY SEO TITLE & DESCRIPTION ====== -->
+    <title>Kabrownie Digital – Animation Studio, Motion Graphics &amp; Graphic Design</title>
+    <meta name="description" content="Kabrownie Digital is a leading animation studio in Nairobi, specializing in animation, motion graphics, graphic design, and professional web & app development. Hire expert animators today!">
+    <link rel="canonical" href="https://kabrownie.digital/">
+
+    <!-- ====== OPEN GRAPH (SOCIAL MEDIA) ====== -->
+    <meta property="og:title" content="Kabrownie Digital – Animation Studio, Motion Graphics &amp; Graphic Design">
+    <meta property="og:description" content="Kabrownie Digital is a leading animation studio in Nairobi, specializing in animation, motion graphics, graphic design, and professional web & app development.">
+    <meta property="og:url" content="https://kabrownie.digital/">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://kabrownie.digital/assets/images/logos/logo-dark.svg">
+
+    <!-- ====== FAVICON ====== -->
+    <link rel="shortcut icon" type="image/png" href="assets/images/logos/favicon.svg" />
+
+    <!-- ====== STYLESHEETS ====== -->
+    <link rel="stylesheet" href="assets/libs/owl.carousel/dist/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/libs/aos-master/dist/aos.css">
+    <link rel="stylesheet" href="assets/css/styles.css" />
+
+    <!-- ====== SCHEMA MARKUP (JSON-LD) FOR SEO RICH RESULTS ====== -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Kabrownie Digital",
+            "url": "https://kabrownie.digital",
+            "logo": "https://kabrownie.digital/assets/images/logos/logo-dark.svg",
+            "description": "Kabrownie Digital is a leading animation studio, motion graphics house, and digital development agency based in Nairobi, Kenya.",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Tom Mboya Street, Braidwood House, 3rd Floor",
+                "addressLocality": "Nairobi",
+                "addressCountry": "KE"
+            },
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+254784144132",
+                "contactType": "Sales",
+                "availableLanguage": ["English"]
+            },
+            "sameAs": [
+                "https://facebook.com/kabrownie.digital",
+                "https://instagram.com/kabrownie.digital",
+                "https://linkedin.com/company/kabrownie-digital"
+            ]
+        }
+    </script>
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "serviceType": "Creative & Digital Agency",
+            "provider": {
+                "@type": "Organization",
+                "name": "Kabrownie Digital"
+            },
+            "areaServed": "Nairobi, Kenya",
+            "description": "We specialize in animation, motion graphics, graphic design, and professional web & app development.",
+            "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": "Kabrownie Digital Services",
+                "itemListElement": [{
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Animation & Motion Graphics",
+                        "description": "2D/3D animation and explainer videos."
+                    }
+                }, {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Graphics & Branding",
+                        "description": "Logo design and brand identity."
+                    }
+                }, {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Web & App Development",
+                        "description": "Custom web and mobile development."
+                    }
+                }]
+            }
+        }
+    </script>
+
 </head>
 
 <body>
@@ -18,18 +103,18 @@
         <div class="container">
             <div class="header-wrapper d-flex align-items-center justify-content-between">
                 <div class="logo">
-                    <a href="#" class="logo-white">
-                        <img src=" assets/images/logos/logo-white.svg" alt="logo" class="img-fluid">
+                    <a href="#" class="logo-white" aria-label="Kabrownie Digital Home">
+                        <img src="assets/images/logos/logo-white.svg" alt="Kabrownie Digital Logo" class="img-fluid">
                     </a>
-                    <a href="#" class="logo-dark">
-                        <img src=" assets/images/logos/logo-dark.svg" alt="logo" class="img-fluid">
+                    <a href="#" class="logo-dark" aria-label="Kabrownie Digital Home">
+                        <img src="assets/images/logos/logo-dark.svg" alt="Kabrownie Digital Logo" class="img-fluid">
                     </a>
                 </div>
                 <div class="d-flex align-items-center gap-4">
                     <div class="btn-group">
                         <button
                             class="btn btn-secondary toggle-menu round-45 p-2 d-flex align-items-center justify-content-center bg-white rounded-circle"
-                            type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+                            type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false" aria-label="Toggle menu">
                             <iconify-icon icon="solar:hamburger-menu-line-duotone" class="menu-icon fs-8 text-dark"></iconify-icon>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end p-4">
@@ -41,8 +126,7 @@
                                 <div class="d-flex flex-column gap-3">
                                     <ul class="header-menu list-unstyled mb-0 d-flex flex-column gap-2">
                                         <li class="header-item">
-                                            <a href="#" aria-current="true"
-                                            class="header-link active hstack gap-2 fs-7 fw-bold text-dark">Home</a>
+                                            <a href="#" aria-current="true" class="header-link active hstack gap-2 fs-7 fw-bold text-dark">Home</a>
                                         </li>
                                         <li class="header-item">
                                             <a href="#about" class="header-link hstack gap-2 fs-7 fw-bold text-dark">About</a>
@@ -76,322 +160,305 @@
         <!-- ====== BANNER ====== -->
         <section class="banner-section position-relative d-flex align-items-end min-vh-100">
             <video class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" autoplay muted loop playsinline>
-                <source src=" assets/images/backgrounds/banner-video.mp4" type="video/mp4" />
+                <source src="assets/images/backgrounds/banner-video.mp4" type="video/mp4" />
             </video>
             <div class="container">
                 <div class="d-flex flex-column gap-4 pb-8 position-relative z-2">
                     <div class="row align-items-center">
                         <div class="col-xl-4">
-                            <div class="d-flex align-items-center gap-4" data-aos="fade-up" data-aos-delay="100"
-                            data-aos-duration="1000">
-                            <p class="mb-0 text-white fs-5 text-opacity-70">
-                                We craft <strong>high‑performing websites, mobile apps, stunning animations, and  graphics</strong>: everything you need to build a powerful digital presence.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="d-flex align-items-end gap-3" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
-                    <h1 class="mb-0 fs-16 text-dark lh-1">Kabrownie <span class="text-primary">Digital</span></h1>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ====== ABOUT (REWRITTEN) ====== -->
-    <section id="about" class="stats-facts py-5 py-lg-11 py-xl-12 position-relative overflow-hidden bg-dark text-white">
-        <div class="container">
-            <div class="row align-items-center g-5">
-                <div class="col-lg-5 col-xl-4" data-aos="fade-right" data-aos-delay="100" data-aos-duration="1000">
-                    <img src="assets/images/about/about-img.jpg" alt="Kabrownie Studio Team" class="img-fluid rounded-2">
-                </div>
-                <div class="col-lg-7 col-xl-8">
-                    <div class="d-flex flex-column gap-6">
-                        <div class="row">
-                            <div class="col-xxl-10">
-                                <h2 class="mb-4 text-white" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
-                                    We don't just build. We <span class="text-primary">accelerate</span> your digital presence.
-                                </h2>
-                                <p class="fs-5 mb-0 text-white" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
-                                    Kabrownie Studio is a creative-tech accelerator. We fuse bold design thinking with
-                                    cutting-edge development to craft experiences that truly resonate. Driven by curiosity,
-                                    collaboration, and an unyielding standard of excellence, we turn complex challenges into
-                                    intuitive, visually stunning realities — whether that's a web app, an animated story, or a
-                                    timeless brand identity.
+                            <div class="d-flex align-items-center gap-4" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
+                                <p class="mb-0 text-white fs-5 text-opacity-70">
+                                    We create <strong>amaizing animations, motion graphics, brand identities, and high-performing web &amp; mobile apps</strong>: <br>everything you need to own your digital presence.
                                 </p>
                             </div>
                         </div>
-                        <div data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
-                            <a href="#services" class="btn btn-outline-light border-white">
-                                <span class="btn-text">Explore our work</span>
-                                <iconify-icon icon="lucide:arrow-up-right"
-                                    class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
-                            </a>
-                        </div>
+                    </div>
+                    <div class="d-flex align-items-end gap-3" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+                        <h1 class="mb-0 fs-16 text-secondary lh-1">Kabrownie <span class="text-primary">Digital</span></h1>
+                        <br>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="position-absolute bottom-0 start-0" data-aos="zoom-in" data-aos-delay="100" data-aos-duration="1000">
-            <img src="assets/images/backgrounds/stats-facts-bg.svg" alt="" class="img-fluid opacity-25">
-        </div>
-    </section>
+        </section>
 
-    <!-- ====== SERVICES (MERGED - REPLACES BOTH OLD SECTIONS) ====== -->
-    <section id="services" class="services py-5 py-lg-11 py-xl-12 bg-primary">
-        <div class="container">
-            <div class="row text-center mb-7" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
-                <div class="col-lg-8 mx-auto">
-                    <h2 class="text-white">What we do best</h2>
-                    <p class="text-white fs-5">End-to-end digital solutions designed to engage, convert, and leave a lasting impression.</p>
-                </div>
-            </div>
-
-            <!-- Three Core Services -->
-            <div class="row g-4 justify-content-center">
-                <!-- Service 1 -->
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
-                    <div class="card bg-dark text-white h-100 border-0 p-3">
-                        <div class="card-body text-center">
-                            <iconify-icon icon="lucide:code" class="fs-10 text-primary mb-3"></iconify-icon>
-                            <h5 class="card-title text-primary">Web &amp; App Development</h5>
-                            <p class="card-text text-white">
-                                Custom websites, web apps, and mobile solutions built for speed, scalability, and seamless user experiences. From UI/UX design to robust backend architecture, we bring your digital product to life.
-                            </p>
-                            <a href="#projects" class="btn btn-link text-primary text-decoration-none fw-bold mt-2 p-0">
-                                See examples <iconify-icon icon="lucide:arrow-right" class="fs-7"></iconify-icon>
-                            </a>
-                        </div>
+        <!-- ====== ABOUT (SEO OPTIMIZED) ====== -->
+        <section id="about" class="stats-facts py-5 py-lg-11 py-xl-12 position-relative overflow-hidden bg-dark text-white">
+            <div class="container">
+                <div class="row align-items-center g-5">
+                    <div class="col-lg-5 col-xl-4" data-aos="fade-right" data-aos-delay="100" data-aos-duration="1000">
+                        <img src="assets/images/about/about-img.jpg" alt="Kabrownie Digital creative team – animation studio and graphic design agency in Nairobi" class="img-fluid rounded-2">
                     </div>
-                </div>
-
-                <!-- Service 2 -->
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
-                    <div class="card bg-dark text-white h-100 border-0 p-3">
-                        <div class="card-body text-center">
-                            <iconify-icon icon="lucide:film" class="fs-10 text-primary mb-3"></iconify-icon>
-                            <h5 class="card-title text-primary">Animation &amp; Motion</h5>
-                            <p class="card-text text-white">
-                                Captivating 2D/3D animations, explainer videos, and motion graphics that breathe life into your brand. We make complex messages clear, engaging, and unforgettable through visual storytelling.
-                            </p>
-                            <a href="#projects" class="btn btn-link text-primary text-decoration-none fw-bold mt-2 p-0">
-                                See examples <iconify-icon icon="lucide:arrow-right" class="fs-7"></iconify-icon>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Service 3 -->
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
-                    <div class="card bg-dark text-white h-100 border-0 p-3">
-                        <div class="card-body text-center">
-                            <iconify-icon icon="lucide:palette" class="fs-10 text-primary mb-3"></iconify-icon>
-                            <h5 class="card-title text-primary">Graphics &amp; Branding</h5>
-                            <p class="card-text text-white">
-                                Logo design, full brand identity systems, and print collateral. We craft cohesive visual languages that make your business instantly recognizable and emotionally resonant with your audience.
-                            </p>
-                            <a href="#projects" class="btn btn-link text-primary text-decoration-none fw-bold mt-2 p-0">
-                                See examples <iconify-icon icon="lucide:arrow-right" class="fs-7"></iconify-icon>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Single CTA -->
-            <div class="text-center mt-8" data-aos="fade-up" data-aos-delay="500" data-aos-duration="1000">
-                <a href="#projects" class="btn btn-outline-light border-white">
-                    <span class="btn-text">View our full portfolio</span>
-                    <iconify-icon icon="lucide:arrow-up-right"
-                        class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ====== FEATURED PROJECTS (KEPT AS ORIGINAL) ====== -->
-    <section id="projects" class="featured-projects py-5 py-lg-11 py-xl-12 bg-dark">
-        <div class="container">
-            <div class="row gap-7 gap-xl-0 mb-7">
-                <div class="col-xl-4 col-xxl-4">
-                    <div class="d-flex align-items-center gap-7 py-2" data-aos="fade-right" data-aos-delay="100" data-aos-duration="1000">
-                    </div>
-                </div>
-                <div class="col-xl-8 col-xxl-7">
-                    <div class="row">
-                        <div class="col-xxl-8">
-                            <div class="d-flex flex-column gap-6" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
-                                <h2 class="mb-0 text-white">Featured projects</h2>
-                                <p class="fs-5 mb-0 text-white">A glimpse into our creativity. Exploring designs, successful collaborations, and transformative digital experiences.</p>
+                    <div class="col-lg-7 col-xl-8">
+                        <div class="d-flex flex-column gap-6">
+                            <div class="row">
+                                <div class="col-xxl-10">
+                                    <h2 class="mb-4 text-white" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
+                                        We create and <span class="text-primary">bring stories to life</span>.
+                                    </h2>
+                                    <p class="fs-5 mb-0 text-white" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+                                        <strong>Kabrownie Digital</strong> is based in Nairobi. We are an <strong>animation studio</strong> and <strong>motion graphics</strong> agency, creating visual for brands. We also offer  <strong>graphic design</strong> and professional <strong>web &amp; app development</strong> to give you a complete, integrated digital ecosystem. we turn ideas into, visually pleasing results.
+                                    </p>
+                                </div>
+                            </div>
+                            <div data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
+                                <a href="#services" class="btn btn-outline-light border-white">
+                                    <span class="btn-text">Explore our work</span>
+                                    <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="position-absolute bottom-0 start-0" data-aos="zoom-in" data-aos-delay="100" data-aos-duration="1000">
+                <img src="assets/images/backgrounds/stats-facts-bg.svg" alt="Kabrownie Digital background illustration" class="img-fluid opacity-25">
+            </div>
+        </section>
 
-            <div class="row g-4">
-                <!-- Project 1 -->
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
-                    <div class="portfolio d-flex flex-column gap-3 h-100">
-                        <div class="portfolio-img position-relative overflow-hidden">
-                            <img src="assets/images/portfolio/giftconer.png" alt="Gifts_conner" class="img-fluid w-100">
-                            <a href="#projects" class="position-absolute top-0 start-0 w-100 h-100 portfolio-overlay" aria-label="View Gifts_conner project"></a>
+        <!-- ====== SERVICES (PRIORITY REVERSED: Animation & Graphics First) ====== -->
+        <section id="services" class="services py-5 py-lg-11 py-xl-12 bg-primary">
+            <div class="container">
+                <div class="row text-center mb-7" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
+                    <div class="col-lg-8 mx-auto">
+                        <h2 class="text-white">Animation, Graphics &amp; software Development </h2>
+                        <p class="text-white fs-5">We specialize  in creating digital solutions for businesses.</p>
+                    </div>
+                </div>
+
+                <!-- Three Core Services -->
+                <div class="row g-4 justify-content-center">
+                    <!-- SERVICE 1: ANIMATION (MAIN) -->
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
+                        <div class="card bg-dark text-white h-100 border-0 p-3">
+                            <div class="card-body text-center">
+                                <iconify-icon icon="lucide:film" class="fs-10 text-primary mb-3"></iconify-icon>
+                                <h5 class="card-title text-primary">Animation &amp; Motion Graphics</h5>
+                                <p class="card-text text-white">
+                                    As an <strong>animation studio</strong>, we create unforgettable 2D/3D animations, explainer videos, and <strong>motion graphics</strong> that will market your brand.
+                                </p>
+                                <a href="#projects" class="btn btn-link text-primary text-decoration-none fw-bold mt-2 p-0">
+                                    See examples <iconify-icon icon="lucide:arrow-right" class="fs-7"></iconify-icon>
+                                </a>
+                            </div>
                         </div>
-                        <div class="portfolio-details d-flex flex-column gap-2">
-                            <h3 class="mb-0 text-primary fs-5">Gifts_conner advert</h3>
-                            <p class="text-white small mb-1">A high-energy animated promotional campaign for a premium gifts hop , to drive holiday sales.</p>
-                            <div class="hstack gap-2 flex-wrap">
-                                <span class="badge text-white border-bottom border-primary">Animation</span>
-                                <span class="badge text-white border-bottom border-primary">Marketing</span>
-                                <span class="badge text-white border-bottom border-primary">
-                                    <a href="#projects" class="text-primary text-decoration-none small fw-semibold mt-1 d-inline-flex align-items-center gap-1">
-                                        View Project
-                                        <iconify-icon icon="lucide:arrow-up-right" class="fs-7"></iconify-icon>
-                                    </a>
-                                </span>
+                    </div>
+
+                    <!-- SERVICE 2: GRAPHICS (MAIN) -->
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+                        <div class="card bg-dark text-white h-100 border-0 p-3">
+                            <div class="card-body text-center">
+                                <iconify-icon icon="lucide:palette" class="fs-10 text-primary mb-3"></iconify-icon>
+                                <h5 class="card-title text-primary">Graphics &amp; Branding</h5>
+                                <p class="card-text text-white">
+                                    We create admirable <strong>graphic designs</strong> including Logos, full brand identities, print collateral, and digital assets. we will make your business instantly recognizable and memorable.
+                                </p>
+                                <a href="#projects" class="btn btn-link text-primary text-decoration-none fw-bold mt-2 p-0">
+                                    See examples <iconify-icon icon="lucide:arrow-right" class="fs-7"></iconify-icon>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SERVICE 3: WEB & APP (SECONDARY, BUT STILL OFFERED) -->
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
+                        <div class="card bg-dark text-white h-100 border-0 p-3">
+                            <div class="card-body text-center">
+                                <iconify-icon icon="lucide:code" class="fs-10 text-primary mb-3"></iconify-icon>
+                                <h5 class="card-title text-primary">Web &amp; App Development</h5>
+                                <p class="card-text text-white">
+                                    We build high-performance <strong>websites and mobile applications</strong> for your business. our <strong>software development</strong> services ensure your digital presence is as powerful as your visuals.
+                                </p>
+                                <a href="#projects" class="btn btn-link text-primary text-decoration-none fw-bold mt-2 p-0">
+                                    See examples <iconify-icon icon="lucide:arrow-right" class="fs-7"></iconify-icon>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Project 2 -->
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
-                    <div class="portfolio d-flex flex-column gap-3 h-100">
-                        <div class="portfolio-img position-relative overflow-hidden">
-                            <img src="assets/images/portfolio/portfolio-img-2.jpg" alt="Amber Bottle" class="img-fluid w-100">
-                            <a href="#projects" class="position-absolute top-0 start-0 w-100 h-100 portfolio-overlay" aria-label="View Amber Bottle project"></a>
+                <!-- Single CTA -->
+                <div class="text-center mt-8" data-aos="fade-up" data-aos-delay="500" data-aos-duration="1000">
+                    <a href="#projects" class="btn btn-outline-light border-white">
+                        <span class="btn-text">View our full portfolio</span>
+                        <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ====== FEATURED PROJECTS ====== -->
+        <section id="projects" class="featured-projects py-5 py-lg-11 py-xl-12 bg-dark">
+            <div class="container">
+                <div class="row gap-7 gap-xl-0 mb-7">
+                    <div class="col-xl-4 col-xxl-4">
+                        <div class="d-flex align-items-center gap-7 py-2" data-aos="fade-right" data-aos-delay="100" data-aos-duration="1000">
                         </div>
-                        <div class="portfolio-details d-flex flex-column gap-2">
-                            <h3 class="mb-0 text-primary fs-5">Amber Bottle</h3>
-                            <p class="text-white small mb-1">A bespoke e-commerce platform for a luxury glassware brand, featuring immersive product showcases and a seamless checkout experience.</p>
-                            <div class="hstack gap-2 flex-wrap">
-                                <span class="badge text-white border-bottom border-primary">Web Development</span>
-                                <span class="badge text-white border-bottom border-primary">Digital Design</span>
-                                <span class="badge text-white border-bottom border-primary">
-                                    <a href="#projects" class="text-primary text-decoration-none small fw-semibold mt-1 d-inline-flex align-items-center gap-1">
-                                        View Project
-                                        <iconify-icon icon="lucide:arrow-up-right" class="fs-7"></iconify-icon>
-                                    </a>
-                                </span>
+                    </div>
+                    <div class="col-xl-8 col-xxl-7">
+                        <div class="row">
+                            <div class="col-xxl-8">
+                                <div class="d-flex flex-column gap-6" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
+                                    <h2 class="mb-0 text-white">Featured Projects</h2>
+                                    <p class="fs-5 mb-0 text-white">A glimpse into our creativity. Exploring designs, successful collaborations, and transformative digital experiences.</p> 
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="text-center mt-8" data-aos="fade-up" data-aos-delay="700" data-aos-duration="1000">
-                <a href="#projects" class="btn btn-outline-light border-white">
-                    <span class="text-white">View other Projects</span>
-                    <iconify-icon icon="lucide:arrow-up-right"
-                                  class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
-                </a>
-            </div>
-        </div>
-    </section>
+                <div class="row g-4">
+                    <!-- Project 1 (Animation focus) -->
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
+                        <div class="portfolio d-flex flex-column gap-3 h-100">
+                            <div class="portfolio-img position-relative overflow-hidden">
+                                <img src="assets/images/portfolio/giftconer.png" alt="Gifts Corner animated advert created by Kabrownie Digital animation studio" class="img-fluid w-100">
+                                <a href="#projects" class="position-absolute top-0 start-0 w-100 h-100 portfolio-overlay" aria-label="View Gifts Corner animated project"></a>
+                            </div>
+                            <div class="portfolio-details d-flex flex-column gap-2">
+                                <h3 class="mb-0 text-primary fs-5">Gifts Corner Advert</h3>
+                                <p class="text-white small mb-1">An animated promotional campaign for a premium gifts shop, to drive holiday sales.</p>
+                                <div class="hstack gap-2 flex-wrap">
+                                    <span class="badge text-white border-bottom border-primary">Animation</span>
+                                    <span class="badge text-white border-bottom border-primary">Motion Graphics</span>
+                                    <span class="badge text-white border-bottom border-primary">
+                                        <a href="#projects" class="text-primary text-decoration-none small fw-semibold mt-1 d-inline-flex align-items-center gap-1">
+                                            View Project
+                                            <iconify-icon icon="lucide:arrow-up-right" class="fs-7"></iconify-icon>
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-    <!-- ====== WHY CHOOSE US (REWRITTEN) ====== -->
-    <section class="why-choose-us py-5 py-lg-11 py-xl-12 bg-dark text-white">
-        <div class="container">
-            <div class="row justify-content-between gap-5 gap-xl-0">
-                <!-- Left Column -->
-                <div class="col-xl-3 col-xxl-3">
-                    <div class="d-flex flex-column gap-4">
-                        <h2 class="mb-0 text-white" data-aos="fade-right" data-aos-delay="100" data-aos-duration="1000">
-                            Built on <span class="text-primary">trust</span>, driven by <span class="text-primary">results</span>.
-                        </h2>
-                        <p class="mb-0 fs-5 text-white" data-aos="fade-right" data-aos-delay="200" data-aos-duration="1000">
-                            We don't just deliver projects; we build lasting partnerships. Our approach combines technical
-                            precision with creative flair, backed by transparent communication and unwavering support.
-                        </p>
+                    <!-- Project 2 (Web Dev focus - secondary) -->
+                    <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+                        <div class="portfolio d-flex flex-column gap-3 h-100">
+                            <div class="portfolio-img position-relative overflow-hidden">
+                                <img src="assets/images/portfolio/portfolio-img-2.jpg" alt="Amber Bottle e-commerce platform developed by Kabrownie Digital web development team" class="img-fluid w-100">
+                                <a href="#projects" class="position-absolute top-0 start-0 w-100 h-100 portfolio-overlay" aria-label="View Amber Bottle e-commerce project"></a>
+                            </div>
+                            <div class="portfolio-details d-flex flex-column gap-2">
+                                <h3 class="mb-0 text-primary fs-5">Amber Bottle</h3>
+                                <p class="text-white small mb-1">A bespoke e-commerce platform for a luxury glassware brand, featuring immersive product showcases and seamless checkout.</p>
+                                <div class="hstack gap-2 flex-wrap">
+                                    <span class="badge text-white border-bottom border-primary">Web Development</span>
+                                    <span class="badge text-white border-bottom border-primary">UI/UX Design</span>
+                                    <span class="badge text-white border-bottom border-primary">
+                                        <a href="#projects" class="text-primary text-decoration-none small fw-semibold mt-1 d-inline-flex align-items-center gap-1">
+                                            View Project
+                                            <iconify-icon icon="lucide:arrow-up-right" class="fs-7"></iconify-icon>
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Right Column (Stats & Testimonials) -->
-                <div class="col-xl-9 col-xxl-8">
-                    <div class="row">
-                        <!-- Stat Card 1: Satisfaction -->
-                        <div class="col-lg-4 mb-7 mb-lg-0">
-                            <div class="card position-relative overflow-hidden bg-primary h-100" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
-                                <div class="card-body d-flex flex-column justify-content-between">
-                                    <div class="position-relative z-1">
-                                        <ul class="list-unstyled mb-3 hstack gap-1">
-                                            <li><iconify-icon icon="solar:star-bold" class="fs-6 text-dark"></iconify-icon></li>
-                                            <li><iconify-icon icon="solar:star-bold" class="fs-6 text-dark"></iconify-icon></li>
-                                            <li><iconify-icon icon="solar:star-bold" class="fs-6 text-dark"></iconify-icon></li>
-                                            <li><iconify-icon icon="solar:star-bold" class="fs-6 text-dark"></iconify-icon></li>
-                                            <li><iconify-icon icon="solar:star-line-duotone" class="fs-6 text-dark"></iconify-icon></li>
-                                        </ul>
-                                        <p class="mb-4 fs-6 text-white fst-italic">"The team exceeded our expectations with a stunning brand identity and flawless web launch."</p>
-                                    </div>
-                                    <div class="position-relative z-1">
-                                        <div class="pb-4 border-bottom border-dark">
-                                            <h2 class="mb-0 text-secondary">98.6%</h2>
-                                            <p class="mb-0 text-white">Client satisfaction rate</p>
+                <div class="text-center mt-8" data-aos="fade-up" data-aos-delay="700" data-aos-duration="1000">
+                    <a href="#projects" class="btn btn-outline-light border-white">
+                        <span class="text-white">View other Projects</span>
+                        <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ====== WHY CHOOSE US ====== -->
+        <section class="why-choose-us py-5 py-lg-11 py-xl-12 bg-dark text-white">
+            <div class="container">
+                <div class="row justify-content-between gap-5 gap-xl-0">
+                    <div class="col-xl-3 col-xxl-3">
+                        <div class="d-flex flex-column gap-4">
+                            <h2 class="mb-0 text-white" data-aos="fade-right" data-aos-delay="100" data-aos-duration="1000">
+                                Built on <span class="text-primary">creativity</span>, driven by <span class="text-primary">results</span>.
+                            </h2>
+                            <p class="mb-0 fs-5 text-white" data-aos="fade-right" data-aos-delay="200" data-aos-duration="1000">
+                               As a leading <strong>Digital</strong>  agency based in Nairobi, We deliver projects and build lasting partnerships. ,
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-9 col-xxl-8">
+                        <div class="row">
+                            <!-- Stat Card 1 -->
+                            <div class="col-lg-4 mb-7 mb-lg-0">
+                                <div class="card position-relative overflow-hidden bg-primary h-100" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
+                                    <div class="card-body d-flex flex-column justify-content-between">
+                                        <div class="position-relative z-1">
+                                            <ul class="list-unstyled mb-3 hstack gap-1">
+                                                <li><iconify-icon icon="solar:star-bold" class="fs-6 text-dark"></iconify-icon></li>
+                                                <li><iconify-icon icon="solar:star-bold" class="fs-6 text-dark"></iconify-icon></li>
+                                                <li><iconify-icon icon="solar:star-bold" class="fs-6 text-dark"></iconify-icon></li>
+                                                <li><iconify-icon icon="solar:star-bold" class="fs-6 text-dark"></iconify-icon></li>
+                                                <li><iconify-icon icon="solar:star-line-duotone" class="fs-6 text-dark"></iconify-icon></li>
+                                            </ul>
+                                            <p class="mb-4 fs-6 text-white fst-italic">"The team exceeded our expectations with a stunning brand identity and flawless web launch."</p>
                                         </div>
-                                        <div class="hstack gap-4 pt-4">
-                                            <img src="assets/images/profile/avatar-1.png" alt="Wade Warren"
-                                                class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="56" height="56">
-                                            <div>
-                                                <h5 class="mb-0 text-secondary">Wade Warren</h5>
-                                                <p class="mb-0 text-white small">CEO, TechVault</p>
+                                        <div class="position-relative z-1">
+                                            <div class="pb-4 border-bottom border-dark">
+                                                <h2 class="mb-0 text-secondary">98.6%</h2>
+                                                <p class="mb-0 text-white">Client satisfaction rate</p>
+                                            </div>
+                                            <div class="hstack gap-4 pt-4">
+                                                <img src="assets/images/profile/avatar-1.png" alt="Wade Warren - satisfied client of Kabrownie Digital" class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="56" height="56">
+                                                <div>
+                                                    <h5 class="mb-0 text-secondary">Wade Warren</h5>
+                                                    <p class="mb-0 text-white small">CEO, TechVault</p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="position-absolute bottom-0 end-0 opacity-25">
-                                        <img src="assets/images/backgrounds/customer-satisfaction-bg.svg" alt="" class="img-fluid">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Stat Card 2: Experience -->
-                        <div class="col-lg-4 mb-7 mb-lg-0">
-                            <div class="d-flex flex-column gap-5" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
-                                <div class="card bg-primary">
-                                    <div class="card-body d-flex flex-column gap-4">
-                                        <div>
-                                            <h2 class="mb-0 text-white">50+</h2>
-                                            <p class="mb-0 text-white">Successful projects delivered</p>
+                                        <div class="position-absolute bottom-0 end-0 opacity-25">
+                                            <img src="assets/images/backgrounds/customer-satisfaction-bg.svg" alt="Kabrownie Digital background graphic" class="img-fluid">
                                         </div>
-                                        <ul class="d-flex align-items-center mb-0 ps-0">
-                                            <li class="list-unstyled">
-                                                <img src="assets/images/profile/user-1.jpg" width="44" height="44"
-                                                    class="rounded-circle border border-2 border-dark" alt="client">
-                                            </li>
-                                            <li class="list-unstyled ms-n2">
-                                                <img src="assets/images/profile/user-2.jpg" width="44" height="44"
-                                                    class="rounded-circle border border-2 border-dark" alt="client">
-                                            </li>
-                                            <li class="list-unstyled ms-n2">
-                                                <img src="assets/images/profile/user-3.jpg" width="44" height="44"
-                                                    class="rounded-circle border border-2 border-dark" alt="client">
-                                            </li>
-                                            <li class="list-unstyled ms-n2">
-                                                <img src="assets/images/profile/user-4.jpg" width="44" height="44"
-                                                    class="rounded-circle border border-2 border-dark" alt="client">
-                                            </li>
-                                            <li class="list-unstyled ms-2 small text-white">+ many more</li>
-                                        </ul>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- Stat Card 3: Reach -->
-                        <div class="col-lg-4 mb-7 mb-lg-0">
-                            <div class="card border border-white h-100 position-relative overflow-hidden bg-transparent"
-                                data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
-                                <div class="card-body d-flex flex-column justify-content-between">
-                                    <div>
-                                        <h2 class="mb-0 text-white">28+</h2>
-                                        <p class="mb-4 text-white">Brands across diverse industries</p>
-                                        <a href="#">
-                                            <img src="assets/images/logos/logo-dark.svg" alt="Kabrownie Digital"
-                                                class="img-fluid mb-3" style="filter: brightness(0) invert(1); max-width: 140px;">
-                                        </a>
-                                        <p class="mb-0 fs-6 text-white">
-                                            From startups to established enterprises, we create culturally relevant designs
-                                            that transcend borders and connect with global audiences.
-                                        </p>
+                            <!-- Stat Card 2 -->
+                            <div class="col-lg-4 mb-7 mb-lg-0">
+                                <div class="d-flex flex-column gap-5" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+                                    <div class="card bg-primary">
+                                        <div class="card-body d-flex flex-column gap-4">
+                                            <div>
+                                                <h2 class="mb-0 text-white">50+</h2>
+                                                <p class="mb-0 text-white">Successful projects delivered</p>
+                                            </div>
+                                            <ul class="d-flex align-items-center mb-0 ps-0">
+                                                <li class="list-unstyled">
+                                                    <img src="assets/images/profile/user-1.jpg" width="44" height="44" class="rounded-circle border border-2 border-dark" alt="Happy client of Kabrownie animation studio">
+                                                </li>
+                                                <li class="list-unstyled ms-n2">
+                                                    <img src="assets/images/profile/user-2.jpg" width="44" height="44" class="rounded-circle border border-2 border-dark" alt="Happy client of Kabrownie graphic design">
+                                                </li>
+                                                <li class="list-unstyled ms-n2">
+                                                    <img src="assets/images/profile/user-3.jpg" width="44" height="44" class="rounded-circle border border-2 border-dark" alt="Happy client of Kabrownie web development">
+                                                </li>
+                                                <li class="list-unstyled ms-n2">
+                                                    <img src="assets/images/profile/user-4.jpg" width="44" height="44" class="rounded-circle border border-2 border-dark" alt="Happy client of Kabrownie Digital">
+                                                </li>
+                                                <li class="list-unstyled ms-2 small text-white">+ many more</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Stat Card 3 -->
+                            <div class="col-lg-4 mb-7 mb-lg-0">
+                                <div class="card border border-white h-100 position-relative overflow-hidden bg-transparent" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
+                                    <div class="card-body d-flex flex-column justify-content-between">
+                                        <div>
+                                            <h2 class="mb-0 text-white">28+</h2>
+                                            <p class="mb-4 text-white">Brands across diverse industries</p>
+                                            <a href="#">
+                                                <img src="assets/images/logos/logo-dark.svg" alt="Kabrownie Digital - leading animation studio and creative agency" class="img-fluid mb-3" style="filter: brightness(0) invert(1); max-width: 140px;">
+                                            </a>
+                                            <p class="mb-0 fs-6 text-white">
+                                                From startups to established enterprises, we create culturally relevant designs that transcend borders and connect with global audiences.
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -399,181 +466,169 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- ====== GET IN TOUCH (KEPT AS ORIGINAL) ====== -->
-    <section id="contact" class="get-in-touch py-5 py-lg-11 py-xl-12 bg-primary">
+        <!-- ====== GET IN TOUCH ====== -->
+        <section id="contact" class="get-in-touch py-5 py-lg-11 py-xl-12 bg-primary">
+            <div class="container">
+                <div class="d-flex flex-column gap-5 gap-xl-10">
+                    <div class="row gap-7 gap-xl-0">
+                        <div class="col-xl-4 col-xxl-4">
+                            <div class="d-flex align-items-center gap-7 py-2" data-aos="fade-right" data-aos-delay="100" data-aos-duration="1000">
+                            </div>
+                        </div>
+                        <div class="col-xl-8 col-xxl-7">
+                            <div class="row">
+                                <div class="col-xxl-8">
+                                    <div class="d-flex flex-column gap-6" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
+                                        <h2 class="mb-0 text-white">Get in touch</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-between gap-7 gap-xl-0">
+                    <div class="col-xl-3">
+                        <p class="mb-0 fs-5 text-white" data-aos="fade-right" data-aos-delay="100" data-aos-duration="1000">
+                            Let us collaborate and create something amazing! Tell us about your project; we are all ears.
+                        </p>
+                    </div>
+                    <div class="col-xl-8">
+                        <form class="d-flex flex-column gap-7" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000" action="#">
+                            <div>
+                                <p class="mb-0 text-white">Name</p>
+                                <input type="text" class="form-control border border-secondary" id="formGroupExampleInput" placeholder="Enter your name" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;">
+                            </div>
+                            <div>
+                                <p class="mb-0 text-white">Email</p>
+                                <input type="email" class="form-control border border-secondary" id="exampleInputEmail1" placeholder="Enter your email" aria-describedby="emailHelp" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;">
+                            </div>
+                            <div>
+                                <p class="mb-0 text-white">Message</p>
+                                <textarea class="form-control border border-secondary" id="exampleFormControlTextarea1" placeholder="Describe your project, goals, or any questions you have..." rows="3" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-outline-light border-white w-100 justify-content-center">
+                                <span class="btn-text">Submit message</span>
+                                <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="footer bg-dark py-5 py-lg-11 py-xl-12">
         <div class="container">
-            <div class="d-flex flex-column gap-5 gap-xl-10">
-                <div class="row gap-7 gap-xl-0">
-                    <div class="col-xl-4 col-xxl-4">
-                        <div class="d-flex align-items-center gap-7 py-2" data-aos="fade-right" data-aos-delay="100"
-                        data-aos-duration="1000">
-                    </div>
-                </div>
-                <div class="col-xl-8 col-xxl-7">
-                    <div class="row">
-                        <div class="col-xxl-8">
-                            <div class="d-flex flex-column gap-6" data-aos="fade-up" data-aos-delay="100"
-                            data-aos-duration="1000">
-                            <h2 class="mb-0 text-white">Get in touch</h2>
+            <div class="row">
+                <div class="col-xl-5 mb-8 mb-xl-0">
+                    <div class="d-flex flex-column gap-8 pe-xl-5">
+                        <div class="d-flex flex-column gap-2">
+                            <p class="text-primary">Give us a visit
+                                <a href="https://maps.app.goo.gl/your-google-maps-link" target="_blank" class="link-hover hstack gap-3 text-white fs-5">
+                                    <iconify-icon icon="lucide:map-pin" class="fs-7 text-primary"></iconify-icon>
+                                    Tom Mboya Street, Braidwood House, 3rd Floor, Nairobi, Kenya
+                                </a>
+                            </p>
+                            <p class="text-primary">Write to us
+                                <a href="mailto:hello@kabrownie.digital" class="link-hover hstack gap-3 text-white fs-5">
+                                    <iconify-icon icon="lucide:mail" class="fs-7 text-primary"></iconify-icon>
+                                    hello@kabrownie.digital
+                                </a>
+                            </p>
+                            <p class="text-primary">Call us
+                                <a class="text-white link-hover hstack" href="tel:+254784144132">
+                                    <iconify-icon icon="lucide:phone" class="fs-7 text-primary"></iconify-icon>
+                                    +2547 84144132
+                                </a>
+                            </p>
+                            <p class="text-primary">WhatsApp us
+                                <a class="text-white link-hover hstack" href="https://wa.me/254784144132">
+                                    <iconify-icon icon="lucide:message-circle" class="fs-7 text-primary"></iconify-icon>
+                                    +2547 84144132
+                                </a>
+                            </p>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row justify-content-between gap-7 gap-xl-0">
-            <div class="col-xl-3">
-                <p class="mb-0 fs-5 text-white" data-aos="fade-right" data-aos-delay="100" data-aos-duration="1000">
-                    Let us collaborate and create something amazing! Tell us about your project; we are all ears.
-                </p>
-            </div>
-            <div class="col-xl-8">
-                <form class="d-flex flex-column gap-7" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000" action="#">
-                    <div>
-                        <p class="mb-0 text-white">Name</p>
-                        <input type="text" class="form-control border border-secondary" id="formGroupExampleInput"
-                        placeholder="Enter your name" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;">
-                    </div>
-                    <div>
-                        <p class="mb-0 text-white">Email</p>
-                        <input type="email" class="form-control border border-secondary" id="exampleInputEmail1"
-                        placeholder="Enter your email" aria-describedby="emailHelp" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;">
-                    </div>
-                    <div>
-                        <p class="mb-0 text-white">Message</p>
-                        <textarea class="form-control border border-secondary" id="exampleFormControlTextarea1"
-                        placeholder="Describe your project, goals, or any questions you have..." rows="3" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-outline-light border-white w-100 justify-content-center">
-                        <span class="btn-text">Submit message</span>
-                        <iconify-icon icon="lucide:arrow-up-right"
-                        class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-</section>
-
-</div>
-
-<!-- ===================== FOOTER ===================== -->
-<footer class="footer bg-dark py-5 py-lg-11 py-xl-12">
-    <div class="container">
-        <div class="row">
-            <div class="col-xl-5 mb-8 mb-xl-0">
-                <div class="d-flex flex-column gap-8 pe-xl-5">
-                    <div class="d-flex flex-column gap-2">
-                        <p class="text-primary">Give us a visit
-                            <a href="https://maps.app.goo.gl/your-google-maps-link" target="_blank"
-                            class="link-hover hstack gap-3 text-white fs-5">
-                            <iconify-icon icon="lucide:map-pin" class="fs-7 text-primary"></iconify-icon>
-                            Tom Mboya Street, Braidwood House, 3rd Floor, Nairobi
-                        </a>
-                    </p>
-                    <p class="text-primary">Write to us
-                        <a href="mailto:hello@kabrownie.digital" class="link-hover hstack gap-3 text-white fs-5">
-                            <iconify-icon icon="lucide:mail" class="fs-7 text-primary"></iconify-icon>
-                            hello@kabrownie.digital
-                        </a>
-                    </p>
-                    <p class="text-primary">Call us
-                        <a class="text-white link-hover hstack" href="tel:+254784144132">
-                            <iconify-icon icon="lucide:phone" class="fs-7 text-primary"></iconify-icon>
-                            +2547 84144132
-                        </a>
-                    </p>
-                    <p class="text-primary">WhatsApp us
-                        <a class="text-white link-hover hstack" href="https://wa.me/254784144132">
-                            <iconify-icon icon="lucide:message-circle" class="fs-7 text-primary"></iconify-icon>
-                            +2547 84144132
-                        </a>
-                    </p>
+                <div class="col-md-4 col-xl-2 mb-8 mb-xl-0">
+                    <ul class="footer-menu list-unstyled mb-0 d-flex flex-column gap-2">
+                        <li><a class="link-hover fs-5 text-white" href="#">Home</a></li>
+                        <li><a class="link-hover fs-5 text-white" href="#about">About</a></li>
+                        <li><a class="link-hover fs-5 text-white" href="#services">Services</a></li>
+                        <li><a class="link-hover fs-5 text-white" href="#projects">Work</a></li>
+                        <li><a class="link-hover fs-5 text-white" href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 col-xl-2 mb-8 mb-xl-0">
+                    <ul class="footer-menu list-unstyled mb-0 d-flex flex-column gap-2">
+                        <li>
+                            <a class="link-hover hstack gap-2 text-white fs-5" href="https://facebook.com/kabrownie.digital" target="_blank">
+                                <iconify-icon icon="fa6-brands:facebook" class="fs-6 text-primary"></iconify-icon>
+                                @kabrownie.digital
+                            </a>
+                        </li>
+                        <li>
+                            <a class="link-hover hstack gap-2 text-white fs-5" href="https://instagram.com/kabrownie.digital" target="_blank">
+                                <iconify-icon icon="fa6-brands:instagram" class="fs-6 text-primary"></iconify-icon>
+                                @kabrownie.digital
+                            </a>
+                        </li>
+                        <li>
+                            <a class="link-hover hstack gap-2 text-white fs-5" href="https://x.com/" target="_blank">
+                                <iconify-icon icon="fa6-brands:twitter" class="fs-6 text-primary"></iconify-icon>
+                                @kabrownie_digital
+                            </a>
+                        </li>
+                        <li>
+                            <a class="link-hover hstack gap-2 text-white fs-5" href="https://linkedin.com/company/kabrownie-digital" target="_blank">
+                                <iconify-icon icon="fa6-brands:linkedin" class="fs-6 text-primary"></iconify-icon>
+                                Kabrownie Digital
+                            </a>
+                        </li>
+                        <li>
+                            <a class="link-hover hstack gap-2 text-white fs-5" href="https://tiktok.com/@kabrownie.digital" target="_blank">
+                                <iconify-icon icon="fa6-brands:tiktok" class="fs-6 text-primary"></iconify-icon>
+                                @kabrownie.digital
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4 col-xl-3 mb-8 mb-xl-0">
+                    <p class="mb-0 text-white text-opacity-70 text-md-end">© Kabrownie Digital</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 col-xl-2 mb-8 mb-xl-0">
-            <ul class="footer-menu list-unstyled mb-0 d-flex flex-column gap-2">
-                <li><a class="link-hover fs-5 text-white" href="#">Home</a></li>
-                <li><a class="link-hover fs-5 text-white" href="#about">About</a></li>
-                <li><a class="link-hover fs-5 text-white" href="#services">Services</a></li>
-                <li><a class="link-hover fs-5 text-white" href="#projects">Work</a></li>
-                <li><a class="link-hover fs-5 text-white" href="#contact">Contact</a></li>
-            </ul>
-        </div>
-        <div class="col-md-4 col-xl-2 mb-8 mb-xl-0">
-            <ul class="footer-menu list-unstyled mb-0 d-flex flex-column gap-2">
-                <li>
-                    <a class="link-hover hstack gap-2 text-white fs-5" href="https://facebook.com/kabrownie.digital" target="_blank">
-                        <iconify-icon icon="fa6-brands:facebook" class="fs-6 text-primary"></iconify-icon>
-                        @kabrownie.digital
-                    </a>
-                </li>
-                <li>
-                    <a class="link-hover hstack gap-2 text-white fs-5" href="https://instagram.com/kabrownie.digital" target="_blank">
-                        <iconify-icon icon="fa6-brands:instagram" class="fs-6 text-primary"></iconify-icon>
-                        @kabrownie.digital
-                    </a>
-                </li>
-                <li>
-                    <a class="link-hover hstack gap-2 text-white fs-5" href="https://x.com/" target="_blank">
-                        <iconify-icon icon="fa6-brands:twitter" class="fs-6 text-primary"></iconify-icon>
-                        @kabrownie_digital
-                    </a>
-                </li>
-                <li>
-                    <a class="link-hover hstack gap-2 text-white fs-5" href="https://linkedin.com/company/kabrownie-digital" target="_blank">
-                        <iconify-icon icon="fa6-brands:linkedin" class="fs-6 text-primary"></iconify-icon>
-                        Kabrownie Digital
-                    </a>
-                </li>
-                <li>
-                    <a class="link-hover hstack gap-2 text-white fs-5" href="https://tiktok.com/@kabrownie.digital" target="_blank">
-                        <iconify-icon icon="fa6-brands:tiktok" class="fs-6 text-primary"></iconify-icon>
-                        @kabrownie.digital
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="col-md-4 col-xl-3 mb-8 mb-xl-0">
-            <p class="mb-0 text-white text-opacity-70 text-md-end">© Kabrownie Digital</p>
-        </div>
+    </footer>
+
+    <!-- ====== SCROLL TO TOP ====== -->
+    <div class="get-template hstack gap-2">
+        <button class="btn bg-primary p-2 round-52 rounded-circle hstack justify-content-center flex-shrink-0" id="scrollToTopBtn" aria-label="Scroll to top">
+            <iconify-icon icon="lucide:arrow-up" class="fs-7 text-dark"></iconify-icon>
+        </button>
     </div>
-</div>
-</footer>
 
-<!-- ====== SCROLL TO TOP ====== -->
-<div class="get-template hstack gap-2">
-    <button class="btn bg-primary p-2 round-52 rounded-circle hstack justify-content-center flex-shrink-0"
-    id="scrollToTopBtn">
-    <iconify-icon icon="lucide:arrow-up" class="fs-7 text-dark"></iconify-icon>
-</button>
-</div>
+    <!-- ====== SCRIPTS ====== -->
+    <script src="assets/libs/jquery/dist/jquery.min.js">
+    </script>
+    <script src="assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js">
+    </script>
+    <script src="assets/libs/owl.carousel/dist/owl.carousel.min.js">
+    </script>
+    <script src="assets/libs/aos-master/dist/aos.js">
+    </script>
+    <script src="assets/js/custom.js">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js">
+    </script>
 
-<!-- ====== SCRIPTS ====== -->
-<script src=" assets/libs/jquery/dist/jquery.min.js">
-</script>
-<script src=" assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js">
-</script>
-<script src=" assets/libs/owl.carousel/dist/owl.carousel.min.js">
-</script>
-<script src=" assets/libs/aos-master/dist/aos.js">
-</script>
-<script src=" assets/js/custom.js">
-</script>
-<script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js">
-</script>
-
-<!-- ====== FLOATING WHATSAPP BUTTON ====== -->
-<a href="https://wa.me/254784144132?text=Hello%2C%20I'd%20like%20to%20know%20more%20about%20your%20digital%20services.%20Can%20you%20help%20me%3F"
-   class="whatsapp-float"
-   target="_blank"
-   aria-label="Chat on WhatsApp">
-    <iconify-icon icon="ri:whatsapp-fill" class="whatsapp-icon"></iconify-icon>
-</a>
+    <!-- ====== FLOATING WHATSAPP BUTTON ====== -->
+    <a href="https://wa.me/254784144132?text=Hello%2C%20I'd%20like%20to%20know%20more%20about%20your%20digital%20services.%20Can%20you%20help%20me%3F" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+        <iconify-icon icon="ri:whatsapp-fill" class="whatsapp-icon"></iconify-icon>
+    </a>
 </body>
 
 </html>
