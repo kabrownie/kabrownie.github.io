@@ -159,26 +159,21 @@
     <div class="page-wrapper overflow-hidden">
 
         <!-- ====== HERO SECTION (with background image) ====== -->
-      <section class="position-relative d-flex align-items-center" 
-         style="
-                background-image: url('assets/images/backgrounds/ban.png'); 
-                background-size: 100% auto; 
-                background-position: center top; 
-                background-repeat: no-repeat; 
-                padding-top: 100px;">
     
-    <!-- Dark overlay -->
-    <div class="position-absolute top-0 start-0 w-100 h-100" style="background: rgba(0,0,0,0.6); z-index:1;"></div>
-
-    
-</section>
-
+<div style="position: relative; width: 100%; display: block;">
+  <!-- The Overlay Layer -->
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); pointer-events: none;"></div>
+  
+  <!-- The Image -->
+  <img src="assets/images/backgrounds/ban.png" alt="" style="width: 100%; height: auto; display: block;">
+</div>
 
         <!-- ====== FORM SECTION (matches homepage "Get in Touch") ====== -->
         <section id="form-section" class="get-in-touch py-5 py-lg-11 py-xl-12 bg-primary">
             <div class="container">
                 <div class="row justify-content-between gap-7 gap-xl-0">
                     <div class="col-xl-3">
+                      
                         <h2 class="text-white display-3 fw-bold">Start Your Project</h2>
                
                         <p class="mb-0 fs-5 text-white" data-aos="fade-right" data-aos-delay="100" data-aos-duration="1000"> Share your vision and we'll make it happen</p>
