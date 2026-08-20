@@ -724,8 +724,8 @@ ul { list-style: none; padding-left: 0; }
 
 /* ---------- GET IN TOUCH ---------- */
 .get-in-touch .form-control {
-  background: white !important;
-  color: black !important;
+  background: rgb(255, 253, 253) !important;
+  color: rgba(0, 0, 0, 0.515) !important;
   padding: 5px !important;
   border-radius: 5px !important;
   border: 1px solid #694e46 !important;
@@ -741,10 +741,10 @@ ul { list-style: none; padding-left: 0; }
    ============================================ */
 .whatsapp-float {
   position: fixed;
-  bottom: 90px;
-  right: 30px;
+  bottom: 10px;
+  right: 10px;
   z-index: 99;
-  background-color: #25D366;
+  background-color: #25d365ab;
   color: #ffffff;
   width: 60px;
   height: 60px;
@@ -771,6 +771,100 @@ ul { list-style: none; padding-left: 0; }
   100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
 }
 @media (max-width: 576px) {
-  .whatsapp-float { width: 50px; height: 50px; bottom: 80px; right: 15px; }
+  .whatsapp-float { width: 50px; height: 50px; bottom: 10px; right: 10px; }
   .whatsapp-float .whatsapp-icon { font-size: 28px; }
+}/* ============================================
+   FLOATING "START PROJECT" BUTTON – LEFT SIDE
+   ============================================ */
+.floating-start-project {
+    position: fixed;
+    bottom: 10px;          /* Adjust to sit above footer */
+    left: 10px;             /* Left side, opposite WhatsApp */
+    z-index: 99;
+    background: #4b00f9ab;
+    color: #ffffff;
+    padding: 12px 18px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.5);
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(2px);
+    /* Blinking animation */
+    animation: blink-pulse 3s ease-in-out infinite;
+}
+
+.floating-start-project:hover {
+    transform: scale(1.08);
+    background: #180329;
+    color: #fff;
+    box-shadow: 0 6px 30px rgba(138, 92, 246, 0.182);
+}
+
+.floating-start-project .start-project-icon {
+    font-size: 24px;
+    color: #fff;
+}
+
+.floating-start-project .start-project-label {
+    display: inline-block;
+}
+
+/* Blinking / Pulsing animation */
+@keyframes blink-pulse {
+    0%   { opacity: 1; transform: scale(1); box-shadow: 0 4px 20px rgba(139, 92, 246, 0.5); }
+    50%  { opacity: 0.6; transform: scale(0.95); box-shadow: 0 4px 40px rgba(139, 92, 246, 0.9); }
+    100% { opacity: 1; transform: scale(1); box-shadow: 0 4px 20px rgba(139, 92, 246, 0.5); }
+}
+
+/* Responsive – hide label on very small screens, keep icon */
+@media (max-width: 576px) {
+    .floating-start-project {
+        padding: 10px 14px;
+        bottom: 10px;
+        left: 10px;
+    }
+    .floating-start-project .start-project-label {
+        display: none;
+    }
+    .floating-start-project .start-project-icon {
+        font-size: 28px;
+    }
+}/* ====== TRUSTED LOGOS CAROUSEL ====== */
+.trusted-logos-carousel .item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+.trusted-logos-carousel .item img {
+    max-height: 65px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.trusted-logos-carousel .item img:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+/* Adjust carousel item spacing */
+.trusted-logos-carousel .owl-stage {
+    display: flex;
+    align-items: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .trusted-logos-carousel .item img {
+        max-height: 40px;
+    }
 }
