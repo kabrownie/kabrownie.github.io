@@ -781,7 +781,7 @@ ul { list-style: none; padding-left: 0; }
     bottom: 10px;          /* Adjust to sit above footer */
     left: 10px;             /* Left side, opposite WhatsApp */
     z-index: 99;
-    background: #4b00f9ab;
+    background: #4b00f9;
     color: #ffffff;
     padding: 12px 18px;
     border-radius: 50px;
@@ -791,9 +791,9 @@ ul { list-style: none; padding-left: 0; }
     text-decoration: none;
     font-weight: 700;
     font-size: 0.95rem;
-    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.5);
+    box-shadow: 0 4px 20px rgba(255, 110, 6, 0.837);
     transition: all 0.3s ease;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.842);
     backdrop-filter: blur(2px);
     /* Blinking animation */
     animation: blink-pulse 3s ease-in-out infinite;
@@ -803,7 +803,7 @@ ul { list-style: none; padding-left: 0; }
     transform: scale(1.08);
     background: #180329;
     color: #fff;
-    box-shadow: 0 6px 30px rgba(138, 92, 246, 0.182);
+    box-shadow: 0 6px 30px rgba(236, 160, 27, 0.595);
 }
 
 .floating-start-project .start-project-icon {
