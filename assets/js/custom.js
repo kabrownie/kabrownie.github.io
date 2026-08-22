@@ -184,7 +184,8 @@ $(function () {
     if (form) {
         form.addEventListener('submit', function(e) {
             e.preventDefault();
-
+ const btn = this.querySelector('button[type="submit"]');
+    btn.disabled = true;
             // Create a FormData object from the form (includes all regular fields)
             const formData = new FormData(this);
 
