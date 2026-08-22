@@ -174,103 +174,105 @@
                     </div>
                     <div class="col-xl-8">
                         <!-- ====== ADDED id="projectForm" for JS interception ====== -->
-                        <form method="POST" action="https://formsubmit.co/hello@kabrownie.digital" id="projectForm" class="d-flex flex-column gap-7" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000" enctype="multipart/form-data">
+                      <form method="POST" action="https://enquiry-form-handler.makonokevin.workers.dev" id="projectForm" class="d-flex flex-column gap-7" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000" enctype="multipart/form-data">
 
-                            <input type="text" name="_honey" style="display:none">
-                            <input type="hidden" name="_next" value="https://kabrownie.digital/thank-you">
-                            <input type="hidden" name="_captcha" value="false">
+    <!-- Honeypot (spam trap) -->
+    <input type="text" name="_honey" style="display:none">
 
-                            <!-- Name -->
-                            <div>
-                                <p class="mb-0 text-white">Tell us your name *</p>
-                                <input type="text" class="form-control border border-secondary" name="Name" placeholder="Your Name" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;" required>
-                            </div>
+    <!-- ========== NAME ========== -->
+    <div>
+        <p class="mb-0 text-white">Tell us your name *</p>
+        <input type="text" class="form-control border border-secondary" name="Name" placeholder="Your Name" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;" required>
+    </div>
 
-                            <!-- Company -->
-                            <div>
-                                <p class="mb-0 text-white">What's the name of your amazing company?</p>
-                                <input type="text" class="form-control border border-secondary" name="Company" placeholder="Company Name" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;">
-                            </div>
+    <!-- ========== COMPANY ========== -->
+    <div>
+        <p class="mb-0 text-white">What's the name of your amazing company?</p>
+        <input type="text" class="form-control border border-secondary" name="Company" placeholder="Company Name" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;">
+    </div>
 
-                            <!-- Service -->
-                            <div>
-                                <p class="mb-0 text-white">What are you looking for? *</p>
-                                <select class="form-control border border-secondary" name="Service" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;" required>
-                                    <option value="">Select a service</option>
-                                    <option value="Animation & Motion Graphics">Animation & Motion Graphics</option>
-                                    <option value="Graphics & Branding">Graphics & Branding</option>
-                                    <option value="Web & App Development">Web & App Development</option>
-                                    <option value="Full Digital Package">Full Digital Package</option>
-                                    <option value="Other">Other</option>
-                                </select>
-                            </div>
+    <!-- ========== SERVICE ========== -->
+    <div>
+        <p class="mb-0 text-white">What are you looking for? *</p>
+        <select class="form-control border border-secondary" name="Service" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;" required>
+            <option value="">Select a service</option>
+            <option value="Animation & Motion Graphics">Animation & Motion Graphics</option>
+            <option value="Graphics & Branding">Graphics & Branding</option>
+            <option value="Web & App Development">Web & App Development</option>
+            <option value="Full Digital Package">Full Digital Package</option>
+            <option value="Other">Other</option>
+        </select>
+    </div>
 
-                            <!-- Budget -->
-                            <div>
-                                <p class="mb-0 text-white">Let's talk about your estimated budget *</p>
-                                <select class="form-control border border-secondary" name="Budget" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;" required>
-                                    <option value="">Select a range</option>
-                                    <option value="Under $1,000">Under $1,000</option>
-                                    <option value="$1,000 – $5,000">$1,000 – $5,000</option>
-                                    <option value="$5,000 – $10,000">$5,000 – $10,000</option>
-                                    <option value="$10,000 – $25,000">$10,000 – $25,000</option>
-                                    <option value="$25,000+">$25,000+</option>
-                                </select>
-                            </div>
+    <!-- ========== BUDGET ========== -->
+    <div>
+        <p class="mb-0 text-white">Let's talk about your estimated budget *</p>
+        <select class="form-control border border-secondary" name="Budget" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;" required>
+            <option value="">Select a range</option>
+            <option value="Under $1,000">Under $1,000</option>
+            <option value="$1,000 – $5,000">$1,000 – $5,000</option>
+            <option value="$5,000 – $10,000">$5,000 – $10,000</option>
+            <option value="$10,000 – $25,000">$10,000 – $25,000</option>
+            <option value="$25,000+">$25,000+</option>
+        </select>
+    </div>
 
-                            <!-- ========================================================= -->
-                            <!-- ====== UPDATED FILE UPLOAD SECTION (one‑by‑one support) ====== -->
-                            <!-- ========================================================= -->
-                            <div>
-                                <p class="mb-0 text-white">Do you have a brief? Attach it here</p>
-                                <div id="dropZone" style="border: 2px dashed rgba(255,255,255,0.3); border-radius: 8px; padding: 20px; text-align: center; background:#4a2e1b8d; cursor: pointer;">
-                                    <!-- Hidden file input – used only to trigger the picker -->
-                                    <input type="file" id="fileInput" accept=".png,.jpg,.jpeg,.pdf,.doc" multiple style="display:none;">
-                                    <label for="fileInput" style="cursor:pointer; display:block; margin:0; color: #fff;">
-                                        <iconify-icon icon="lucide:upload-cloud" class="fs-8 text-white"></iconify-icon>
-                                        <p class="mb-0 mt-2 text-white text-opacity-70">Click to select files (or drag & drop)</p>
-                                        <small class="text-white text-opacity-50">Allowed: PNG, JPG, JPEG, PDF, DOC | Max 3 files, 2.86 MB each</small>
-                                    </label>
-                                </div>
-                                <!-- File list will be populated here -->
-                                <div id="file-list" class="mt-2 text-white" style="font-size: 0.9rem;"></div>
-                                <!-- Hidden input to store file names (optional, for reference) -->
-                                <input type="hidden" name="BriefNames" id="briefNames" value="">
-                            </div>
-                            <!-- ====== END OF UPDATED FILE UPLOAD ====== -->
+    <!-- ========== FILE UPLOAD ========== -->
+    <div>
+        <p class="mb-0 text-white">Do you have a brief? Attach it here</p>
+        <div id="dropZone" style="border: 2px dashed rgba(255,255,255,0.3); border-radius: 8px; padding: 20px; text-align: center; background:#4a2e1b8d; cursor: pointer;">
+            <!-- UPDATED: file input now has a name="files[]" -->
+            <input type="file" id="fileInput" name="files[]" accept=".png,.jpg,.jpeg,.pdf,.doc" multiple style="display:none;">
+            <label for="fileInput" style="cursor:pointer; display:block; margin:0; color: #fff;">
+                <iconify-icon icon="lucide:upload-cloud" class="fs-8 text-white"></iconify-icon>
+                <p class="mb-0 mt-2 text-white text-opacity-70">Click to select files (or drag & drop)</p>
+                <small class="text-white text-opacity-50">Allowed: PNG, JPG, JPEG, PDF, DOC | Max 3 files, 2.86 MB each</small>
+            </label>
+        </div>
+        <!-- File list will be populated here -->
+        <div id="file-list" class="mt-2 text-white" style="font-size: 0.9rem;"></div>
+        <!-- Hidden input to store file names (optional, for reference) -->
+        <input type="hidden" name="BriefNames" id="briefNames" value="">
+    </div>
 
-                            <!-- Phone -->
-                            <div>
-                                <p class="mb-0 text-white">Tell us your contact number *</p>
-                                <input type="tel" class="form-control border border-secondary" name="Phone" placeholder="Your phone number" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;" required>
-                            </div>
+    <!-- ========== PHONE ========== -->
+    <div>
+        <p class="mb-0 text-white">Tell us your contact number *</p>
+        <input type="tel" class="form-control border border-secondary" name="Phone" placeholder="Your phone number" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;" required>
+    </div>
 
-                            <!-- Secondary phone -->
-                            <div>
-                                <p class="mb-0 text-white">Secondary Contact Number</p>
-                                <input type="tel" class="form-control border border-secondary" name="Secondary Phone" placeholder="Alternative number" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;">
-                            </div>
+    <!-- ========== SECONDARY PHONE ========== -->
+    <div>
+        <p class="mb-0 text-white">Secondary Contact Number</p>
+        <input type="tel" class="form-control border border-secondary" name="Secondary Phone" placeholder="Alternative number" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;">
+    </div>
 
-                            <!-- Email -->
-                            <div>
-                                <p class="mb-0 text-white">Email Address *</p>
-                                <input type="email" class="form-control border border-secondary" name="Email" placeholder="you@example.com" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;" required>
-                            </div>
+    <!-- ========== EMAIL ========== -->
+    <div>
+        <p class="mb-0 text-white">Email Address *</p>
+        <input type="email" class="form-control border border-secondary" name="Email" placeholder="you@example.com" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;" required>
+    </div>
 
-                            <!-- Project description -->
-                            <div>
-                                <p class="mb-0 text-white">Tell us about your project</p>
-                                <textarea class="text-white form-control border border-secondary" name="Project Description" rows="4" placeholder="This will help us get a better picture on how we can help you." style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;"></textarea>
-                            </div>
+    <!-- ========== PROJECT DESCRIPTION ========== -->
+    <div>
+        <p class="mb-0 text-white">Tell us about your project</p>
+        <textarea class="text-white form-control border border-secondary" name="Project Description" rows="4" placeholder="This will help us get a better picture on how we can help you." style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;"></textarea>
+    </div>
 
-                            <!-- Submit -->
-                            <button type="submit" class="btn btn-outline-light border-white w-100 justify-content-center">
-                                <span class="btn-text">SEND INQUIRY</span>
-                                <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
-                            </button>
+    <!-- ========== TURNSTILE WIDGET ========== -->
+    <div class="cf-turnstile" data-sitekey="0x4AAAAAAEXmIpf7T2WxU14b"></div>
 
-                            <p class="text-center text-white text-opacity-50 small mt-2">We'll get back to you within 24 hours.</p>
-                        </form>
+    <!-- ========== SUBMIT BUTTON ========== -->
+    <button type="submit" class="btn btn-outline-light border-white w-100 justify-content-center">
+        <span class="btn-text">SEND INQUIRY</span>
+        <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
+    </button>
+
+    <p class="text-center text-white text-opacity-50 small mt-2">We'll get back to you within 24 hours.</p>
+</form>
+
+<!-- Turnstile script – include once on your page -->
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
                     </div>
                 </div>
             </div>
