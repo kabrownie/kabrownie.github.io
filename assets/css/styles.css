@@ -800,7 +800,7 @@ ul { list-style: none; padding-left: 0; }
     border: 2px solid rgba(255, 255, 255, 0.842);
     backdrop-filter: blur(2px);
     /* Blinking animation */
-    animation: blink-pulse 3s ease-in-out infinite;
+    animation: blink-pulse 2s ease-in-out infinite;
 }
 
 .floating-start-project:hover {
