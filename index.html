@@ -542,28 +542,41 @@
                     </div>
                     <div class="col-xl-8">
                         <!-- ====== WORKING FORM ====== -->
-                        <form method="POST" action="https://formsubmit.co/hello@kabrownie.digital" class="d-flex flex-column gap-7" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
-                            <input type="hidden" name="_next" value="https://kabrownie.digital/thank-you">
-                            <input type="text" name="_honey" style="display:none">
-                            <input type="hidden" name="_captcha" value="false">
+   <form method="POST" action="https://contact-form-handler.makonokevin.workers.dev" class="d-flex flex-column gap-7" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+    
+    <!-- Honey pot (anti-spam, optional but keep it) -->
+    <input type="text" name="_honey" style="display:none">
+    
+    <!-- Name field -->
+    <div>
+        <p class="mb-0 text-white">Name</p>
+        <input type="text" name="name" class="form-control border border-secondary" placeholder="Enter your name" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;" required>
+    </div>
+    
+    <!-- Email field -->
+    <div>
+        <p class="mb-0 text-white">Email</p>
+        <input type="email" name="email" class="form-control border border-secondary" placeholder="Enter your email" style="background:rgba(79, 79, 79, 0.433); color:rgb(0,0,0); padding:5px; border-radius:5px;" required>
+    </div>
+    
+    <!-- Message field -->
+    <div>
+        <p class="mb-0 text-white">Message</p>
+        <textarea name="message" class="form-control border border-secondary" placeholder="Describe your project, goals, or any questions you have..." rows="3" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;" required></textarea>
+    </div>
+    
+    <!-- Turnstile widget -->
+    <div class="cf-turnstile" data-sitekey="0x4AAAAAAEXmIpf7T2WxU14b"></div>
+    
+    <!-- Submit button -->
+    <button type="submit" class="btn btn-outline-light border-white w-100 justify-content-center">
+        <span class="btn-text">Submit message</span>
+        <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
+    </button>
+</form>
 
-                            <div>
-                                <p class="mb-0 text-white">Name</p>
-                                <input type="text" class="form-control border border-secondary" placeholder="Enter your name" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;" required>
-                            </div>
-                            <div>
-                                <p class="mb-0 text-white">Email</p>
-                                <input type="email" class="form-control border border-secondary " placeholder="Enter your email" style=" background:rgba(79, 79, 79, 0.433); color:rgb(0,0,0); padding:5px; border-radius:5px;" required>
-                            </div>
-                            <div>
-                                <p class="mb-0 text-white">Message</p>
-                                <textarea class="form-control border border-secondary" placeholder="Describe your project, goals, or any questions you have..." rows="3" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;" required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-outline-light border-white w-100 justify-content-center">
-                                <span class="btn-text">Submit message</span>
-                                <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
-                            </button>
-                        </form>
+<!-- Turnstile script (add this once somewhere on your page, e.g., in the <head> or before </body>) -->
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
                     </div>
                 </div>
             </div>
