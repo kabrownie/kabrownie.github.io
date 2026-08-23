@@ -240,7 +240,7 @@ $(function () {
             console.log('✅ Overlay shown');
             // Clear any previous timeout
             clearTimeout(timeoutId);
-            // Safety timeout: 30 seconds (in case fetch never resolves)
+            // Safety timeout: 30 seconds
             timeoutId = setTimeout(function () {
                 console.warn('⏰ Overlay auto‑hidden after timeout (30s)');
                 hideLoadingOverlay();
@@ -268,7 +268,7 @@ $(function () {
     }
 
     // ============================================================
-    // FORM SUBMISSION – using 'submit' event for reliability
+    // FORM SUBMISSION – with Turnstile token support
     // ============================================================
 
     var form = document.getElementById('projectForm');
@@ -276,15 +276,19 @@ $(function () {
 
     if (form && submitBtn) {
 
-        // Use the form's submit event instead of button click
+        // Helper to get Turnstile token (if widget exists)
+        function getTurnstileToken() {
+            // Turnstile adds a hidden input with name="cf-turnstile-response"
+            var tokenInput = form.querySelector('input[name="cf-turnstile-response"]');
+            return tokenInput ? tokenInput.value : null;
+        }
+
         form.addEventListener('submit', function (e) {
-            // Prevent default browser submission
             e.preventDefault();
             console.log('🔵 Form submit event triggered');
 
-            // 1. Validate the form
+            // 1. Validate HTML5
             if (!form.checkValidity()) {
-                console.log('🟡 Form invalid – showing validation messages');
                 form.reportValidity();
                 return;
             }
@@ -294,33 +298,36 @@ $(function () {
                 console.log('⏳ Already submitting, ignoring.');
                 return;
             }
-            form._submitting = true;
 
             // 3. Show overlay and disable button
             showLoadingOverlay();
             submitBtn.disabled = true;
             submitBtn.innerHTML = 'SENDING…';
+            form._submitting = true;
 
-            // 4. Build FormData – wrap everything in try/catch
+            // 4. Build FormData
             try {
                 console.log('📦 Building FormData...');
                 var formData = new FormData(form);
                 console.log('✅ FormData created');
 
-                // Remove default file input and append our selected files
+                // Remove default file input and append selected files
                 formData.delete('files[]');
                 selectedFiles.forEach(function (item) {
                     formData.append('files[]', item.file, item.file.name);
                 });
                 formData.set('BriefNames', selectedFiles.map(function (item) { return item.file.name; }).join(', '));
 
-                // Optional: get Turnstile token and append
-                // var turnstileResponse = turnstile.getResponse();
-                // if (turnstileResponse) {
-                //     formData.set('cf-turnstile-response', turnstileResponse);
-                // }
+                // --- IMPORTANT: Add Turnstile token if present ---
+                var token = getTurnstileToken();
+                if (token) {
+                    formData.set('cf-turnstile-response', token);
+                    console.log('✅ Turnstile token appended');
+                } else {
+                    console.warn('⚠️ No Turnstile token found – continuing anyway (server may reject)');
+                }
 
-                // Log the data we're about to send
+                // Log data (avoid logging file contents)
                 console.log('📤 Sending data to:', form.action);
                 formData.forEach(function (value, key) {
                     if (key === 'files[]') {
@@ -342,8 +349,7 @@ $(function () {
                         var nextUrl = form.querySelector('input[name="_next"]') ?
                             form.querySelector('input[name="_next"]').value :
                             'https://kabrownie.digital/thank-you';
-                        // Important: hide overlay before redirect (optional)
-                        hideLoadingOverlay();
+                        hideLoadingOverlay(); // hide before redirect
                         window.location.href = nextUrl;
                     } else {
                         return response.text().then(function (text) {
@@ -354,7 +360,6 @@ $(function () {
                 .catch(function (err) {
                     console.error('❌ Fetch error:', err);
                     alert('Network error: ' + err.message);
-                    // Hide overlay and reset button
                     hideLoadingOverlay();
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = '<span class="btn-text">SEND INQUIRY</span><iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>';
@@ -370,11 +375,5 @@ $(function () {
                 form._submitting = false;
             }
         });
-
-        // Also keep the button click as a backup (but it will be handled by the submit event)
-        // Remove the old click listener to avoid double submission
-        // We'll just let the submit event handle everything.
-        // If you want to keep the click listener for some reason, you can leave it,
-        // but it's redundant and may cause issues.
     }
 });
