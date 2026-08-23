@@ -12,9 +12,8 @@ $(function () {
         }
     });
 
-
     // ============================================================
-    // FEATURED PROJECTS OWL CAROUSEL
+    // OWL CAROUSELS & COUNTERS
     // ============================================================
 
     $('.featured-projects-slider .owl-carousel').owlCarousel({
@@ -34,11 +33,6 @@ $(function () {
         }
     });
 
-
-    // ============================================================
-    // TRUST LOGOS CAROUSEL
-    // ============================================================
-
     $('.trusted-logos-carousel').owlCarousel({
         loop: true,
         margin: 30,
@@ -55,11 +49,6 @@ $(function () {
         }
     });
 
-
-    // ============================================================
-    // COUNTERS
-    // ============================================================
-
     $('.count').each(function () {
         $(this)
             .prop('Counter', 0)
@@ -75,13 +64,7 @@ $(function () {
             );
     });
 
-
-    // ============================================================
-    // AOS
-    // ============================================================
-
     AOS.init({ once: true });
-
 
     // ============================================================
     // FILE UPLOAD
@@ -93,7 +76,6 @@ $(function () {
     var briefNamesHidden = document.getElementById('briefNames');
 
     var selectedFiles = [];
-
     var maxFiles = 3;
     var maxFileSize = 2.86 * 1024 * 1024;
     var maxTotalSize = 3.5 * 1024 * 1024;
@@ -245,74 +227,93 @@ $(function () {
         });
     }
 
-
     // ============================================================
-    // LOADING OVERLAY – SHOW / HIDE
+    // LOADING OVERLAY – robust show/hide
     // ============================================================
 
     var overlay = document.getElementById('loadingOverlay');
 
     function showLoadingOverlay() {
         if (overlay) {
-            overlay.style.display = 'flex';
+            overlay.classList.add('show');
+            console.log('✅ Overlay shown');
+        } else {
+            console.warn('❌ Overlay not found');
         }
     }
 
     function hideLoadingOverlay() {
         if (overlay) {
-            overlay.style.display = 'none';
+            overlay.classList.remove('show');
+            console.log('❌ Overlay hidden');
         }
     }
 
-
     // ============================================================
-    // FORM SUBMISSION
+    // FORM SUBMISSION – forced for desktop
     // ============================================================
 
     var form = document.getElementById('projectForm');
-    var submitBtn = form ? form.querySelector('#submitBtn') : null;
+    var submitBtn = document.getElementById('submitBtn');
 
     if (form && submitBtn) {
 
-        // Show overlay instantly on button click (if form is valid)
+        // --- 1) Click handler – instant overlay (before validation) ---
         submitBtn.addEventListener('click', function (e) {
-            if (form.checkValidity() && !form._submitting) {
+            // If the form is invalid, let the browser show validation messages.
+            // We only show the overlay if the form passes basic validation.
+            if (form.checkValidity()) {
+                console.log('🔵 Button clicked – showing overlay');
                 showLoadingOverlay();
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = 'SENDING…';
+            } else {
+                // Let the browser handle validation; do NOT show overlay.
+                console.log('🟡 Form invalid – validation will fire.');
             }
         });
 
-        // Handle form submission
+        // --- 2) Submit handler – prevent default, do fetch ---
         form.addEventListener('submit', function (e) {
             e.preventDefault();
 
+            console.log('🟢 Submit event fired');
+
+            // If form is invalid, the browser will show validation messages.
             if (!form.checkValidity()) {
-                form.reportValidity();
+                console.log('🔴 Form invalid – aborting submit');
+                // Hide overlay if it was shown (shouldn't be, but just in case)
+                hideLoadingOverlay();
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<span class="btn-text">SEND INQUIRY</span><iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>';
                 return;
             }
 
-            if (form._submitting) return;
+            // Prevent double submission
+            if (form._submitting) {
+                console.log('⏳ Already submitting, ignoring.');
+                return;
+            }
             form._submitting = true;
 
-            // Make sure overlay is visible
+            // Ensure overlay is visible (it should already be, but double‑check)
             showLoadingOverlay();
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = 'SENDING…';
 
+            // Build FormData
             var formData = new FormData(form);
             formData.delete('files[]');
-
             selectedFiles.forEach(function (item) {
                 formData.append('files[]', item.file, item.file.name);
             });
             formData.set('BriefNames', selectedFiles.map(function (item) { return item.file.name; }).join(', '));
 
+            // Send fetch
             fetch(form.action, {
                 method: 'POST',
                 body: formData
             })
                 .then(function (response) {
+                    console.log('📡 Response received', response);
                     if (response.ok || response.redirected) {
                         var nextUrl = form.querySelector('input[name="_next"]') ?
                             form.querySelector('input[name="_next"]').value :
@@ -325,7 +326,7 @@ $(function () {
                     }
                 })
                 .catch(function (error) {
-                    console.error('Submission error:', error);
+                    console.error('❌ Submission error:', error);
                     alert(error.message || 'Network error. Please check your connection and try again.');
                     hideLoadingOverlay();
                     submitBtn.disabled = false;

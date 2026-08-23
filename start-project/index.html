@@ -5,27 +5,23 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- ====== PRIMARY SEO TITLE & DESCRIPTION ====== -->
     <title>Start Your Project – Kabrownie Digital – Animation Studio, Motion Graphics &amp; Graphic Design</title>
     <meta name="description" content="Start your project with Kabrownie Digital, a leading animation studio in Nairobi. Get a free quote for animation, motion graphics, graphic design, web & app development.">
     <link rel="canonical" href="https://kabrownie.digital/start-project/">
 
-    <!-- ====== OPEN GRAPH (SOCIAL MEDIA) ====== -->
     <meta property="og:title" content="Start Your Project – Kabrownie Digital">
     <meta property="og:description" content="Start your project with Kabrownie Digital – animation, motion graphics, graphic design, and web & app development in Nairobi.">
     <meta property="og:url" content="https://kabrownie.digital/start-project/">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://kabrownie.digital/assets/images/logos/logo-dark.svg">
 
-    <!-- ====== FAVICON ====== -->
     <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.svg" />
 
-    <!-- ====== STYLESHEETS ====== -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
     <link rel="stylesheet" href="../assets/css/styles.css" />
 
-    <!-- ====== SCHEMA MARKUP ====== -->
+    <!-- Schema markup (unchanged) -->
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
@@ -54,48 +50,8 @@
         }
     </script>
 
-    <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "Service",
-            "serviceType": "Creative & Digital Agency",
-            "provider": {
-                "@type": "Organization",
-                "name": "Kabrownie Digital"
-            },
-            "areaServed": "Nairobi, Kenya",
-            "description": "We specialize in animation, motion graphics, graphic design, and professional web & app development.",
-            "hasOfferCatalog": {
-                "@type": "OfferCatalog",
-                "name": "Kabrownie Digital Services",
-                "itemListElement": [{
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Service",
-                        "name": "Animation & Motion Graphics",
-                        "description": "2D/3D animation and explainer videos."
-                    }
-                }, {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Service",
-                        "name": "Graphics & Branding",
-                        "description": "Logo design and brand identity."
-                    }
-                }, {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Service",
-                        "name": "Web & App Development",
-                        "description": "Custom web and mobile development."
-                    }
-                }]
-            }
-        }
-    </script>
-
     <style>
-        /* ====== LOADING OVERLAY – fixed, full viewport ====== */
+        /* ====== LOADING OVERLAY – hardened for desktop ====== */
         #loadingOverlay {
             display: none;
             position: fixed;
@@ -103,14 +59,19 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(0, 0, 0, 0.82);
-            z-index: 99999;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 999999;
             justify-content: center;
             align-items: center;
             flex-direction: column;
             color: #fff;
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            /* force hardware acceleration */
+            transform: translateZ(0);
+        }
+        #loadingOverlay.show {
+            display: flex !important;
         }
         #loadingOverlay .spinner {
             width: 60px;
@@ -133,18 +94,21 @@
             font-size: 0.95rem;
             opacity: 0.55;
         }
-        /* Button disabled state */
         .btn:disabled {
             opacity: 0.65;
             cursor: not-allowed;
             pointer-events: none;
+        }
+        /* Turnstile fix – ensure it doesn't block the overlay */
+        .cf-turnstile {
+            pointer-events: auto;
         }
     </style>
 </head>
 
 <body>
 
-    <!-- ===================== HEADER ===================== -->
+    <!-- ====== HEADER ====== -->
     <header class="header border-4 border-primary border-top position-fixed start-0 top-0 w-100">
         <div class="container">
             <div class="header-wrapper d-flex align-items-center justify-content-between">
@@ -188,16 +152,16 @@
         </div>
     </header>
 
-    <!-- ===================== PAGE WRAPPER ===================== -->
+    <!-- ====== PAGE WRAPPER ====== -->
     <div class="page-wrapper overflow-hidden">
 
-        <!-- ====== HERO SECTION ====== -->
+        <!-- Hero -->
         <div style="position: relative; width: 100%; display: block;">
             <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); pointer-events: none;"></div>
             <img src="../assets/images/backgrounds/ban.png" alt="" style="width: 100%; height: auto; display: block;">
         </div>
 
-        <!-- ====== FORM SECTION ====== -->
+        <!-- Form -->
         <section id="form-section" class="get-in-touch py-5 py-lg-11 py-xl-12 bg-primary">
             <div class="container">
                 <div class="row justify-content-between gap-7 gap-xl-0">
@@ -208,24 +172,20 @@
                     </div>
                     <div class="col-xl-8">
 
-                        <form method="POST" action="https://enquiry-form-handler.kabrownie.workers.dev/" id="projectForm" class="d-flex flex-column gap-7" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000" enctype="multipart/form-data">
+                        <form method="POST" action="https://enquiry-form-handler.kabrownie.workers.dev/" id="projectForm" class="d-flex flex-column gap-7" enctype="multipart/form-data">
 
-                            <!-- Honeypot -->
                             <input type="text" name="_honey" style="display:none">
 
-                            <!-- ========== NAME ========== -->
                             <div>
                                 <p class="mb-0 text-white">Tell us your name *</p>
                                 <input type="text" class="form-control border border-secondary" name="Name" placeholder="Your Name" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;" required>
                             </div>
 
-                            <!-- ========== COMPANY ========== -->
                             <div>
                                 <p class="mb-0 text-white">What's the name of your amazing company?</p>
                                 <input type="text" class="form-control border border-secondary" name="Company" placeholder="Company Name" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;">
                             </div>
 
-                            <!-- ========== SERVICE ========== -->
                             <div>
                                 <p class="mb-0 text-white">What are you looking for? *</p>
                                 <select class="form-control border border-secondary" name="Service" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;" required>
@@ -238,7 +198,6 @@
                                 </select>
                             </div>
 
-                            <!-- ========== BUDGET ========== -->
                             <div>
                                 <p class="mb-0 text-white">Let's talk about your estimated budget *</p>
                                 <select class="form-control border border-secondary" name="Budget" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;" required>
@@ -251,7 +210,7 @@
                                 </select>
                             </div>
 
-                            <!-- ========== FILE UPLOAD ========== -->
+                            <!-- File Upload -->
                             <div>
                                 <p class="mb-0 text-white">Do you have a brief? Attach it here</p>
                                 <div id="dropZone" style="border: 2px dashed rgba(255,255,255,0.3); border-radius: 8px; padding: 20px; text-align: center; background: #4a2e1b8d; cursor: pointer; transition: border-color 0.2s ease, background 0.2s ease;">
@@ -266,34 +225,28 @@
                                 <input type="hidden" name="BriefNames" id="briefNames" value="">
                             </div>
 
-                            <!-- ========== PHONE ========== -->
                             <div>
                                 <p class="mb-0 text-white">Tell us your contact number *</p>
                                 <input type="tel" class="form-control border border-secondary" name="Phone" placeholder="Your phone number" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;" required>
                             </div>
 
-                            <!-- ========== SECONDARY PHONE ========== -->
                             <div>
                                 <p class="mb-0 text-white">Secondary Contact Number</p>
                                 <input type="tel" class="form-control border border-secondary" name="Secondary Phone" placeholder="Alternative number" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;">
                             </div>
 
-                            <!-- ========== EMAIL ========== -->
                             <div>
                                 <p class="mb-0 text-white">Email Address *</p>
                                 <input type="email" class="form-control border border-secondary" name="Email" placeholder="you@example.com" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;" required>
                             </div>
 
-                            <!-- ========== PROJECT DESCRIPTION ========== -->
                             <div>
                                 <p class="mb-0 text-white">Tell us about your project</p>
                                 <textarea class="text-white form-control border border-secondary" name="Project Description" rows="4" placeholder="This will help us get a better picture on how we can help you." style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;"></textarea>
                             </div>
 
-                            <!-- ========== TURNSTILE WIDGET ========== -->
                             <div class="cf-turnstile" data-sitekey="0x4AAAAAAEXmIpf7T2WxU14b"></div>
 
-                            <!-- ========== SUBMIT BUTTON ========== -->
                             <button type="submit" id="submitBtn" class="btn btn-outline-light border-white w-100 justify-content-center">
                                 <span class="btn-text">SEND INQUIRY</span>
                                 <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
@@ -309,16 +262,14 @@
         </section>
     </div>
 
-    <!-- ============================================================
-    LOADING OVERLAY – placed outside the form, at the bottom of <body>
-    ============================================================ -->
+    <!-- ====== LOADING OVERLAY (outside form) ====== -->
     <div id="loadingOverlay">
         <div class="spinner"></div>
         <p class="title">Sending your enquiry…</p>
         <p class="sub">Please do not close this page.</p>
     </div>
 
-    <!-- ===================== FOOTER ===================== -->
+    <!-- ====== FOOTER ====== -->
     <footer class="footer bg-dark py-5 py-lg-11 py-xl-12">
         <div class="container">
             <div class="row">
@@ -377,12 +328,12 @@
         </div>
     </footer>
 
-    <!-- ====== FLOATING WHATSAPP BUTTON ====== -->
+    <!-- WhatsApp -->
     <a href="https://wa.me/254784144132?text=Hello%2C%20I'd%20like%20to%20know%20more%20about%20your%20digital%20services.%20Can%20you%20help%20me%3F" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
         <iconify-icon icon="ri:whatsapp-fill" class="whatsapp-icon"></iconify-icon>
     </a>
 
-    <!-- ====== SCRIPTS ====== -->
+    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
