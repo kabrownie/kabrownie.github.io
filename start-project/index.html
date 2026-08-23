@@ -95,11 +95,7 @@
     </script>
 
     <style>
-        /* Ensure spin animation exists (if not in styles.css) */
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        /* Overlay styling – fixed and full viewport */
+        /* ====== LOADING OVERLAY – fixed, full viewport ====== */
         #loadingOverlay {
             display: none;
             position: fixed;
@@ -107,30 +103,41 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(0,0,0,0.78);
-            z-index: 9999;
+            background: rgba(0, 0, 0, 0.82);
+            z-index: 99999;
             justify-content: center;
             align-items: center;
             flex-direction: column;
             color: #fff;
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
         }
         #loadingOverlay .spinner {
-            width: 56px;
-            height: 56px;
-            border: 5px solid rgba(255,255,255,0.2);
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255, 255, 255, 0.15);
             border-top-color: #8B5CF6;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
             margin-bottom: 1.5rem;
         }
-        #loadingOverlay p {
-            margin: 0;
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        #loadingOverlay .title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
         }
         #loadingOverlay .sub {
-            font-size: 0.9rem;
-            opacity: 0.6;
+            font-size: 0.95rem;
+            opacity: 0.55;
+        }
+        /* Button disabled state */
+        .btn:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+            pointer-events: none;
         }
     </style>
 </head>
@@ -151,9 +158,7 @@
                 </div>
                 <div class="d-flex align-items-center gap-4">
                     <div class="btn-group">
-                        <button
-                            class="btn btn-secondary toggle-menu round-45 p-2 d-flex align-items-center justify-content-center bg-white rounded-circle"
-                            type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false" aria-label="Toggle menu">
+                        <button class="btn btn-secondary toggle-menu round-45 p-2 d-flex align-items-center justify-content-center bg-white rounded-circle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false" aria-label="Toggle menu">
                             <iconify-icon icon="solar:hamburger-menu-line-duotone" class="menu-icon fs-8 text-dark"></iconify-icon>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end p-4">
@@ -164,21 +169,11 @@
                                 </div>
                                 <div class="d-flex flex-column gap-3">
                                     <ul class="header-menu list-unstyled mb-0 d-flex flex-column gap-2">
-                                        <li class="header-item">
-                                            <a href="/" aria-current="true" class="header-link active hstack gap-2 fs-7 fw-bold text-dark">Home</a>
-                                        </li>
-                                        <li class="header-item">
-                                            <a href="/#about" class="header-link hstack gap-2 fs-7 fw-bold text-dark">About</a>
-                                        </li>
-                                        <li class="header-item">
-                                            <a href="/#services" class="header-link hstack gap-2 fs-7 fw-bold text-dark">Services</a>
-                                        </li>
-                                        <li class="header-item">
-                                            <a href="/#projects" class="header-link hstack gap-2 fs-7 fw-bold text-dark">Projects</a>
-                                        </li>
-                                        <li class="header-item">
-                                            <a href="/#contact" class="header-link hstack gap-2 fs-7 fw-bold text-dark">Contact</a>
-                                        </li>
+                                        <li class="header-item"><a href="/" aria-current="true" class="header-link active hstack gap-2 fs-7 fw-bold text-dark">Home</a></li>
+                                        <li class="header-item"><a href="/#about" class="header-link hstack gap-2 fs-7 fw-bold text-dark">About</a></li>
+                                        <li class="header-item"><a href="/#services" class="header-link hstack gap-2 fs-7 fw-bold text-dark">Services</a></li>
+                                        <li class="header-item"><a href="/#projects" class="header-link hstack gap-2 fs-7 fw-bold text-dark">Projects</a></li>
+                                        <li class="header-item"><a href="/#contact" class="header-link hstack gap-2 fs-7 fw-bold text-dark">Contact</a></li>
                                     </ul>
                                 </div>
                                 <div>
@@ -213,12 +208,9 @@
                     </div>
                     <div class="col-xl-8">
 
-                        <!-- ============================================================
-                        FORM – overlay is now outside the form (see bottom of body)
-                        ============================================================ -->
-                        <form method="POST" action="https://enquiry-form-handler.kabrownie.workers.dev/" id="projectForm" class="d-flex flex-column gap-7" style="position: relative;" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000" enctype="multipart/form-data">
+                        <form method="POST" action="https://enquiry-form-handler.kabrownie.workers.dev/" id="projectForm" class="d-flex flex-column gap-7" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000" enctype="multipart/form-data">
 
-                            <!-- Honeypot (spam trap) -->
+                            <!-- Honeypot -->
                             <input type="text" name="_honey" style="display:none">
 
                             <!-- ========== NAME ========== -->
@@ -302,7 +294,7 @@
                             <div class="cf-turnstile" data-sitekey="0x4AAAAAAEXmIpf7T2WxU14b"></div>
 
                             <!-- ========== SUBMIT BUTTON ========== -->
-                            <button type="submit" class="btn btn-outline-light border-white w-100 justify-content-center">
+                            <button type="submit" id="submitBtn" class="btn btn-outline-light border-white w-100 justify-content-center">
                                 <span class="btn-text">SEND INQUIRY</span>
                                 <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
                             </button>
@@ -310,7 +302,6 @@
                             <p class="text-center text-white text-opacity-50 small mt-2">We'll get back to you within 24 hours.</p>
 
                         </form>
-                        <!-- /form -->
 
                     </div>
                 </div>
@@ -318,10 +309,12 @@
         </section>
     </div>
 
-    <!-- ===================== LOADING OVERLAY (OUTSIDE FORM) ===================== -->
+    <!-- ============================================================
+    LOADING OVERLAY – placed outside the form, at the bottom of <body>
+    ============================================================ -->
     <div id="loadingOverlay">
         <div class="spinner"></div>
-        <p class="fs-4 fw-semibold">Sending your enquiry…</p>
+        <p class="title">Sending your enquiry…</p>
         <p class="sub">Please do not close this page.</p>
     </div>
 
@@ -370,36 +363,11 @@
                 </div>
                 <div class="col-md-4 col-xl-2 mb-8 mb-xl-0">
                     <ul class="footer-menu list-unstyled mb-0 d-flex flex-column gap-2">
-                        <li>
-                            <a class="link-hover hstack gap-2 text-white fs-5" href="https://facebook.com/kabrownie.digital" target="_blank">
-                                <iconify-icon icon="fa6-brands:facebook" class="fs-6 text-primary"></iconify-icon>
-                                @kabrownie.digital
-                            </a>
-                        </li>
-                        <li>
-                            <a class="link-hover hstack gap-2 text-white fs-5" href="https://instagram.com/kabrownie.digital" target="_blank">
-                                <iconify-icon icon="fa6-brands:instagram" class="fs-6 text-primary"></iconify-icon>
-                                @kabrownie.digital
-                            </a>
-                        </li>
-                        <li>
-                            <a class="link-hover hstack gap-2 text-white fs-5" href="https://x.com/" target="_blank">
-                                <iconify-icon icon="fa6-brands:twitter" class="fs-6 text-primary"></iconify-icon>
-                                @kabrownie_digital
-                            </a>
-                        </li>
-                        <li>
-                            <a class="link-hover hstack gap-2 text-white fs-5" href="https://linkedin.com/company/kabrownie-digital" target="_blank">
-                                <iconify-icon icon="fa6-brands:linkedin" class="fs-6 text-primary"></iconify-icon>
-                                Kabrownie Digital
-                            </a>
-                        </li>
-                        <li>
-                            <a class="link-hover hstack gap-2 text-white fs-5" href="https://tiktok.com/@kabrownie.digital" target="_blank">
-                                <iconify-icon icon="fa6-brands:tiktok" class="fs-6 text-primary"></iconify-icon>
-                                @kabrownie.digital
-                            </a>
-                        </li>
+                        <li><a class="link-hover hstack gap-2 text-white fs-5" href="https://facebook.com/kabrownie.digital" target="_blank"><iconify-icon icon="fa6-brands:facebook" class="fs-6 text-primary"></iconify-icon> @kabrownie.digital</a></li>
+                        <li><a class="link-hover hstack gap-2 text-white fs-5" href="https://instagram.com/kabrownie.digital" target="_blank"><iconify-icon icon="fa6-brands:instagram" class="fs-6 text-primary"></iconify-icon> @kabrownie.digital</a></li>
+                        <li><a class="link-hover hstack gap-2 text-white fs-5" href="https://x.com/" target="_blank"><iconify-icon icon="fa6-brands:twitter" class="fs-6 text-primary"></iconify-icon> @kabrownie_digital</a></li>
+                        <li><a class="link-hover hstack gap-2 text-white fs-5" href="https://linkedin.com/company/kabrownie-digital" target="_blank"><iconify-icon icon="fa6-brands:linkedin" class="fs-6 text-primary"></iconify-icon> Kabrownie Digital</a></li>
+                        <li><a class="link-hover hstack gap-2 text-white fs-5" href="https://tiktok.com/@kabrownie.digital" target="_blank"><iconify-icon icon="fa6-brands:tiktok" class="fs-6 text-primary"></iconify-icon> @kabrownie.digital</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4 col-xl-3 mb-8 mb-xl-0">
@@ -427,10 +395,10 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js">
     </script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer>
+    </script>
     <script>
         AOS.init({ once: true });
-    </script>
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer>
     </script>
 
 </body>
