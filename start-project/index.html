@@ -217,23 +217,77 @@
         </select>
     </div>
 
-    <!-- ========== FILE UPLOAD ========== -->
-    <div>
-        <p class="mb-0 text-white">Do you have a brief? Attach it here</p>
-        <div id="dropZone" style="border: 2px dashed rgba(255,255,255,0.3); border-radius: 8px; padding: 20px; text-align: center; background:#4a2e1b8d; cursor: pointer;">
-            <!-- UPDATED: file input now has a name="files[]" -->
-            <input type="file" id="fileInput" name="files[]" accept=".png,.jpg,.jpeg,.pdf,.doc" multiple style="display:none;">
-            <label for="fileInput" style="cursor:pointer; display:block; margin:0; color: #fff;">
-                <iconify-icon icon="lucide:upload-cloud" class="fs-8 text-white"></iconify-icon>
-                <p class="mb-0 mt-2 text-white text-opacity-70">Click to select files (or drag & drop)</p>
-                <small class="text-white text-opacity-50">Allowed: PNG, JPG, JPEG, PDF, DOC | Max 3 files, 2.86 MB each</small>
-            </label>
-        </div>
-        <!-- File list will be populated here -->
-        <div id="file-list" class="mt-2 text-white" style="font-size: 0.9rem;"></div>
-        <!-- Hidden input to store file names (optional, for reference) -->
-        <input type="hidden" name="BriefNames" id="briefNames" value="">
+    <!-- ============================================================
+     FILE UPLOAD
+     ============================================================ -->
+
+<div>
+    <p class="mb-0 text-white">
+        Do you have a brief? Attach it here
+    </p>
+
+    <div
+        id="dropZone"
+        style="
+            border: 2px dashed rgba(255,255,255,0.3);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            background: #4a2e1b8d;
+            cursor: pointer;
+            transition: border-color 0.2s ease, background 0.2s ease;
+        "
+    >
+
+        <input
+            type="file"
+            id="fileInput"
+            name="files[]"
+            accept=".png,.jpg,.jpeg,.pdf,.doc,.docx"
+            multiple
+            style="display:none;"
+        >
+
+        <label
+            for="fileInput"
+            style="
+                cursor:pointer;
+                display:block;
+                margin:0;
+                color:#fff;
+            "
+        >
+            <iconify-icon
+                icon="lucide:upload-cloud"
+                class="fs-8 text-white"
+            ></iconify-icon>
+
+            <p class="mb-0 mt-2 text-white text-opacity-70">
+                Click to select files (or drag & drop)
+            </p>
+
+            <small class="text-white text-opacity-50">
+                Allowed: PNG, JPG, JPEG, PDF, DOC, DOCX
+                | Max 3 files, 2.86 MB each
+            </small>
+        </label>
     </div>
+
+    <!-- Selected files -->
+    <div
+        id="file-list"
+        class="mt-2 text-white"
+        style="font-size:0.9rem;"
+    ></div>
+
+    <!-- Optional list of filenames -->
+    <input
+        type="hidden"
+        name="BriefNames"
+        id="briefNames"
+        value=""
+    >
+</div>
 
     <!-- ========== PHONE ========== -->
     <div>
