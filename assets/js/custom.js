@@ -228,7 +228,7 @@ $(function () {
     }
 
     // ============================================================
-    // LOADING OVERLAY – robust show/hide with timeout
+    // LOADING OVERLAY – with timeout
     // ============================================================
 
     var overlay = document.getElementById('loadingOverlay');
@@ -238,13 +238,11 @@ $(function () {
         if (overlay) {
             overlay.classList.add('show');
             console.log('✅ Overlay shown');
-            // Set a timeout to auto‑hide after 15 seconds (safety net)
             clearTimeout(timeoutId);
             timeoutId = setTimeout(function () {
                 console.warn('⏰ Overlay auto‑hidden after timeout (15s)');
                 hideLoadingOverlay();
                 alert('The request is taking longer than expected. Please check your network and try again.');
-                // Re‑enable the button
                 if (submitBtn) {
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = '<span class="btn-text">SEND INQUIRY</span><iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>';
@@ -265,7 +263,7 @@ $(function () {
     }
 
     // ============================================================
-    // FORM SUBMISSION
+    // FORM SUBMISSION – all in the click handler
     // ============================================================
 
     var form = document.getElementById('projectForm');
@@ -273,42 +271,30 @@ $(function () {
 
     if (form && submitBtn) {
 
-        // --- 1) Click handler – instant overlay (before validation) ---
         submitBtn.addEventListener('click', function (e) {
-            if (form.checkValidity()) {
-                console.log('🔵 Button clicked – showing overlay');
-                showLoadingOverlay();
-                submitBtn.disabled = true;
-                submitBtn.innerHTML = 'SENDING…';
-            } else {
-                console.log('🟡 Form invalid – validation will fire.');
-            }
-        });
-
-        // --- 2) Submit handler – prevent default, do fetch ---
-        form.addEventListener('submit', function (e) {
+            // Prevent the default form submission entirely
             e.preventDefault();
 
-            console.log('🟢 Submit event fired');
-
+            // 1. Validate the form
             if (!form.checkValidity()) {
-                console.log('🔴 Form invalid – aborting submit');
-                hideLoadingOverlay();
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = '<span class="btn-text">SEND INQUIRY</span><iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>';
+                // Let the browser show validation messages
+                form.reportValidity();
                 return;
             }
 
+            // 2. Prevent double submission
             if (form._submitting) {
                 console.log('⏳ Already submitting, ignoring.');
                 return;
             }
             form._submitting = true;
 
-            // Ensure overlay is visible
+            // 3. Show overlay and disable button
             showLoadingOverlay();
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'SENDING…';
 
-            // Build FormData
+            // 4. Build FormData
             var formData = new FormData(form);
             formData.delete('files[]');
             selectedFiles.forEach(function (item) {
@@ -316,13 +302,13 @@ $(function () {
             });
             formData.set('BriefNames', selectedFiles.map(function (item) { return item.file.name; }).join(', '));
 
-            // Log the data being sent (for debugging)
+            // 5. Log for debugging
             console.log('📤 Sending data to:', form.action);
             for (var pair of formData.entries()) {
                 console.log(pair[0] + ': ' + (pair[0] === 'files[]' ? 'File: ' + pair[1].name : pair[1]));
             }
 
-            // Send fetch
+            // 6. Send fetch
             fetch(form.action, {
                 method: 'POST',
                 body: formData
