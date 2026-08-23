@@ -228,7 +228,7 @@ $(function () {
     }
 
     // ============================================================
-    // LOADING OVERLAY – with timeout
+    // LOADING OVERLAY – with timeout and error recovery
     // ============================================================
 
     var overlay = document.getElementById('loadingOverlay');
@@ -238,17 +238,20 @@ $(function () {
         if (overlay) {
             overlay.classList.add('show');
             console.log('✅ Overlay shown');
+            // Clear any previous timeout
             clearTimeout(timeoutId);
+            // Set a safety timeout (20 seconds)
             timeoutId = setTimeout(function () {
-                console.warn('⏰ Overlay auto‑hidden after timeout (15s)');
+                console.warn('⏰ Overlay auto‑hidden after timeout (20s)');
                 hideLoadingOverlay();
                 alert('The request is taking longer than expected. Please check your network and try again.');
+                // Re-enable the button
                 if (submitBtn) {
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = '<span class="btn-text">SEND INQUIRY</span><iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>';
                 }
                 form._submitting = false;
-            }, 15000);
+            }, 20000);
         } else {
             console.warn('❌ Overlay not found');
         }
@@ -263,7 +266,7 @@ $(function () {
     }
 
     // ============================================================
-    // FORM SUBMISSION – all in the click handler
+    // FORM SUBMISSION – all in the click handler with error handling
     // ============================================================
 
     var form = document.getElementById('projectForm');
@@ -272,12 +275,13 @@ $(function () {
     if (form && submitBtn) {
 
         submitBtn.addEventListener('click', function (e) {
-            // Prevent the default form submission entirely
+            // Prevent default form submission
             e.preventDefault();
+            console.log('🔵 Button clicked');
 
             // 1. Validate the form
             if (!form.checkValidity()) {
-                // Let the browser show validation messages
+                console.log('🟡 Form invalid – showing validation messages');
                 form.reportValidity();
                 return;
             }
@@ -294,25 +298,33 @@ $(function () {
             submitBtn.disabled = true;
             submitBtn.innerHTML = 'SENDING…';
 
-            // 4. Build FormData
-            var formData = new FormData(form);
-            formData.delete('files[]');
-            selectedFiles.forEach(function (item) {
-                formData.append('files[]', item.file, item.file.name);
-            });
-            formData.set('BriefNames', selectedFiles.map(function (item) { return item.file.name; }).join(', '));
+            // 4. Build FormData – wrap in try-catch to catch errors
+            try {
+                var formData = new FormData(form);
+                console.log('📦 FormData created');
+                
+                // Remove the default file input (if any) and append our selected files
+                formData.delete('files[]');
+                selectedFiles.forEach(function (item) {
+                    formData.append('files[]', item.file, item.file.name);
+                });
+                formData.set('BriefNames', selectedFiles.map(function (item) { return item.file.name; }).join(', '));
 
-            // 5. Log for debugging
-            console.log('📤 Sending data to:', form.action);
-            for (var pair of formData.entries()) {
-                console.log(pair[0] + ': ' + (pair[0] === 'files[]' ? 'File: ' + pair[1].name : pair[1]));
-            }
+                // Log form data contents (using forEach to avoid iteration issues)
+                console.log('📤 Sending data to:', form.action);
+                formData.forEach(function (value, key) {
+                    if (key === 'files[]') {
+                        console.log(key + ': File - ' + value.name);
+                    } else {
+                        console.log(key + ': ' + value);
+                    }
+                });
 
-            // 6. Send fetch
-            fetch(form.action, {
-                method: 'POST',
-                body: formData
-            })
+                // 5. Send fetch
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData
+                })
                 .then(function (response) {
                     console.log('📡 Response received', response);
                     if (response.ok || response.redirected) {
@@ -334,6 +346,15 @@ $(function () {
                     submitBtn.innerHTML = '<span class="btn-text">SEND INQUIRY</span><iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>';
                     form._submitting = false;
                 });
+
+            } catch (err) {
+                console.error('❌ Error building FormData:', err);
+                alert('An error occurred while preparing your data: ' + err.message);
+                hideLoadingOverlay();
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<span class="btn-text">SEND INQUIRY</span><iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>';
+                form._submitting = false;
+            }
         });
     }
 
