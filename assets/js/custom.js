@@ -686,6 +686,25 @@ $(function () {
 
 
     // ============================================================
+    // LOADING OVERLAY HELPERS
+    // ============================================================
+
+    function showLoadingOverlay() {
+        const overlay = document.getElementById('loadingOverlay');
+        if (overlay) {
+            overlay.style.display = 'flex';
+        }
+    }
+
+    function hideLoadingOverlay() {
+        const overlay = document.getElementById('loadingOverlay');
+        if (overlay) {
+            overlay.style.display = 'none';
+        }
+    }
+
+
+    // ============================================================
     // FORM SUBMISSION
     // ============================================================
 
@@ -724,6 +743,10 @@ $(function () {
                 }
 
 
+                // Show loading overlay
+                showLoadingOverlay();
+
+
                 if (btn) {
 
                     btn.disabled = true;
@@ -732,7 +755,7 @@ $(function () {
                         btn.innerHTML;
 
                     btn.innerHTML =
-                        'Sending...';
+                        '<iconify-icon icon="line-md:loading-twotone-loop" class="me-2"></iconify-icon> Sending…';
                 }
 
 
@@ -931,6 +954,10 @@ $(function () {
                     );
 
 
+                    // Hide loading overlay
+                    hideLoadingOverlay();
+
+
                     // Re-enable button
                     if (btn) {
 
@@ -938,7 +965,7 @@ $(function () {
 
                         btn.innerHTML =
                             btn.dataset.originalText ||
-                            'Submit';
+                            'SEND INQUIRY';
                     }
                 }
             }

@@ -323,6 +323,28 @@
     </button>
 
     <p class="text-center text-white text-opacity-50 small mt-2">We'll get back to you within 24 hours.</p>
+
+    <!-- Loading Overlay (hidden by default) -->
+<div id="loadingOverlay" style="
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    border-radius: 8px;
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #fff;
+    backdrop-filter: blur(2px);
+">
+    <iconify-icon icon="line-md:loading-twotone-loop" class="fs-1" style="margin-bottom: 1rem;"></iconify-icon>
+    <p class="fs-5 fw-semibold mb-0">Sending your enquiry…</p>
+    <p class="small text-white-50">Please do not close this page.</p>
+</div>
 </form>
 
 <!-- Turnstile script – include once on your page -->
