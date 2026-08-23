@@ -141,13 +141,16 @@ $(function () {
 
 
     // ------------------------------------------------------------
-    // FILE LIMITS
+    // FILE LIMITS (match worker.js)
     // ------------------------------------------------------------
 
     const maxFiles = 3;
 
-    const maxSize =
-        2.86 * 1024 * 1024;
+    const maxFileSize =
+        2.86 * 1024 * 1024; // 2.86 MB
+
+    const maxTotalSize =
+        3.5 * 1024 * 1024; // 3.5 MB
 
 
     // ------------------------------------------------------------
@@ -399,7 +402,7 @@ $(function () {
 
 
     // ============================================================
-    // ADD FILES
+    // ADD FILES (with total size check)
     // ============================================================
 
     function addFiles(files) {
@@ -424,7 +427,7 @@ $(function () {
         ) {
 
             alert(
-                `You can attach a maximum of ${maxFiles} files.`
+                `Maximum ${maxFiles} files allowed.`
             );
 
             return;
@@ -432,7 +435,32 @@ $(function () {
 
 
         // --------------------------------------------------------
-        // Validate all files before adding any
+        // Calculate total size if we add these files
+        // --------------------------------------------------------
+
+        const newTotalSize =
+            selectedFiles.reduce(
+                (sum, item) => sum + item.file.size,
+                0
+            ) +
+            fileArray.reduce(
+                (sum, file) => sum + file.size,
+                0
+            );
+
+
+        if (newTotalSize > maxTotalSize) {
+
+            alert(
+                'The combined attachment size is too large. Please keep all attachments below 3.5 MB total.'
+            );
+
+            return;
+        }
+
+
+        // --------------------------------------------------------
+        // Validate each file individually
         // --------------------------------------------------------
 
         for (const file of fileArray) {
@@ -452,8 +480,7 @@ $(function () {
             ) {
 
                 alert(
-                    `"${file.name}" is not allowed.\n\n` +
-                    `Allowed: PNG, JPG, JPEG, PDF, DOC, DOCX.`
+                    `File "${file.name}" has an unsupported file extension.`
                 );
 
                 return;
@@ -472,7 +499,7 @@ $(function () {
             ) {
 
                 alert(
-                    `"${file.name}" has an unsupported file type.\n\n` +
+                    `File "${file.name}" has an unsupported file type.\n\n` +
                     `Detected type: ${file.type}`
                 );
 
@@ -481,13 +508,13 @@ $(function () {
 
 
             // ----------------------------------------------------
-            // File size
+            // Individual file size
             // ----------------------------------------------------
 
-            if (file.size > maxSize) {
+            if (file.size > maxFileSize) {
 
                 alert(
-                    `"${file.name}" exceeds the 2.86 MB limit.\n\n` +
+                    `File "${file.name}" exceeds the 2.86 MB limit.\n\n` +
                     `File size: ${formatFileSize(file.size)}`
                 );
 
@@ -502,7 +529,7 @@ $(function () {
             if (file.size === 0) {
 
                 alert(
-                    `"${file.name}" is empty.`
+                    `File "${file.name}" is empty.`
                 );
 
                 return;
