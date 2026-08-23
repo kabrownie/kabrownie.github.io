@@ -168,21 +168,8 @@ $(function () {
 
 
     // ------------------------------------------------------------
-    // ALLOWED MIME TYPES
-    // ------------------------------------------------------------
-
-    const allowedTypes = [
-        'image/png',
-        'image/jpeg',
-        'application/pdf',
-        'application/msword',
-        'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-    ];
-
-
-    // ============================================================
     // HELPER: GET FILE EXTENSION
-    // ============================================================
+    // ------------------------------------------------------------
 
     function getFileExtension(filename) {
 
@@ -470,7 +457,7 @@ $(function () {
 
 
             // ----------------------------------------------------
-            // Extension
+            // Extension check (primary validation)
             // ----------------------------------------------------
 
             if (
@@ -481,26 +468,6 @@ $(function () {
 
                 alert(
                     `File "${file.name}" has an unsupported file extension.`
-                );
-
-                return;
-            }
-
-
-            // ----------------------------------------------------
-            // MIME type
-            // ----------------------------------------------------
-
-            // Some browsers may provide an empty MIME type.
-            // In that case extension validation above is enough.
-            if (
-                file.type &&
-                !allowedTypes.includes(file.type)
-            ) {
-
-                alert(
-                    `File "${file.name}" has an unsupported file type.\n\n` +
-                    `Detected type: ${file.type}`
                 );
 
                 return;
@@ -713,13 +680,15 @@ $(function () {
 
 
     // ============================================================
-    // LOADING OVERLAY HELPERS
+    // LOADING OVERLAY HELPERS (with guaranteed visibility)
     // ============================================================
 
     function showLoadingOverlay() {
         const overlay = document.getElementById('loadingOverlay');
         if (overlay) {
             overlay.style.display = 'flex';
+            // Force reflow to ensure display change applies
+            void overlay.offsetHeight;
         }
     }
 
@@ -782,7 +751,7 @@ $(function () {
                         btn.innerHTML;
 
                     btn.innerHTML =
-                        '<iconify-icon icon="line-md:loading-twotone-loop" class="me-2"></iconify-icon> Sending…';
+                        'Sending…';
                 }
 
 
