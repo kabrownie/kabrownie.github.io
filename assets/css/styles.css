@@ -871,4 +871,6 @@ ul { list-style: none; padding-left: 0; }
     .trusted-logos-carousel .item img {
         max-height: 40px;
     }
+}@keyframes spin {
+    to { transform: rotate(360deg); }
 }
