@@ -228,7 +228,7 @@ $(function () {
     }
 
     // ============================================================
-    // LOADING OVERLAY – with timeout and error recovery
+    // LOADING OVERLAY – robust with guaranteed fallback
     // ============================================================
 
     var overlay = document.getElementById('loadingOverlay');
@@ -240,18 +240,20 @@ $(function () {
             console.log('✅ Overlay shown');
             // Clear any previous timeout
             clearTimeout(timeoutId);
-            // Set a safety timeout (20 seconds)
+            // Safety timeout: 30 seconds (in case fetch never resolves)
             timeoutId = setTimeout(function () {
-                console.warn('⏰ Overlay auto‑hidden after timeout (20s)');
+                console.warn('⏰ Overlay auto‑hidden after timeout (30s)');
                 hideLoadingOverlay();
-                alert('The request is taking longer than expected. Please check your network and try again.');
-                // Re-enable the button
-                if (submitBtn) {
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = '<span class="btn-text">SEND INQUIRY</span><iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>';
+                // Re-enable the button (if still disabled)
+                var btn = document.getElementById('submitBtn');
+                if (btn) {
+                    btn.disabled = false;
+                    btn.innerHTML = '<span class="btn-text">SEND INQUIRY</span><iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>';
                 }
-                form._submitting = false;
-            }, 20000);
+                var frm = document.getElementById('projectForm');
+                if (frm) frm._submitting = false;
+                alert('The request is taking longer than expected. Please check your network and try again.');
+            }, 30000);
         } else {
             console.warn('❌ Overlay not found');
         }
@@ -266,7 +268,7 @@ $(function () {
     }
 
     // ============================================================
-    // FORM SUBMISSION – all in the click handler with error handling
+    // FORM SUBMISSION – using 'submit' event for reliability
     // ============================================================
 
     var form = document.getElementById('projectForm');
@@ -274,10 +276,11 @@ $(function () {
 
     if (form && submitBtn) {
 
-        submitBtn.addEventListener('click', function (e) {
-            // Prevent default form submission
+        // Use the form's submit event instead of button click
+        form.addEventListener('submit', function (e) {
+            // Prevent default browser submission
             e.preventDefault();
-            console.log('🔵 Button clicked');
+            console.log('🔵 Form submit event triggered');
 
             // 1. Validate the form
             if (!form.checkValidity()) {
@@ -298,19 +301,26 @@ $(function () {
             submitBtn.disabled = true;
             submitBtn.innerHTML = 'SENDING…';
 
-            // 4. Build FormData – wrap in try-catch to catch errors
+            // 4. Build FormData – wrap everything in try/catch
             try {
+                console.log('📦 Building FormData...');
                 var formData = new FormData(form);
-                console.log('📦 FormData created');
-                
-                // Remove the default file input (if any) and append our selected files
+                console.log('✅ FormData created');
+
+                // Remove default file input and append our selected files
                 formData.delete('files[]');
                 selectedFiles.forEach(function (item) {
                     formData.append('files[]', item.file, item.file.name);
                 });
                 formData.set('BriefNames', selectedFiles.map(function (item) { return item.file.name; }).join(', '));
 
-                // Log form data contents (using forEach to avoid iteration issues)
+                // Optional: get Turnstile token and append
+                // var turnstileResponse = turnstile.getResponse();
+                // if (turnstileResponse) {
+                //     formData.set('cf-turnstile-response', turnstileResponse);
+                // }
+
+                // Log the data we're about to send
                 console.log('📤 Sending data to:', form.action);
                 formData.forEach(function (value, key) {
                     if (key === 'files[]') {
@@ -321,6 +331,7 @@ $(function () {
                 });
 
                 // 5. Send fetch
+                console.log('🚀 Sending fetch...');
                 fetch(form.action, {
                     method: 'POST',
                     body: formData
@@ -331,6 +342,8 @@ $(function () {
                         var nextUrl = form.querySelector('input[name="_next"]') ?
                             form.querySelector('input[name="_next"]').value :
                             'https://kabrownie.digital/thank-you';
+                        // Important: hide overlay before redirect (optional)
+                        hideLoadingOverlay();
                         window.location.href = nextUrl;
                     } else {
                         return response.text().then(function (text) {
@@ -338,9 +351,10 @@ $(function () {
                         });
                     }
                 })
-                .catch(function (error) {
-                    console.error('❌ Submission error:', error);
-                    alert(error.message || 'Network error. Please check your connection and try again.');
+                .catch(function (err) {
+                    console.error('❌ Fetch error:', err);
+                    alert('Network error: ' + err.message);
+                    // Hide overlay and reset button
                     hideLoadingOverlay();
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = '<span class="btn-text">SEND INQUIRY</span><iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>';
@@ -349,13 +363,18 @@ $(function () {
 
             } catch (err) {
                 console.error('❌ Error building FormData:', err);
-                alert('An error occurred while preparing your data: ' + err.message);
+                alert('Error preparing data: ' + err.message);
                 hideLoadingOverlay();
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = '<span class="btn-text">SEND INQUIRY</span><iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>';
                 form._submitting = false;
             }
         });
-    }
 
+        // Also keep the button click as a backup (but it will be handled by the submit event)
+        // Remove the old click listener to avoid double submission
+        // We'll just let the submit event handle everything.
+        // If you want to keep the click listener for some reason, you can leave it,
+        // but it's redundant and may cause issues.
+    }
 });
