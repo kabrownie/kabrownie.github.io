@@ -23,4 +23,22 @@
     <priority>0.3000</priority>
   </url>
 
+   <url>
+    <loc>https://kabrownie.digital/karanja/</loc>
+    <lastmod>2026-08-20T06:45:52+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3000</priority>
+  </url>
+   <url>
+    <loc>https://kabrownie.digital/kabrownie/</loc>
+    <lastmod>2026-08-20T06:45:52+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3000</priority>
+  </url>
+     <url>
+    <loc>https://kabrownie.digital/Karanja-3D/</loc>
+    <lastmod>2026-08-20T06:45:52+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3000</priority>
+  </url>
 </urlset>
