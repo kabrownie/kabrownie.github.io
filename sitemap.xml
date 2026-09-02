@@ -2,6 +2,7 @@
 <?xml-stylesheet type="text/css" href="https://www.xml-sitemaps.com/css/sitemap.css"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
+  <!-- 1.0: Homepage (Primary Entry) -->
   <url>
     <loc>https://kabrownie.digital/</loc>
     <lastmod>2026-08-20T06:45:52+00:00</lastmod>
@@ -9,36 +10,48 @@
     <priority>1.0000</priority>
   </url>
 
+  <!-- 0.9: Key Conversion Page (Getting leads) -->
   <url>
     <loc>https://kabrownie.digital/start-project/</loc>
     <lastmod>2026-08-20T06:45:52+00:00</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8000</priority>
+    <priority>0.9000</priority>
   </url>
 
+  <!-- 0.7: High-Value Portfolio/Profile Pages (Showcase your work) -->
+  <url>
+    <loc>https://kabrownie.digital/karanja/</loc>
+    <lastmod>2026-08-20T06:45:52+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7000</priority>
+  </url>
+  <url>
+    <loc>https://kabrownie.digital/kabrownie/</loc>
+    <lastmod>2026-08-20T06:45:52+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7000</priority>
+  </url>
+  <url>
+    <loc>https://kabrownie.digital/Karanja-3D/</loc>
+    <lastmod>2026-08-20T06:45:52+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7000</priority>
+  </url>
+
+  <!-- 0.7: Blog (Fresh content, important for SEO) -->
+  <url>
+    <loc>https://blog.kabrownie.digital/</loc>
+    <lastmod>2026-08-20T06:45:52+00:00</lastmod>
+    <changefreq>daily</changefreq> <!-- Changed to daily since blogs update often -->
+    <priority>0.7000</priority>
+  </url>
+
+  <!-- 0.2: Thank You Page (Transactional dead-end, low value) -->
   <url>
     <loc>https://kabrownie.digital/thank-you/</loc>
     <lastmod>2026-08-20T06:45:52+00:00</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.3000</priority>
+    <priority>0.2000</priority>
   </url>
 
-   <url>
-    <loc>https://kabrownie.digital/karanja/</loc>
-    <lastmod>2026-08-20T06:45:52+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3000</priority>
-  </url>
-   <url>
-    <loc>https://kabrownie.digital/kabrownie/</loc>
-    <lastmod>2026-08-20T06:45:52+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3000</priority>
-  </url>
-     <url>
-    <loc>https://kabrownie.digital/Karanja-3D/</loc>
-    <lastmod>2026-08-20T06:45:52+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3000</priority>
-  </url>
 </urlset>
