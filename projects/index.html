@@ -70,13 +70,12 @@
 
         <section class="projects-section bg-dark" id="projects"><div class="container">
             <div class="section-heading"><p class="eyebrow text-primary">Selected work</p><h2 class="text-white">Find your next visual direction.</h2><p class="text-white text-opacity-70">Browse projects by discipline, from animated stories and motion graphics to brand, web, and app experiences.</p></div>
-            <ul class="nav projects-tabs" id="projectTabs" role="tablist">
-                <li class="nav-item" role="presentation"><button class="nav-link active" id="animation-tab" data-bs-toggle="tab" data-bs-target="#animation-projects" type="button" role="tab" aria-controls="animation-projects" aria-selected="true">Animation &amp; Motion Graphics</button></li>
-                <li class="nav-item" role="presentation"><button class="nav-link" id="branding-tab" data-bs-toggle="tab" data-bs-target="#branding-projects" type="button" role="tab" aria-controls="branding-projects" aria-selected="false">Graphics &amp; Branding</button></li>
-                <li class="nav-item" role="presentation"><button class="nav-link" id="web-tab" data-bs-toggle="tab" data-bs-target="#web-projects" type="button" role="tab" aria-controls="web-projects" aria-selected="false">Web &amp; App</button></li>
-            </ul>
-            <div class="tab-content" id="projectTabContent">
-            <div class="tab-pane fade show active" id="animation-projects" role="tabpanel" aria-labelledby="animation-tab" tabindex="0">
+            <nav class="projects-tabs" aria-label="Project categories">
+                <a class="nav-link active" href="./" aria-current="page">Animation &amp; Motion Graphics</a>
+                <a class="nav-link" href="branding/">Graphics &amp; Branding</a>
+                <a class="nav-link" href="web-app/">Web &amp; App</a>
+            </nav>
+            <div>
             <div class="video-frame"><iframe src="https://player.vimeo.com/video/1190608661?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Spin to Lose short film"></iframe></div>
             <p class="media-caption text-white"><strong>Spin to Lose</strong> | A short film about gambling addiction and its consequences.</p>
             <div class="video-frame video-frame-showcase"><iframe src="https://vimeo.com/showcase/12237498/embed" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Kabrownie Digital animation showcase"></iframe></div>
@@ -96,9 +95,6 @@
                 <figure class="gallery-item"><img src="https://raw.githubusercontent.com/kabrownie/Karanja-3D/master/renders/rc.png" alt="Dekut RC environment"><figcaption><strong>Dekut RC</strong><span>Environment for <em>Spin to Lose</em></span></figcaption></figure>
             </div>
         </div>
-            </div>
-            <div class="tab-pane fade project-coming-soon" id="branding-projects" role="tabpanel" aria-labelledby="branding-tab" tabindex="0"><p class="eyebrow text-primary">Coming soon</p><h3 class="text-white">Graphics &amp; Branding</h3><p class="text-white text-opacity-70">Brand identities, campaign graphics, and visual systems will be added here.</p></div>
-            <div class="tab-pane fade project-coming-soon" id="web-projects" role="tabpanel" aria-labelledby="web-tab" tabindex="0"><p class="eyebrow text-primary">Coming soon</p><h3 class="text-white">Web &amp; App</h3><p class="text-white text-opacity-70">Websites, product interfaces, and app experiences will be added here.</p></div>
             </div>
         </div></section>
 

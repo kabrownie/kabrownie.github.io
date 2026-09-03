@@ -891,7 +891,7 @@ ul { list-style: none; padding-left: 0; }
 .section-heading { max-width: 640px; margin-bottom: 44px; }
 .section-heading h2 { font-size: clamp(2.5rem, 5vw, 5rem); line-height: 1; margin-bottom: 18px; }
 .section-heading p:last-child { font-size: 1.1rem; margin: 0; }
-.projects-tabs { gap: 10px; margin-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,.2); }
+.projects-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,.2); }
 .projects-tabs .nav-link { color: rgba(255,255,255,.68); border: 0; border-bottom: 3px solid transparent; border-radius: 0; padding: 14px 18px; font-weight: 700; }
 .projects-tabs .nav-link:hover, .projects-tabs .nav-link:focus { color: #fff; }
 .projects-tabs .nav-link.active { color: var(--bs-primary); background: transparent; border-bottom-color: var(--bs-primary); }

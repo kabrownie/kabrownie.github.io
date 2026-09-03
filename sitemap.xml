@@ -18,6 +18,26 @@
     <priority>0.9000</priority>
   </url>
 
+  <!-- 0.8: Project Category Pages -->
+  <url>
+    <loc>https://kabrownie.digital/projects/</loc>
+    <lastmod>2026-09-03T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8000</priority>
+  </url>
+  <url>
+    <loc>https://kabrownie.digital/projects/branding/</loc>
+    <lastmod>2026-09-03T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7000</priority>
+  </url>
+  <url>
+    <loc>https://kabrownie.digital/projects/web-app/</loc>
+    <lastmod>2026-09-03T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7000</priority>
+  </url>
+
   <!-- 0.7: High-Value Portfolio/Profile Pages (Showcase your work) -->
   <url>
     <loc>https://kabrownie.digital/karanja/</loc>
