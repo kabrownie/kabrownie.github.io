@@ -876,11 +876,15 @@ ul { list-style: none; padding-left: 0; }
 }
 
 /* 3D portfolio page */
-.projects-page { background: var(--bs-dark); color: #fff; }
-.projects-page .header { background: rgba(24, 3, 41, .38); backdrop-filter: blur(12px); }
+.projects-page {
+  background: var(--bs-dark);
+  color: var(--bs-body-color);
+  font-family: var(--bs-body-font-family);
+}
+.projects-page .header { background: rgba(var(--bs-primary-rgb), .38); backdrop-filter: blur(12px); }
 .projects-page .header.fixed-header { background: var(--bs-primary); }
 .projects-hero { min-height: min(860px, 100vh); overflow: hidden; padding: 150px 0 96px; background: url('../images/backgrounds/fallback.png') center / cover no-repeat; }
-.projects-hero::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(24, 3, 41, .25), rgba(24, 3, 41, .94)); }
+.projects-hero::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(var(--bs-primary-rgb), .25), rgba(var(--bs-primary-rgb), .94)); }
 .projects-hero-content { max-width: 760px; }
 .projects-hero h1 { font-size: clamp(3rem, 7vw, 7.5rem); line-height: .96; margin: 0 0 28px; }
 .eyebrow { font-size: .78rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; margin: 0 0 18px; }
@@ -919,7 +923,7 @@ ul { list-style: none; padding-left: 0; }
 .projects-top { position: fixed; right: 24px; bottom: 24px; z-index: 20; display: grid; place-items: center; width: 48px; height: 48px; color: #fff; background: var(--bs-primary); border: 1px solid rgba(255,255,255,.3); border-radius: 50%; opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s; }
 .projects-top.visible { opacity: 1; pointer-events: auto; }
 .projects-top:hover { color: #fff; transform: translateY(-4px); }
-.lightbox { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: 48px 24px; background: rgba(15, 2, 39, .94); opacity: 0; pointer-events: none; transition: opacity .25s ease; }
+.lightbox { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: 48px 24px; background: rgba(var(--bs-primary-rgb), .94); opacity: 0; pointer-events: none; transition: opacity .25s ease; }
 .lightbox.active { opacity: 1; pointer-events: auto; }
 .lightbox img { max-width: min(1100px, 94vw); max-height: 88vh; object-fit: contain; box-shadow: 0 20px 80px rgba(0,0,0,.5); }
 .lightbox-close { position: absolute; top: 18px; right: 24px; color: #fff; background: transparent; border: 0; font-size: 2.5rem; line-height: 1; cursor: pointer; }
