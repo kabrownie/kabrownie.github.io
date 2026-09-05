@@ -883,7 +883,7 @@ ul { list-style: none; padding-left: 0; }
 }
 .projects-page .header { background: rgba(var(--bs-primary-rgb), .38); backdrop-filter: blur(12px); }
 .projects-page .header.fixed-header { background: var(--bs-primary); }
-.projects-hero { min-height: min(860px, 100vh); overflow: hidden; padding: 150px 0 96px; background: url('../images/backgrounds/fallback.png') center / cover no-repeat; }
+.projects-hero { min-height: min(860px, 100vh); overflow: hidden; padding: 150px 0 96px; background: url('../images/backgrounds/fallback.webp') center / cover no-repeat; }
 .projects-hero::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(var(--bs-primary-rgb), .25), rgba(var(--bs-primary-rgb), .94)); }
 .projects-hero-content { max-width: 760px; }
 .projects-hero h1 { font-size: clamp(3rem, 7vw, 7.5rem); line-height: .96; margin: 0 0 28px; }
