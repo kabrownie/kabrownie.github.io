@@ -899,9 +899,25 @@ ul { list-style: none; padding-left: 0; }
 .projects-tabs .nav-link { color: rgba(255,255,255,.68); border: 0; border-bottom: 3px solid transparent; border-radius: 0; padding: 14px 18px; font-weight: 700; }
 .projects-tabs .nav-link:hover, .projects-tabs .nav-link:focus { color: #fff; }
 .projects-tabs .nav-link.active { color: #fff; background: var(--bs-primary); border-bottom-color: var(--bs-primary); }
-.project-coming-soon { min-height: 420px; padding: 80px 0; }
-.project-coming-soon h3 { font-size: clamp(2.5rem, 5vw, 5rem); margin-bottom: 18px; }
-.project-coming-soon p:last-child { max-width: 500px; font-size: 1.1rem; }
+.repository-intro { padding: 48px 0 42px; }
+.repository-intro h3 { font-size: clamp(2.5rem, 5vw, 5rem); margin-bottom: 18px; }
+.repository-intro p:not(.eyebrow) { max-width: 620px; font-size: 1.1rem; }
+.repository-intro .repository-status { margin: 24px 0 0; font-size: .9rem; }
+.repository-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.repository-card { display: flex; flex-direction: column; min-width: 0; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.16); transition: transform .25s ease, border-color .25s ease; }
+.repository-card:hover { transform: translateY(-6px); border-color: #8B5CF6; }
+.repository-image-link { display: block; overflow: hidden; background: #24120d; }
+.repository-image { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; transition: transform .45s ease; }
+.repository-card:hover .repository-image { transform: scale(1.04); }
+.repository-card-body { display: flex; flex: 1; flex-direction: column; padding: 22px; }
+.repository-card-meta { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 14px; color: #8B5CF6; font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.repository-card h3 { margin-bottom: 10px; font-size: 1.35rem; overflow-wrap: anywhere; }
+.repository-card h3 a { color: #fff; }
+.repository-card h3 a:hover { color: #8B5CF6; }
+.repository-card-body p { flex: 1; margin-bottom: 22px; color: rgba(255,255,255,.68); font-size: .95rem; line-height: 1.6; }
+.repository-link { display: inline-flex; align-items: center; gap: 8px; color: #fff; font-size: .88rem; font-weight: 800; }
+.repository-link:hover { color: #8B5CF6; }
+.repository-link iconify-icon { font-size: 1rem; }
 .video-frame { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--bs-primary); border: 1px solid rgba(255,255,255,.16); }
 .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .video-frame-showcase { margin-top: 64px; }
@@ -937,5 +953,5 @@ ul { list-style: none; padding-left: 0; }
 .lightbox.active { opacity: 1; pointer-events: auto; }
 .lightbox img { max-width: min(1100px, 94vw); max-height: 88vh; object-fit: contain; box-shadow: 0 20px 80px rgba(0,0,0,.5); }
 .lightbox-close { position: absolute; top: 18px; right: 24px; color: #fff; background: transparent; border: 0; font-size: 2.5rem; line-height: 1; cursor: pointer; }
-@media (max-width: 767.98px) { .projects-section { padding: 76px 0; } .projects-hero { min-height: 760px; padding-bottom: 64px; } .projects-tabs { top: 76px; flex-direction: column; border-bottom: 0; } .projects-tabs .nav-link { width: 100%; text-align: left; border-bottom: 1px solid rgba(255,255,255,.2); } .projects-tabs .nav-link.active { border-bottom-color: var(--bs-primary); } .gallery-grid { gap: 16px; } .gallery-item { grid-column: span 6; } .gallery-item:nth-child(3n + 2) { transform: none; } }
-@media (max-width: 479.98px) { .gallery-item { grid-column: span 12; } .hero-actions .btn { width: 100%; justify-content: center; } .projects-top { right: 14px; bottom: 14px; } }
+@media (max-width: 767.98px) { .projects-section { padding: 76px 0; } .projects-hero { min-height: 760px; padding-bottom: 64px; } .projects-tabs { top: 76px; flex-direction: column; border-bottom: 0; } .projects-tabs .nav-link { width: 100%; text-align: left; border-bottom: 1px solid rgba(255,255,255,.2); } .projects-tabs .nav-link.active { border-bottom-color: var(--bs-primary); } .gallery-grid { gap: 16px; } .gallery-item { grid-column: span 6; } .gallery-item:nth-child(3n + 2) { transform: none; } .repository-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 479.98px) { .gallery-item { grid-column: span 12; } .hero-actions .btn { width: 100%; justify-content: center; } .projects-top { right: 14px; bottom: 14px; } .repository-grid { grid-template-columns: 1fr; } }
