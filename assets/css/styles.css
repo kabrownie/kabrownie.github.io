@@ -608,6 +608,17 @@ textarea.form-control { min-height: calc(1.5em + 28px + calc(var(--bs-border-wid
 }
 .banner-section > video { z-index: 0; }
 .banner-section .container { position: relative; z-index: 2; }
+.banner-section h1 {
+  font-size: clamp(3rem, 8vw, 8rem) !important;
+  max-width: 12ch;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 575.98px) {
+  .banner-section h1 { font-size: clamp(2.8rem, 14vw, 4.5rem) !important; }
+  .banner-section .btn { padding-left: 20px; padding-right: 48px; }
+  .banner-section .btn .btn-text { font-size: 15px; }
+}
 
 .banner-inner-section {
   min-height: 650px;
