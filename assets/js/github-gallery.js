@@ -8,7 +8,7 @@
   const OWNER       = 'kabrownie';
   const REPO        = 'my-renders';    // ← your new repo name
   const BRANCH      = 'main';          // ← 'main' or 'master' (see Step 4)
-  const FOLDER      = 'branding';      // ← folder for THIS page
+  const FOLDER      = 'renders';      // ← folder for THIS page
   const GALLERY_ID  = 'githubGallery';
   // ========================================================
 
@@ -66,20 +66,15 @@
     }
 
     const frag = document.createDocumentFragment();
-
     images.forEach(img => {
-      const title = titleFromFilename(img.name);
-
       const figure = document.createElement('figure');
+      const title = titleFromFilename(img.name);
       figure.className = 'gallery-item';
       figure.innerHTML =
         '<img src="' + escapeHtml(img.url) + '" alt="' + escapeHtml(title) +
-        '" loading="lazy" decoding="async">' +
-        '<figcaption><strong>' + escapeHtml(title) + '</strong></figcaption>';
-
+        '" loading="lazy" decoding="async">';
       frag.appendChild(figure);
     });
-
     gallery.appendChild(frag);
     console.log('✅ Rendered ' + images.length + ' images from GitHub.');
   }
