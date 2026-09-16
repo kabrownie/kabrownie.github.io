@@ -1037,20 +1037,21 @@ ul { list-style: none; padding-left: 0; }
   inset: 0;
   display: grid;
   place-items: center;
-  background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.55) 100%);
-  opacity: 0;
-  transition: opacity 0.25s ease;
-}
-
-.video-card:hover .video-card__play,
-.video-card:focus-visible .video-card__play {
+  background: linear-gradient(180deg, rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.55) 100%);
   opacity: 1;
+  transition: opacity 0.25s ease;
 }
 
 .video-card__play iconify-icon {
   font-size: 54px;
   color: #fff;
   filter: drop-shadow(0 4px 12px rgba(0,0,0,0.6));
+  transition: transform 0.25s ease;
+}
+
+.video-card:hover .video-card__play iconify-icon,
+.video-card:focus-visible .video-card__play iconify-icon {
+  transform: scale(1.12);
 }
 
 .video-card__title {
