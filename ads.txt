@@ -1,0 +1,2 @@
+subdomain=blog.kabrownie.digital
+google.com, pub-5153056709111912, DIRECT, f08c47fec0942fa0
