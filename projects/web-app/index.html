@@ -75,6 +75,16 @@
             var grid = document.getElementById('repositoryGrid');
             var status = document.getElementById('repositoryStatus');
             var fallbackImage = 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1000&q=80';
+            var privateProjects = [
+                {
+                    name: 'AL NAWA Management & HR Consultants Ltd',
+                    description: 'A website for a licensed international manpower recruitment agency connecting professionals with global career opportunities.',
+                    language: 'Private client',
+                    image: '../../assets/images/portfolio/al-nawa-consultants.png',
+                    homepage: 'https://kabrownie.digital/al-nawa-consultants/',
+                    private: true
+                }
+            ];
             var fallbackRepos = [
                 { name: 'afya', description: 'A health-focused digital experience.', language: 'Web' },
                 { name: 'Chess-Challenge', description: 'A playful chess challenge for sharpening your game.', language: 'Game' },
@@ -120,15 +130,18 @@
                 grid.innerHTML = repositories.map(function (repo) {
                     var description = repo.description || 'An open-source project by Kabrownie.';
                     var language = repo.language || 'Open source';
-                    var repoUrl = safeUrl(repo.html_url, 'https://github.com/' + owner + '/' + encodeURIComponent(repo.name));
-                    var projectUrl = projectLink(repo, repoUrl);
+                    var projectUrl = safeUrl(repo.homepage, '');
+                    var repoUrl = safeUrl(repo.html_url, projectUrl || 'https://github.com/' + owner + '/' + encodeURIComponent(repo.name));
+                    projectUrl = projectUrl || projectLink(repo, repoUrl);
                     var hasHomepage = projectUrl !== repoUrl;
-                    var projectLabel = projectLinkLabel(projectUrl, hasHomepage);
+                    var projectLabel = repo.private ? 'View project' : projectLinkLabel(projectUrl, hasHomepage);
+                    var meta = repo.private ? '<span>Private client</span><span>Selected work</span>' :
+                        '<span>' + escapeHtml(language) + '</span><span>' + (repo.stargazers_count || 0) + ' stars</span>';
                     return '<article class="repository-card">' +
                         '<a class="repository-image-link" href="' + escapeHtml(projectUrl) + '" target="_blank" rel="noopener" aria-label="Open ' + escapeHtml(repo.name) + '">' +
                             '<img class="repository-image" src="' + imageFor(repo) + '" alt="Visual preview for ' + escapeHtml(repo.name) + '" loading="lazy" data-fallback="' + fallbackImage + '">' +
                         '</a>' +
-                        '<div class="repository-card-body"><div class="repository-card-meta"><span>' + escapeHtml(language) + '</span><span>' + (repo.stargazers_count || 0) + ' stars</span></div>' +
+                        '<div class="repository-card-body"><div class="repository-card-meta">' + meta + '</div>' +
                             '<h3><a href="' + repoUrl + '" target="_blank" rel="noopener">' + escapeHtml(repo.name) + '</a></h3>' +
                             '<p>' + escapeHtml(description) + '</p><a class="repository-link" href="' + escapeHtml(projectUrl) + '" target="_blank" rel="noopener">' + projectLabel + ' <iconify-icon icon="lucide:arrow-up-right"></iconify-icon></a>' +
                         '</div></article>';
@@ -138,14 +151,15 @@
                         if (this.src !== this.dataset.fallback) this.src = this.dataset.fallback;
                     });
                 });
-                status.textContent = isFallback ? 'Showing a selection while GitHub is unavailable.' : repositories.length + ' public repositories';
+                status.textContent = isFallback ? 'Showing a selection while GitHub is unavailable.' :
+                    repositories.length + ' public repositories · ' + privateProjects.length + ' private client project';
             }
 
-            render(fallbackRepos, true);
+            render(privateProjects.concat(fallbackRepos), true);
             fetch('https://api.github.com/users/' + owner + '/repos?per_page=100&sort=updated')
                 .then(function (response) { if (!response.ok) throw new Error('GitHub request failed'); return response.json(); })
                 .then(function (repositories) {
-                    render(repositories.filter(function (repo) { return !repo.fork; }), false);
+                    render(privateProjects.concat(repositories.filter(function (repo) { return !repo.fork; })), false);
                 })
                 .catch(function () { /* The fallback grid is already visible. */ });
         }());
