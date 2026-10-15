@@ -27,10 +27,9 @@
     <link rel="shortcut icon" type="image/png" href="assets/images/logos/favicon.svg" />
 
     <!-- ====== STYLESHEETS ====== -->
-    <!-- Owl Carousel -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-
-    <!-- AOS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 
     <!-- (Keep custom styles.css) -->
@@ -193,7 +192,7 @@
 
         <!-- ====== BANNER ====== -->
         <section class="banner-section position-relative d-flex align-items-end min-vh-100">
-            <video class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" autoplay muted loop playsinline
+            <video class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" autoplay muted loop playsinline preload="metadata"
                 poster="assets/images/backgrounds/fallback.webp">
                 <source src="assets/images/backgrounds/banner-video.mp4" type="video/mp4" />
             </video>
@@ -241,7 +240,7 @@
                                 </div>
                             </div>
                             <div data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
-                                <a href="#services" class="btn btn-outline-light border-white">
+                                <a href="/projects/" class="btn btn-outline-light border-white">
                                     <span class="btn-text">Explore our work</span>
                                     <iconify-icon icon="lucide:arrow-up-right" class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
                                 </a>
@@ -453,36 +452,36 @@
             <div class="col-12">
                 <h3 class="text-white  small text-uppercase mb-4" data-aos="fade-up">Some of our amazing clients</h3>
                 <p class="text-white">Here are some of the brands that have trusted us with their projects.</p>
-                <div class="owl-carousel owl-theme trusted-logos-carousel" data-aos="fade-up" data-aos-delay="100">
+                <div class="trusted-logos-track" data-aos="fade-up" data-aos-delay="100">
                     <!-- Slide 1 -->
                     <div class="item text-center">
-                        <img src="assets/images/portfolio/giftconerlo.png" alt="Client 1" class="img-fluid" style="filter: brightness(1) invert(1); opacity:0.7; max-height:60px; width:auto; display:inline-block;">
+                        <img src="assets/images/portfolio/giftconerlo.png" alt="Gifts Corner" class="img-fluid">
                     </div>
                     <!-- Slide 2 -->
                     <div class="item text-center">
-                        <img src="assets/images/portfolio/filmhub.jpeg" alt="Client 2" class="img-fluid" style="filter: brightness(1) invert(1); opacity:0.7; max-height:60px; width:auto; display:inline-block;">
+                        <img src="assets/images/portfolio/filmhub.jpeg" alt="FilmHub" class="img-fluid">
                     </div>
                     <!-- Slide 3 -->
                     <div class="item text-center">
-                        <img src="assets/images/portfolio/vibez.jpeg" alt="Client 3" class="img-fluid" style="filter: brightness(1) invert(1); opacity:0.7; max-height:60px; width:auto; display:inline-block;">
+                        <img src="assets/images/portfolio/vibez.jpeg" alt="Vibez" class="img-fluid">
                     </div>
                     <!-- Slide 4 -->
                     <div class="item text-center">
-                        <img src="assets/images/portfolio/ask-logo.webp" alt="Client 4" class="img-fluid" style="filter: brightness(1) invert(1); opacity:0.7; max-height:60px; width:auto; display:inline-block;">
+                        <img src="assets/images/portfolio/ask-logo.webp" alt="ASK" class="img-fluid">
                     </div>
                     <!-- Slide 5 -->
                     <div class="item text-center">
-                        <img src="assets/images/portfolio/karanja.png" alt="Client 5" class="img-fluid" style="filter: brightness(1) invert(1); opacity:0.7; max-height:60px; width:auto; display:inline-block;">
+                        <img src="assets/images/portfolio/karanja.png" alt="Karanja" class="img-fluid">
                     </div>
                     <!-- Slide 6 -->
                     <div class="item text-center">
-                        <img src="assets/images/portfolio/shalin.jpeg" alt="Client 6" class="img-fluid" style="filter: brightness(1) invert(1); opacity:0.7; max-height:60px; width:auto; display:inline-block;">
+                        <img src="assets/images/portfolio/shalin.jpeg" alt="Shalin" class="img-fluid">
                     </div>
                      <div class="item text-center">
-                        <img src="assets/images/portfolio/dj.webp" alt="Client 6" class="img-fluid" loading="lazy" style="filter: brightness(1) invert(1); opacity:0.7; max-height:60px; width:auto; display:inline-block;">
+                        <img src="assets/images/portfolio/dj.webp" alt="DJ" class="img-fluid" loading="lazy">
                     </div>
                       <div class="item text-center">
-                        <img src="assets/images/portfolio/mus.png" alt="Client 6" class="img-fluid" loading="lazy" style="filter: brightness(1) invert(1); opacity:0.7; max-height:60px; width:auto; display:inline-block;">
+                        <img src="assets/images/portfolio/mus.png" alt="MUS" class="img-fluid" loading="lazy">
                     </div>
                 </div>
             </div>
@@ -518,11 +517,12 @@
                                                 <li><iconify-icon icon="solar:star-line-duotone" class="fs-6 text-dark"></iconify-icon></li>
                                             </ul>
                                             <p class="mb-4 fs-6 text-white fst-italic">"The team exceeded our expectations with a beautiful animated advertisement."</p>
+                                            <p class="mb-4 text-white text-opacity-70 small">GiftConner campaign: animated promotional film created to support a seasonal sales push.</p>
                                         </div>
                                         <div class="position-relative z-1">
                                             <div class="pb-4 border-bottom border-dark">
                                                 <h2 class="mb-0 text-secondary">98.6%</h2>
-                                                <p class="mb-0 text-white">Client satisfaction rate</p>
+                                                <p class="mb-0 text-white">Client satisfaction rate, based on post-project feedback</p>
                                             </div>
                                             <div class="hstack gap-4 pt-4">
                                                 <img src="assets/images/profile/user-2.jpg" alt="Wambui Mwangi - satisfied client of Kabrownie Digital" class="img-fluid rounded-circle overflow-hidden flex-shrink-0" width="56" height="56">
@@ -546,7 +546,7 @@
                                     <div class="card-body d-flex flex-column justify-content-between">
                                         <div>
                                             <h2 class="mb-0 text-white">28+</h2>
-                                            <p class="mb-4 text-white">Brands across diverse industries</p>
+                                            <p class="mb-4 text-white">Brands across diverse industries, from retail to media</p>
                                             <a href="#">
                                                 <img src="assets/images/logos/logo-dark.svg" alt="Kabrownie Digital animation studio" class="img-fluid mb-3" style="filter: brightness(0) invert(1); max-width: 140px;">
                                             </a>
@@ -594,24 +594,24 @@
    <form method="POST" action="https://contact-form-handler.kabrownie.workers.dev/" class="d-flex flex-column gap-7" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
     
     <!-- Honey pot (anti-spam, optional but keep it) -->
-    <input type="text" name="_honey" style="display:none">
+    <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="display:none">
     
     <!-- Name field -->
     <div>
-        <p class="mb-0 text-white">Name</p>
-        <input type="text" name="name" class="form-control border border-secondary" placeholder="Enter your name" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;" required>
+        <label for="contact-name" class="mb-0 text-white">Name</label>
+        <input id="contact-name" type="text" name="name" autocomplete="name" class="form-control border border-secondary" placeholder="Enter your name" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;" required>
     </div>
     
     <!-- Email field -->
     <div>
-        <p class="mb-0 text-white">Email</p>
-        <input type="email" name="email" class="form-control border border-secondary" placeholder="Enter your email" style="background:rgba(79, 79, 79, 0.433); color:rgb(0,0,0); padding:5px; border-radius:5px;" required>
+        <label for="contact-email" class="mb-0 text-white">Email</label>
+        <input id="contact-email" type="email" name="email" autocomplete="email" class="form-control border border-secondary" placeholder="Enter your email" style="background:rgba(79, 79, 79, 0.433); color:rgb(0,0,0); padding:5px; border-radius:5px;" required>
     </div>
     
     <!-- Message field -->
     <div>
-        <p class="mb-0 text-white">Message</p>
-        <textarea name="message" class="form-control border border-secondary" placeholder="Describe your project, goals, or any questions you have..." rows="3" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;" required></textarea>
+        <label for="contact-message" class="mb-0 text-white">Message</label>
+        <textarea id="contact-message" name="message" autocomplete="off" class="form-control border border-secondary" placeholder="Describe your project, goals, or any questions you have..." rows="3" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;" required></textarea>
     </div>
     
     <!-- Turnstile widget -->
@@ -624,8 +624,6 @@
     </button>
 </form>
 
-<!-- Turnstile script (add this once somewhere on your page, e.g., in the <head> or before </body>) -->
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
                     </div>
                 </div>
             </div>
@@ -729,7 +727,6 @@
     <!-- ====== SCRIPTS ====== -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="assets/js/custom.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>

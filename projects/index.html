@@ -78,17 +78,18 @@
     <nav class="projects-tabs" aria-label="Project categories">
       <a class="nav-link active" href="./" aria-current="page">Animation &amp; Motion Graphics</a>
       <a class="nav-link" href="branding/">Graphics &amp; Branding</a>
+            <a class="nav-link" href="web-app/">Web &amp; App</a>
     </nav>
 
-    <div class="video-gallery" id="videoGallery" aria-live="polite">
-      <div class="video-card video-card--skeleton" aria-hidden="true"></div>
-      <div class="video-card video-card--skeleton" aria-hidden="true"></div>
-      <div class="video-card video-card--skeleton" aria-hidden="true"></div>
-      <div class="video-card video-card--skeleton" aria-hidden="true"></div>
-      <div class="video-card video-card--skeleton" aria-hidden="true"></div>
-      <div class="video-card video-card--skeleton" aria-hidden="true"></div>
-    </div>
-    <p class="video-gallery-status" id="videoGalleryStatus" role="status"></p>
+        <div class="video-gallery" id="videoGallery" aria-live="polite">
+            <div class="video-card video-card--skeleton" aria-hidden="true"></div>
+            <div class="video-card video-card--skeleton" aria-hidden="true"></div>
+            <div class="video-card video-card--skeleton" aria-hidden="true"></div>
+            <div class="video-card video-card--skeleton" aria-hidden="true"></div>
+            <div class="video-card video-card--skeleton" aria-hidden="true"></div>
+            <div class="video-card video-card--skeleton" aria-hidden="true"></div>
+        </div>
+        <p class="video-gallery-status" id="videoGalleryStatus" role="status"></p>
 
 
         
@@ -121,21 +122,15 @@
         </div></div>
     </footer>
     <a href="#" class="projects-top" id="scrollToTopBtn" aria-label="Back to top"><iconify-icon icon="lucide:arrow-up"></iconify-icon></a>
-    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true"><button class="lightbox-close" id="lightboxClose" type="button" aria-label="Close image">&times;</button><img id="lightboxImage" src="" alt=""></div>
-    <!-- YouTube video lightbox -->
-<div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Video player">
-  <div class="video-modal__inner">
-    <button class="video-modal__close" id="videoModalClose" type="button" aria-label="Close video">&times;</button>
-    <button class="video-modal__nav video-modal__nav--prev" id="videoModalPrev" type="button" aria-label="Previous video">
-      <iconify-icon icon="lucide:chevron-left"></iconify-icon>
-    </button>
-    <button class="video-modal__nav video-modal__nav--next" id="videoModalNext" type="button" aria-label="Next video">
-      <iconify-icon icon="lucide:chevron-right"></iconify-icon>
-    </button>
-    <div class="video-modal__frame" id="videoModalFrame"></div>
-    <p class="video-modal__counter" id="videoModalCounter" aria-live="polite"></p>
-  </div>
-</div>
+    <div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Video player">
+        <div class="video-modal__inner">
+            <button class="video-modal__close" id="videoModalClose" type="button" aria-label="Close video">&times;</button>
+            <button class="video-modal__nav video-modal__nav--prev" id="videoModalPrev" type="button" aria-label="Previous video"><iconify-icon icon="lucide:chevron-left"></iconify-icon></button>
+            <button class="video-modal__nav video-modal__nav--next" id="videoModalNext" type="button" aria-label="Next video"><iconify-icon icon="lucide:chevron-right"></iconify-icon></button>
+            <div class="video-modal__frame" id="videoModalFrame"></div>
+            <p class="video-modal__counter" id="videoModalCounter" aria-live="polite"></p>
+        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
     <script src="../assets/js/youtube-gallery.js" defer></script>

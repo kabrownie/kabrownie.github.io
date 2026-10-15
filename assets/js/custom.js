@@ -13,41 +13,8 @@ $(function () {
     });
 
     // ============================================================
-    // OWL CAROUSELS & COUNTERS
+    // COUNTERS
     // ============================================================
-
-    $('.featured-projects-slider .owl-carousel').owlCarousel({
-        center: true,
-        loop: true,
-        margin: 30,
-        nav: false,
-        dots: false,
-        autoplay: true,
-        autoplayTimeout: 5000,
-        autoplayHoverPause: false,
-        responsive: {
-            0: { items: 1 },
-            600: { items: 2 },
-            1000: { items: 3 },
-            1200: { items: 4 }
-        }
-    });
-
-    $('.trusted-logos-carousel').owlCarousel({
-        loop: true,
-        margin: 30,
-        nav: false,
-        dots: false,
-        autoplay: true,
-        autoplayTimeout: 3000,
-        autoplayHoverPause: true,
-        responsive: {
-            0: { items: 2 },
-            576: { items: 3 },
-            768: { items: 4 },
-            992: { items: 5 }
-        }
-    });
 
     $('.count').each(function () {
         $(this)
@@ -273,6 +240,31 @@ $(function () {
 
     var form = document.getElementById('projectForm');
     var submitBtn = document.getElementById('submitBtn');
+
+    var turnstileWidget = document.querySelector('.cf-turnstile');
+    if (turnstileWidget && !document.querySelector('script[src*="challenges.cloudflare.com/turnstile"]')) {
+        var loadTurnstile = function () {
+            if (turnstileWidget.dataset.loaded) return;
+            turnstileWidget.dataset.loaded = 'true';
+            var turnstileScript = document.createElement('script');
+            turnstileScript.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+            turnstileScript.async = true;
+            turnstileScript.defer = true;
+            document.body.appendChild(turnstileScript);
+        };
+
+        if ('IntersectionObserver' in window) {
+            var turnstileObserver = new IntersectionObserver(function (entries, observer) {
+                if (entries.some(function (entry) { return entry.isIntersecting; })) {
+                    loadTurnstile();
+                    observer.disconnect();
+                }
+            }, { rootMargin: '300px' });
+            turnstileObserver.observe(turnstileWidget);
+        } else {
+            loadTurnstile();
+        }
+    }
 
     if (form && submitBtn) {
 
