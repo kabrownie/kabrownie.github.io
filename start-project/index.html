@@ -211,16 +211,16 @@
                             </div>
 
                             <div>
-                                <label class="mb-0 text-white" for="projectBudget">Let's talk about your estimated budget *</label>
+                                <label class="mb-0 text-white" for="projectBudget">Let's talk about your estimated budget (prices in KES) *</label>
                                 <select id="projectBudget" class="form-control border border-secondary" name="Budget" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;" required>
-                                    <option value="">Select a range</option>
-                                    <option value="Under 100">Under $100</option>                                    
-                                    <option value="$100 - $500">$100 - $500</option>
-                                     <option value="$ 500 -$1,000">$500 - $1,000</option>
-                                    <option value="$1,000 – $2,000">$1,000 – $2,000</option>
-                                    <option value="$2,000 – $5,000">$2,000 – $5,000</option>
-                                    <option value="$5,000 – $15,000">$5,000 – $15,000</option>
-                                    <option value="$15,000+">$25,000+</option>
+                                    <option value="">Select a range (KES)</option>
+                                    <option value="Under KES 10,000">Under KES 10,000</option>
+                                    <option value="KES 10,000 - KES 50,000">KES 10,000 - KES 50,000</option>
+                                    <option value="KES 50,000 - KES 100,000">KES 50,000 - KES 100,000</option>
+                                    <option value="KES 100,000 - KES 200,000">KES 100,000 - KES 200,000</option>
+                                    <option value="KES 200,000 - KES 500,000">KES 200,000 - KES 500,000</option>
+                                    <option value="KES 500,000 - KES 1,500,000">KES 500,000 - KES 1,500,000</option>
+                                    <option value="KES 1,500,000+">KES 1,500,000+</option>
                                 </select>
                             </div>
 
@@ -235,7 +235,9 @@
                                         <small class="text-white text-opacity-50">Allowed: PNG, JPG, JPEG, PDF, DOC, DOCX | Max 3 files, 2.86 MB each, total max 3.5 MB</small>
                                     </label>
                                 </div>
-                                <div id="file-list" class="mt-2 text-white" style="font-size:0.9rem;"></div>
+                                <div id="file-list" class="mt-2 text-white" style="font-size:0.9rem;" aria-live="polite" aria-label="Uploaded files">
+                                    <p class="mb-0 text-white text-opacity-50">Uploaded files will appear here.</p>
+                                </div>
                                 <input type="hidden" name="BriefNames" id="briefNames" value="">
                             </div>
 

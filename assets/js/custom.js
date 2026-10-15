@@ -94,7 +94,7 @@ $(function () {
             return;
         }
 
-        var html = '<ul class="list-unstyled mb-0" style="font-size:0.9rem; margin-top:10px;">';
+        var html = '<p class="mb-1 text-white text-opacity-70">Uploaded files</p><ul class="list-unstyled mb-0" style="font-size:0.9rem; margin-top:10px;">';
         selectedFiles.forEach(function (item, index) {
             html += '<li class="d-flex justify-content-between align-items-center py-1" style="gap:10px;">' +
                 '<span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">' +
