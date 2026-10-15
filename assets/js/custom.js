@@ -31,6 +31,22 @@ $(function () {
             );
     });
 
+    $('.trusted-logos-carousel').owlCarousel({
+        loop: true,
+        margin: 30,
+        nav: false,
+        dots: false,
+        autoplay: true,
+        autoplayTimeout: 3000,
+        autoplayHoverPause: true,
+        responsive: {
+            0: { items: 2 },
+            576: { items: 3 },
+            768: { items: 4 },
+            992: { items: 5 }
+        }
+    });
+
     AOS.init({ once: true });
 
     // ============================================================
