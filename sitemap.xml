@@ -38,12 +38,4 @@
     <priority>0.7000</priority>
   </url>
 
-  <!-- 0.7: Blog (Fresh content, important for SEO) -->
-  <url>
-    <loc>https://blog.kabrownie.digital/</loc>
-    <lastmod>2026-08-20T06:45:52+00:00</lastmod>
-    <changefreq>daily</changefreq> <!-- Changed to daily since blogs update often -->
-    <priority>0.7000</priority>
-  </url>
-
 </urlset>
