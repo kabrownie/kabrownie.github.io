@@ -183,18 +183,18 @@
                             <input type="text" name="_honey" style="display:none">
 
                             <div>
-                                <p class="mb-0 text-white">Tell us your name *</p>
-                                <input type="text" class="form-control border border-secondary" name="Name" placeholder="Your Name" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;" required>
+                                <label class="mb-0 text-white" for="projectName">Tell us your name *</label>
+                                <input type="text" id="projectName" class="form-control border border-secondary" name="Name" placeholder="Your Name" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;" required>
                             </div>
 
                             <div>
-                                <p class="mb-0 text-white">What's the name of your amazing company?</p>
-                                <input type="text" class="form-control border border-secondary" name="Company" placeholder="Company Name" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;">
+                                <label class="mb-0 text-white" for="projectCompany">What's the name of your company?</label>
+                                <input type="text" id="projectCompany" class="form-control border border-secondary" name="Company" placeholder="Company Name" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;">
                             </div>
 
                             <div>
-                                <p class="mb-0 text-white">What are you looking for? *</p>
-                                <select class="form-control border border-secondary" name="Service" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;" required>
+                                <label class="mb-0 text-white" for="projectService">What are you looking for? *</label>
+                                <select id="projectService" class="form-control border border-secondary" name="Service" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;" required>
                                     <option value="">Select a service</option>
                                     <option value="Animation & Motion Graphics">Animation & Motion Graphics</option>
                                     <option value="Graphics & Branding">Graphics & Branding</option>
@@ -204,8 +204,8 @@
                             </div>
 
                             <div>
-                                <p class="mb-0 text-white">Let's talk about your estimated budget *</p>
-                                <select class="form-control border border-secondary" name="Budget" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;" required>
+                                <label class="mb-0 text-white" for="projectBudget">Let's talk about your estimated budget *</label>
+                                <select id="projectBudget" class="form-control border border-secondary" name="Budget" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;" required>
                                     <option value="">Select a range</option>
                                     <option value="Under 100">Under $100</option>                                    
                                     <option value="$100 - $500">$100 - $500</option>
@@ -233,23 +233,23 @@
                             </div>
 
                             <div>
-                                <p class="mb-0 text-white">Tell us your contact number *</p>
-                                <input type="tel" class="form-control border border-secondary" name="Phone" placeholder="Your phone number" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;" required>
+                                <label class="mb-0 text-white" for="projectPhone">Tell us your contact number *</label>
+                                <input type="tel" id="projectPhone" class="form-control border border-secondary" name="Phone" placeholder="Your phone number" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;" required>
                             </div>
 
                             <div>
-                                <p class="mb-0 text-white">Secondary Contact Number</p>
-                                <input type="tel" class="form-control border border-secondary" name="Secondary Phone" placeholder="Alternative number" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;">
+                                <label class="mb-0 text-white" for="secondaryPhone">Secondary Contact Number</label>
+                                <input type="tel" id="secondaryPhone" class="form-control border border-secondary" name="Secondary Phone" placeholder="Alternative number" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;">
                             </div>
 
                             <div>
-                                <p class="mb-0 text-white">Email Address *</p>
-                                <input type="email" class="form-control border border-secondary" name="Email" placeholder="you@example.com" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;" required>
+                                <label class="mb-0 text-white" for="projectEmail">Email Address *</label>
+                                <input type="email" id="projectEmail" class="form-control border border-secondary" name="Email" placeholder="you@example.com" style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;" required>
                             </div>
 
                             <div>
-                                <p class="mb-0 text-white">Tell us about your project</p>
-                                <textarea class="text-white form-control border border-secondary" name="Project Description" rows="4" placeholder="This will help us get a better picture on how we can help you." style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;"></textarea>
+                                <label class="mb-0 text-white" for="projectDescription">Tell us about your project</label>
+                                <textarea id="projectDescription" class="text-white form-control border border-secondary" name="Project Description" rows="4" placeholder="This will help us get a better picture on how we can help you." style="background:white; color:rgb(0,0,0); padding:5px; border-radius:5px;"></textarea>
                             </div>
 
                             <div class="cf-turnstile" data-sitekey="0x4AAAAAAEXmIpf7T2WxU14b"></div>
@@ -297,9 +297,9 @@
                             </p>
                          
                             <p class="text-primary">
-                                <a class="text-white link-hover hstack" href="https://wa.me/@kabrownie.digital">
+                                <a class="text-white link-hover hstack" href="https://wa.me/message/XPEYPPHB3FATP1">
                                     <iconify-icon icon="lucide:message-circle" class="fs-7 text-primary"></iconify-icon>
-                                 @kabrownie.digital
+                                    WhatsApp @kabrownie.digital
                                 </a>
                             </p>
                         </div>
@@ -332,7 +332,7 @@
     </footer>
 
     <!-- WhatsApp -->
-    <a href="https://wa.me/@kabrownie.digital" class="whatsapp-float" target="_blank" aria-label="WhatsApp @kabrownie.digital">
+    <a href="https://wa.me/message/XPEYPPHB3FATP1" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp @kabrownie.digital">
         <iconify-icon icon="ri:whatsapp-fill" class="whatsapp-icon"></iconify-icon>
     </a>
 
