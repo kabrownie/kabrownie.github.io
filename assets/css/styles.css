@@ -613,6 +613,26 @@ textarea.form-control { min-height: calc(1.5em + 28px + calc(var(--bs-border-wid
   max-width: 12ch;
   overflow-wrap: anywhere;
 }
+.studio-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  letter-spacing: 0.12em;
+  font-size: 0.8rem !important;
+  font-weight: 800;
+  color: #e0ffb9 !important;
+}
+.studio-kicker::before {
+  content: "";
+  width: 36px;
+  height: 3px;
+  background: #e0ffb9;
+  animation: frame-pulse 1.8s ease-in-out infinite;
+}
+@keyframes frame-pulse {
+  0%, 100% { transform: scaleX(0.55); transform-origin: left; opacity: 0.55; }
+  50% { transform: scaleX(1); transform-origin: left; opacity: 1; }
+}
 
 @media (max-width: 575.98px) {
   .banner-section h1 { font-size: clamp(2.8rem, 14vw, 4.5rem) !important; }
@@ -714,6 +734,20 @@ ul { list-style: none; padding-left: 0; }
 }
 .services-grid .card .card-text.text-white {
   color: #ffffff !important;
+}
+.services .service-animation {
+  border-top: 4px solid #e0ffb9 !important;
+  background: linear-gradient(145deg, #180329 0%, #4a2e1b 100%) !important;
+  box-shadow: 0 18px 0 rgba(224, 255, 185, 0.12);
+}
+.services .service-animation .card-title {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+}
+.services .service-label {
+  color: #e0ffb9 !important;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
 }
 
 /* ---------- WHY CHOOSE US CARDS ---------- */
