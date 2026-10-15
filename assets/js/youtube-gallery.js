@@ -3,8 +3,6 @@
 
   const API_KEY = 'AIzaSyBScWzVqlmvvCbb0zk5cH5YGtrJMiVuH9s';
   const PLAYLIST_ID = 'PLKuh7kVBP-A4';
-  const MAX_VIDEOS = 60;
-  const PAGE_SIZE = 15;
   const gallery = document.getElementById('videoGallery');
   const statusEl = document.getElementById('videoGalleryStatus');
   const modal = document.getElementById('videoModal');
@@ -15,6 +13,9 @@
   const close = document.getElementById('videoModalClose');
 
   if (!gallery) return;
+
+  const MAX_VIDEOS = Number(gallery.dataset.videoLimit) || 60;
+  const PAGE_SIZE = Number(gallery.dataset.pageSize) || 15;
 
   let videos = [];
   let rendered = 0;
