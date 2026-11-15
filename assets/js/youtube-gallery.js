@@ -41,6 +41,16 @@
     return image ? image.url : '';
   }
 
+  function publishVideos() {
+    const sharedVideos = videos.map(item => ({
+      videoId: item.snippet.resourceId.videoId,
+      title: item.snippet.title || 'Untitled video',
+      thumbnail: thumbnail(item)
+    }));
+    window.kabrownieProjectVideos = sharedVideos;
+    window.dispatchEvent(new CustomEvent('kabrownie:project-videos-loaded', { detail: sharedVideos }));
+  }
+
   async function fetchVideos() {
     const url = new URL('https://www.googleapis.com/youtube/v3/playlistItems');
     url.searchParams.set('part', 'snippet');
@@ -121,6 +131,10 @@
     const card = event.target.closest('.video-card');
     if (card) openModal(card.dataset.videoId);
   });
+  window.addEventListener('kabrownie:play-project-video', event => {
+    const videoId = event.detail?.videoId;
+    if (videoId) openModal(videoId);
+  });
   close?.addEventListener('click', closeModal);
   previous?.addEventListener('click', () => { if (currentIndex > 0) { currentIndex -= 1; updateModal(); } });
   next?.addEventListener('click', () => { if (currentIndex < videos.length - 1) { currentIndex += 1; updateModal(); } });
@@ -135,6 +149,7 @@
   fetchVideos().then(data => {
     videos = data;
     gallery.innerHTML = '';
+    publishVideos();
     if (!videos.length) {
       setStatus('No videos are available right now. Please check back soon.');
       return;
@@ -142,6 +157,8 @@
     renderNextPage();
   }).catch(error => {
     console.error('YouTube gallery error:', error);
+    videos = [];
+    publishVideos();
     gallery.innerHTML = '';
     setStatus('Sorry — videos could not be loaded right now. Please try again shortly.');
   });

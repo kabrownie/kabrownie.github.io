@@ -1,0 +1,998 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>3D Exhibition | Kabrownie Digital</title>
+    <meta name="description" content="Walk through a 3D exhibition of selected animation and motion graphics work by Kabrownie Digital.">
+    <link rel="canonical" href="https://kabrownie.digital/exhibition/">
+    <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.svg">
+    <style>
+        :root {
+            color-scheme: dark;
+            --accent: #c084fc;
+            --background: #0d0509;
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            background: var(--background);
+            color: #fff;
+            font-family: Manrope, system-ui, -apple-system, "Segoe UI", sans-serif;
+        }
+
+        [hidden] { display: none !important; }
+        #scene { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+
+        .hud { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
+        .crosshair {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #fff;
+            opacity: .55;
+            transform: translate(-50%, -50%);
+        }
+        .crosshair.active { background: var(--accent); opacity: 1; transform: translate(-50%, -50%) scale(1.7); }
+        .prompt {
+            position: absolute;
+            top: calc(50% + 28px);
+            left: 50%;
+            padding: 8px 14px;
+            border: 1px solid rgba(192, 132, 252, .55);
+            border-radius: 999px;
+            background: rgba(13, 5, 9, .88);
+            font-size: .88rem;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateX(-50%);
+            transition: opacity .15s ease;
+            white-space: nowrap;
+        }
+        .prompt.show { opacity: 1; }
+        .hint {
+            position: absolute;
+            bottom: 18px;
+            left: 50%;
+            margin: 0;
+            color: rgba(255, 255, 255, .65);
+            font-size: .78rem;
+            text-align: center;
+            transform: translateX(-50%);
+            white-space: nowrap;
+        }
+
+        .screen {
+            position: fixed;
+            inset: 0;
+            z-index: 2;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+            background: rgba(9, 3, 7, .86);
+            backdrop-filter: blur(8px);
+        }
+        .card {
+            width: min(520px, 100%);
+            padding: 36px 32px;
+            border: 1px solid rgba(192, 132, 252, .28);
+            border-radius: 20px;
+            background: rgba(36, 18, 26, .96);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, .6);
+            text-align: center;
+        }
+        .card h1, .card h2 { margin: 6px 0 12px; line-height: 1.1; }
+        .card h1 { font-size: clamp(1.7rem, 5vw, 2.4rem); }
+        .card h2 { font-size: 1.6rem; }
+        .card p { margin: 0 0 18px; color: rgba(255, 255, 255, .76); line-height: 1.6; }
+        .card .small { color: rgba(255, 255, 255, .56); font-size: .82rem; }
+        .eyebrow {
+            margin: 0;
+            color: var(--accent) !important;
+            font-size: .72rem;
+            font-weight: 800;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+        }
+        .btn {
+            display: inline-flex;
+            width: 100%;
+            min-height: 48px;
+            align-items: center;
+            justify-content: center;
+            margin-top: 8px;
+            padding: 12px 20px;
+            border: 1px solid var(--accent);
+            border-radius: 999px;
+            background: var(--accent);
+            color: #170b1c;
+            cursor: pointer;
+            font: inherit;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .btn:hover, .btn:focus-visible { background: #d7adff; border-color: #d7adff; }
+        .btn.ghost { margin-top: 10px; background: transparent; color: #fff; }
+        .btn.ghost:hover, .btn.ghost:focus-visible { background: rgba(255, 255, 255, .1); }
+        .link {
+            display: inline-block;
+            margin-top: 18px;
+            color: rgba(255, 255, 255, .68);
+            font-size: .88rem;
+            text-decoration: none;
+        }
+        .link:hover, .link:focus-visible { color: var(--accent); }
+        kbd {
+            padding: 2px 6px;
+            border: 1px solid rgba(255, 255, 255, .22);
+            border-radius: 5px;
+            background: rgba(255, 255, 255, .1);
+            font: inherit;
+            font-size: .8em;
+        }
+
+        @media (max-width: 600px) {
+            .card { padding: 30px 22px; }
+            .hint { width: calc(100% - 24px); white-space: normal; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+        }
+
+        .video-library-card {
+            display: flex;
+            width: min(1100px, 100%);
+            max-height: calc(100vh - 48px);
+            flex-direction: column;
+            overflow-y: auto;
+            text-align: left;
+        }
+        .video-library-card h2 { margin-top: 0; }
+        .video-library-card > p:not(.eyebrow) { margin-bottom: 12px; }
+        #videoGallery {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            flex: 0 0 auto;
+            height: auto;
+            margin: 8px 0;
+            padding: 3px;
+        }
+        #videoGallery .video-card {
+            display: flex;
+            width: 100%;
+            min-height: 180px;
+            flex-direction: column;
+            overflow: hidden;
+            padding: 0;
+            border: 1px solid rgba(255, 255, 255, .16);
+            border-radius: 8px;
+            background: #1a0e14;
+            color: #fff;
+            cursor: pointer;
+            font: inherit;
+            text-align: left;
+        }
+        #videoGallery .video-card:hover,
+        #videoGallery .video-card:focus-visible {
+            border-color: var(--accent);
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+        #videoGallery .video-card__thumb {
+            position: relative;
+            flex: 0 0 auto;
+            width: 100%;
+            overflow: hidden;
+            aspect-ratio: 16 / 9;
+            background: #24120d;
+        }
+        #videoGallery .video-card__thumb img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        #videoGallery .video-card__play {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(transparent, rgba(0, 0, 0, .55));
+        }
+        #videoGallery .video-card__play iconify-icon { color: #fff; font-size: 42px; }
+        #videoGallery .video-card__title {
+            display: -webkit-box;
+            overflow: hidden;
+            margin: 0;
+            padding: 12px;
+            color: #fff;
+            font-size: .9rem;
+            line-height: 1.4;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+        }
+        #videoGallery .video-card--skeleton {
+            min-height: 150px;
+            background: linear-gradient(90deg, #1a0e14, #382033, #1a0e14);
+            background-size: 200% 100%;
+            animation: videoSkeleton 1.5s linear infinite;
+        }
+        @keyframes videoSkeleton {
+            to { background-position: -200% 0; }
+        }
+        #videoGalleryStatus {
+            margin: 4px 0 12px;
+            color: rgba(255, 255, 255, .72);
+            text-align: center;
+        }
+        #videoGalleryStatus:empty { display: none; }
+        #closeVideoLibrary {
+            position: sticky;
+            bottom: 0;
+            z-index: 1;
+            flex: 0 0 auto;
+            background: rgba(36, 18, 26, .96);
+        }
+        .video-load-more {
+            align-self: center;
+            margin: 8px auto 16px;
+            padding: 10px 24px;
+            border: 1px solid rgba(255, 255, 255, .35);
+            border-radius: 999px;
+            background: transparent;
+            color: #fff;
+            cursor: pointer;
+            font: inherit;
+        }
+        .video-load-more:hover, .video-load-more:focus-visible {
+            border-color: var(--accent);
+            background: rgba(192, 132, 252, .14);
+        }
+        .video-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 10;
+            display: grid;
+            place-items: center;
+            padding: 48px 24px;
+            background: rgba(9, 3, 7, .96);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .2s ease;
+        }
+        .video-modal.active { opacity: 1; pointer-events: auto; }
+        .video-modal__inner { position: relative; width: min(1100px, 100%); }
+        .video-modal__frame {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            background: #000;
+        }
+        .video-modal__frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+        .video-modal__close,
+        .video-modal__nav {
+            position: absolute;
+            z-index: 1;
+            display: grid;
+            width: 42px;
+            height: 42px;
+            place-items: center;
+            border: 1px solid rgba(255, 255, 255, .4);
+            border-radius: 50%;
+            background: rgba(20, 10, 20, .8);
+            color: #fff;
+            cursor: pointer;
+            font: inherit;
+        }
+        .video-modal__close { top: -50px; right: 0; font-size: 1.5rem; }
+        .video-modal__nav { top: 50%; transform: translateY(-50%); }
+        .video-modal__nav--prev { left: 12px; }
+        .video-modal__nav--next { right: 12px; }
+        .video-modal__counter { margin: 12px 0 0; color: rgba(255, 255, 255, .72); text-align: center; }
+
+        @media (max-width: 760px) {
+            #videoGallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        @media (max-width: 520px) {
+            .video-library-card { padding: 24px 18px; }
+            #videoGallery { grid-template-columns: 1fr; }
+            .video-modal { padding: 24px 12px; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="scene" aria-hidden="true"></canvas>
+
+    <div class="hud">
+        <div class="crosshair" id="crosshair" aria-hidden="true"></div>
+        <div class="prompt" id="prompt" role="status" aria-live="polite"></div>
+        <p class="hint">WASD / arrows to move · Mouse to look · <kbd>E</kbd> or click to open · <kbd>Esc</kbd> to pause</p>
+    </div>
+
+    <main>
+        <section class="screen" id="startScreen" role="dialog" aria-modal="true" aria-labelledby="startTitle">
+            <div class="card">
+                <p class="eyebrow">Kabrownie Digital</p>
+                <h1 id="startTitle">Walk the exhibition</h1>
+                <p>Walk through a gallery of 3D project placeholders and animation screens.</p>
+                <button class="btn" id="startBtn" type="button">Enter exhibition</button>
+                <button class="btn ghost" type="button" data-open-video-gallery>Browse animation videos</button>
+                <p class="small">Use <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> to walk, the mouse to look, and <kbd>E</kbd> to inspect a display.</p>
+                <a class="link" href="../projects/">Skip the 3D and view the portfolio →</a>
+            </div>
+        </section>
+
+        <section class="screen" id="pauseScreen" role="dialog" aria-modal="true" aria-labelledby="pauseTitle" hidden>
+            <div class="card">
+                <h2 id="pauseTitle">Paused</h2>
+                <p>The exhibition is waiting.</p>
+                <button class="btn" id="resumeBtn" type="button">Back to the hallway</button>
+                <button class="btn ghost" type="button" data-open-video-gallery>Browse animation videos</button>
+                <a class="link" href="../projects/">View the normal portfolio →</a>
+            </div>
+        </section>
+
+        <section class="screen" id="projectPanel" role="dialog" aria-modal="true" aria-labelledby="panelTitle" hidden>
+            <div class="card">
+                <p class="eyebrow" id="panelTag"></p>
+                <h2 id="panelTitle"></h2>
+                <p id="panelCopy">Project preview.</p>
+                <a class="btn" id="panelLink" href="../projects/">Open project</a>
+                <button class="btn ghost" id="panelClose" type="button">Back to the hallway</button>
+            </div>
+        </section>
+
+        <section class="screen" id="fallback" role="dialog" aria-modal="true" aria-labelledby="fallbackTitle" hidden>
+            <div class="card">
+                <h2 id="fallbackTitle">The walkthrough could not start</h2>
+                <p>This walkthrough needs a desktop browser with pointer-lock support. You can browse the portfolio on any device.</p>
+                <button class="btn ghost" type="button" data-open-video-gallery>Browse animation videos</button>
+                <a class="btn" href="../projects/">View the portfolio</a>
+                <a class="link" href="../">Back to Kabrownie Digital</a>
+            </div>
+        </section>
+
+        <section class="screen" id="videoLibrary" role="dialog" aria-modal="true" aria-labelledby="videoLibraryTitle" hidden>
+            <div class="card video-library-card">
+                <p class="eyebrow">Kabrownie Digital</p>
+                <h2 id="videoLibraryTitle">Animation videos</h2>
+                <p>Choose a thumbnail to watch the video. Use the arrows in the player to browse the playlist.</p>
+                <div class="video-gallery" id="videoGallery" aria-live="polite">
+                    <div class="video-card video-card--skeleton" aria-hidden="true"></div>
+                    <div class="video-card video-card--skeleton" aria-hidden="true"></div>
+                    <div class="video-card video-card--skeleton" aria-hidden="true"></div>
+                    <div class="video-card video-card--skeleton" aria-hidden="true"></div>
+                    <div class="video-card video-card--skeleton" aria-hidden="true"></div>
+                    <div class="video-card video-card--skeleton" aria-hidden="true"></div>
+                </div>
+                <p id="videoGalleryStatus" role="status" aria-live="polite"></p>
+                <button class="btn ghost" id="closeVideoLibrary" type="button">Back to the hallway</button>
+            </div>
+        </section>
+    </main>
+
+    <div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Video player">
+        <div class="video-modal__inner">
+            <button class="video-modal__close" id="videoModalClose" type="button" aria-label="Close video">&times;</button>
+            <button class="video-modal__nav video-modal__nav--prev" id="videoModalPrev" type="button" aria-label="Previous video"><iconify-icon icon="lucide:chevron-left"></iconify-icon></button>
+            <button class="video-modal__nav video-modal__nav--next" id="videoModalNext" type="button" aria-label="Next video"><iconify-icon icon="lucide:chevron-right"></iconify-icon></button>
+            <div class="video-modal__frame" id="videoModalFrame"></div>
+            <p class="video-modal__counter" id="videoModalCounter" aria-live="polite"></p>
+        </div>
+    </div>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.1/build/three.module.js"
+            }
+        }
+    </script>
+    <script type="module">
+        import * as THREE from 'three';
+
+        const canvas = document.querySelector('#scene');
+        const startScreen = document.querySelector('#startScreen');
+        const pauseScreen = document.querySelector('#pauseScreen');
+        const projectPanel = document.querySelector('#projectPanel');
+        const fallback = document.querySelector('#fallback');
+        const videoLibrary = document.querySelector('#videoLibrary');
+        const prompt = document.querySelector('#prompt');
+        const crosshair = document.querySelector('#crosshair');
+        const panelTag = document.querySelector('#panelTag');
+        const panelTitle = document.querySelector('#panelTitle');
+        const panelCopy = document.querySelector('#panelCopy');
+        const panelLink = document.querySelector('#panelLink');
+
+        let videoLibraryReturnScreen = startScreen;
+        let videoLibraryReturnFocus = null;
+        document.querySelectorAll('[data-open-video-gallery]').forEach((button) => {
+            button.addEventListener('click', () => {
+                videoLibraryReturnScreen = [startScreen, pauseScreen, fallback].find((screen) => !screen.hidden) || startScreen;
+                videoLibraryReturnFocus = button;
+                startScreen.hidden = true;
+                pauseScreen.hidden = true;
+                fallback.hidden = true;
+                videoLibrary.hidden = false;
+            });
+        });
+        function closeVideoLibrary() {
+            videoLibrary.hidden = true;
+            videoLibraryReturnScreen.hidden = false;
+            videoLibraryReturnFocus?.focus();
+        }
+
+        document.querySelector('#closeVideoLibrary').addEventListener('click', closeVideoLibrary);
+        document.addEventListener('keydown', (event) => {
+            const videoPlayerOpen = document.querySelector('#videoModal').classList.contains('active');
+            if (event.key === 'Escape' && !videoLibrary.hidden && !videoPlayerOpen) {
+                closeVideoLibrary();
+            }
+        });
+
+        if (!('requestPointerLock' in Element.prototype) || matchMedia('(pointer: coarse)').matches) {
+            startScreen.hidden = true;
+            fallback.hidden = false;
+        } else {
+            const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.outputColorSpace = THREE.SRGBColorSpace;
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 1.15;
+
+            const scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x0b0407);
+            scene.fog = new THREE.FogExp2(0x0b0407, 0.028);
+
+            const camera = new THREE.PerspectiveCamera(72, window.innerWidth / window.innerHeight, 0.05, 120);
+            camera.rotation.order = 'YXZ';
+            camera.position.set(0, 1.65, 1.2);
+
+            const hallWidth = 5.2;
+            const wallHeight = 3.8;
+            const hallStart = 2.5;
+            const hallEnd = -62;
+            const hallLength = hallStart - hallEnd;
+            const centerZ = (hallStart + hallEnd) / 2;
+            const accent = 0xc084fc;
+            const interactives = [];
+            const objectExhibits = [
+                { title: 'Character Model', tag: '3D OBJECT PLACEHOLDER', color: 0xc084fc },
+                { title: 'Product Model', tag: '3D OBJECT PLACEHOLDER', color: 0x62d4c7 },
+                { title: 'World Design', tag: '3D OBJECT PLACEHOLDER', color: 0xf2a365 },
+                { title: 'Sculpture', tag: '3D OBJECT PLACEHOLDER', color: 0x8db3ff }
+            ].map((exhibit) => ({
+                ...exhibit,
+                href: '../projects/',
+                description: 'A 3D project placeholder. Replace this procedural model with your Blender artwork.'
+            }));
+
+            const floorMaterial = new THREE.MeshStandardMaterial({ color: 0x1a0e14, roughness: 0.35, metalness: 0.5 });
+            const wallMaterial = new THREE.MeshStandardMaterial({ color: 0x2a1a24, roughness: 0.92 });
+            const ceilingMaterial = new THREE.MeshStandardMaterial({ color: 0x140a10, roughness: 1 });
+            const trimMaterial = new THREE.MeshStandardMaterial({ color: 0x0f070c, roughness: 0.5, metalness: 0.6 });
+            const stripMaterial = new THREE.MeshBasicMaterial({ color: accent });
+
+            const floor = new THREE.Mesh(new THREE.PlaneGeometry(hallWidth, hallLength), floorMaterial);
+            floor.rotation.x = -Math.PI / 2;
+            floor.position.z = centerZ;
+            scene.add(floor);
+
+            const ceiling = new THREE.Mesh(new THREE.PlaneGeometry(hallWidth, hallLength), ceilingMaterial);
+            ceiling.rotation.x = Math.PI / 2;
+            ceiling.position.set(0, wallHeight, centerZ);
+            scene.add(ceiling);
+
+            const sideWallGeometry = new THREE.PlaneGeometry(hallLength, wallHeight);
+            const leftWall = new THREE.Mesh(sideWallGeometry, wallMaterial);
+            leftWall.rotation.y = Math.PI / 2;
+            leftWall.position.set(-hallWidth / 2, wallHeight / 2, centerZ);
+            scene.add(leftWall);
+
+            const rightWall = leftWall.clone();
+            rightWall.rotation.y = -Math.PI / 2;
+            rightWall.position.x = hallWidth / 2;
+            scene.add(rightWall);
+
+            for (const [z, rotation] of [[hallEnd, 0], [hallStart, Math.PI]]) {
+                const wall = new THREE.Mesh(new THREE.PlaneGeometry(hallWidth, wallHeight), wallMaterial);
+                wall.rotation.y = rotation;
+                wall.position.set(0, wallHeight / 2, z);
+                scene.add(wall);
+            }
+
+            for (const side of [-1, 1]) {
+                const strip = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.05, hallLength), stripMaterial);
+                strip.position.set(side * (hallWidth / 2 - 0.12), 0.05, centerZ);
+                scene.add(strip);
+            }
+
+            for (let z = hallStart; z >= hallEnd; z -= 9) {
+                for (const side of [-1, 1]) {
+                    const column = new THREE.Mesh(new THREE.BoxGeometry(0.3, wallHeight, 0.3), trimMaterial);
+                    column.position.set(side * (hallWidth / 2 - 0.15), wallHeight / 2, z);
+                    scene.add(column);
+                }
+            }
+
+            scene.add(new THREE.HemisphereLight(0xd8c6ff, 0x1a0e14, 1.1));
+            for (let z = hallStart - 6; z > hallEnd; z -= 12) {
+                const ceilingStrip = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.06, 0.22), stripMaterial);
+                ceilingStrip.position.set(0, wallHeight - 0.08, z);
+                scene.add(ceilingStrip);
+
+                const light = new THREE.PointLight(0xc084fc, 26, 26, 2);
+                light.position.set(0, wallHeight - 0.4, z);
+                scene.add(light);
+            }
+
+            function makeTexture(draw, width, height) {
+                const textureCanvas = document.createElement('canvas');
+                textureCanvas.width = width;
+                textureCanvas.height = height;
+                draw(textureCanvas.getContext('2d'), width, height);
+                const texture = new THREE.CanvasTexture(textureCanvas);
+                texture.colorSpace = THREE.SRGBColorSpace;
+                return texture;
+            }
+
+            function makeLabel(exhibit) {
+                return makeTexture((context, width, height) => {
+                    context.fillStyle = '#0d0509';
+                    context.fillRect(0, 0, width, height);
+                    context.fillStyle = '#c084fc';
+                    context.fillRect(0, height * 0.28, 8, height * 0.44);
+                    context.textAlign = 'left';
+                    context.textBaseline = 'middle';
+                    context.fillStyle = '#fff';
+                    context.font = `bold ${Math.round(height * 0.33)}px system-ui, sans-serif`;
+                    context.fillText(exhibit.title, 44, height * 0.38, width - 80);
+                    context.fillStyle = 'rgba(192,132,252,.9)';
+                    context.font = `600 ${Math.round(height * 0.21)}px system-ui, sans-serif`;
+                    context.fillText(exhibit.tag, 44, height * 0.72, width - 80);
+                }, 1024, 256);
+            }
+
+            function registerInteractive(mesh, exhibit, highlightMaterial) {
+                mesh.userData.exhibit = exhibit;
+                mesh.userData.highlightMaterial = highlightMaterial;
+                interactives.push(mesh);
+            }
+
+            const textureLoader = new THREE.TextureLoader();
+            textureLoader.setCrossOrigin('anonymous');
+            const videoWallSlots = [];
+
+            function makeVideoPlaceholder(title) {
+                return makeTexture((context, width, height) => {
+                    context.fillStyle = '#171018';
+                    context.fillRect(0, 0, width, height);
+                    context.strokeStyle = 'rgba(192,132,252,.6)';
+                    context.lineWidth = 8;
+                    context.strokeRect(20, 20, width - 40, height - 40);
+                    context.fillStyle = '#c084fc';
+                    context.font = `bold ${Math.round(height * 0.22)}px system-ui, sans-serif`;
+                    context.textAlign = 'center';
+                    context.textBaseline = 'middle';
+                    context.fillText('PLAY', width / 2, height * 0.4);
+                    context.fillStyle = '#fff';
+                    context.font = `600 ${Math.round(height * 0.09)}px system-ui, sans-serif`;
+                    context.fillText(title, width / 2, height * 0.7, width * 0.85);
+                }, 1024, 576);
+            }
+
+            function addObjectExhibit(side, z, exhibit, shapeIndex) {
+                const group = new THREE.Group();
+                const plinthMaterial = new THREE.MeshStandardMaterial({
+                    color: 0x171018, roughness: 0.4, metalness: 0.5,
+                    emissive: accent, emissiveIntensity: 0
+                });
+                const objectMaterial = new THREE.MeshStandardMaterial({
+                    color: exhibit.color, roughness: 0.32, metalness: 0.28,
+                    emissive: exhibit.color, emissiveIntensity: 0.04
+                });
+                const plinth = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.82, 0.9), plinthMaterial);
+                plinth.position.y = 0.41;
+                group.add(plinth);
+
+                const accentBand = new THREE.Mesh(new THREE.BoxGeometry(0.92, 0.055, 0.92), stripMaterial);
+                accentBand.position.y = 0.78;
+                group.add(accentBand);
+
+                const objectMeshes = [];
+                const addObjectMesh = (geometry, position, rotation = [0, 0, 0]) => {
+                    const mesh = new THREE.Mesh(geometry, objectMaterial);
+                    mesh.position.set(...position);
+                    mesh.rotation.set(...rotation);
+                    group.add(mesh);
+                    objectMeshes.push(mesh);
+                };
+
+                if (shapeIndex % 3 === 0) {
+                    addObjectMesh(new THREE.CylinderGeometry(0.2, 0.29, 0.68, 8), [0, 1.19, 0]);
+                    addObjectMesh(new THREE.SphereGeometry(0.24, 12, 10), [0, 1.7, 0]);
+                    addObjectMesh(new THREE.CylinderGeometry(0.055, 0.08, 0.48, 7), [-0.31, 1.2, 0], [0, 0, -0.55]);
+                    addObjectMesh(new THREE.CylinderGeometry(0.055, 0.08, 0.48, 7), [0.31, 1.2, 0], [0, 0, 0.55]);
+                } else if (shapeIndex % 3 === 1) {
+                    addObjectMesh(new THREE.CylinderGeometry(0.25, 0.34, 0.82, 12), [0, 1.25, 0]);
+                    addObjectMesh(new THREE.TorusGeometry(0.19, 0.055, 8, 20), [0, 1.72, 0], [Math.PI / 2, 0, 0]);
+                    addObjectMesh(new THREE.SphereGeometry(0.16, 12, 10), [0, 1.78, 0]);
+                } else {
+                    addObjectMesh(new THREE.IcosahedronGeometry(0.4, 0), [0, 1.45, 0], [0.2, 0.3, 0.1]);
+                    addObjectMesh(new THREE.TorusGeometry(0.48, 0.035, 8, 32), [0, 1.45, 0], [Math.PI / 2, 0.2, 0]);
+                    addObjectMesh(new THREE.OctahedronGeometry(0.16, 0), [0.33, 1.94, 0.08]);
+                }
+
+                const label = new THREE.Mesh(
+                    new THREE.PlaneGeometry(1.2, 0.3),
+                    new THREE.MeshBasicMaterial({ map: makeLabel(exhibit), transparent: true })
+                );
+                label.position.set(side < 0 ? 0.47 : -0.47, 0.43, 0);
+                label.rotation.y = side < 0 ? Math.PI / 2 : -Math.PI / 2;
+                group.add(label);
+                group.position.set(side * 1.55, 0, z);
+                scene.add(group);
+
+                objectMeshes.forEach((mesh) => registerInteractive(mesh, exhibit, objectMaterial));
+                registerInteractive(plinth, exhibit, plinthMaterial);
+                registerInteractive(label, exhibit, plinthMaterial);
+            }
+
+            function addVideoWallScreen(position, index) {
+                const group = new THREE.Group();
+                const exhibit = {
+                    title: `Animation video ${index + 1}`,
+                    tag: 'YOUTUBE VIDEO',
+                    href: '../projects/',
+                    description: 'Select this thumbnail to play the animation.'
+                };
+                const frameMaterial = new THREE.MeshStandardMaterial({
+                    color: 0x120a10, roughness: 0.38, metalness: 0.55,
+                    emissive: accent, emissiveIntensity: 0
+                });
+                const frame = new THREE.Mesh(new THREE.BoxGeometry(1.84, 1.08, 0.12), frameMaterial);
+                const screenMaterial = new THREE.MeshBasicMaterial({ map: makeVideoPlaceholder('Loading thumbnail') });
+                const screen = new THREE.Mesh(new THREE.PlaneGeometry(1.72, 0.97), screenMaterial);
+                screen.position.z = 0.066;
+
+                const labelMaterial = new THREE.MeshBasicMaterial({ map: makeLabel(exhibit), transparent: true });
+                const label = new THREE.Mesh(
+                    new THREE.PlaneGeometry(1.6, 0.4),
+                    labelMaterial
+                );
+                label.position.set(0, -0.72, 0.066);
+                group.add(frame, screen, label);
+                group.position.set(position.side * (hallWidth / 2 - 0.05), position.y, position.z);
+                group.rotation.y = position.side < 0 ? Math.PI / 2 : -Math.PI / 2;
+                scene.add(group);
+
+                registerInteractive(screen, exhibit, frameMaterial);
+                registerInteractive(frame, exhibit, frameMaterial);
+                videoWallSlots.push({ exhibit, group, screenMaterial, labelMaterial });
+            }
+
+            function addVideoWallHeader() {
+                const texture = makeTexture((context, width, height) => {
+                    context.fillStyle = '#0d0509';
+                    context.fillRect(0, 0, width, height);
+                    context.fillStyle = '#c084fc';
+                    context.fillRect(0, height - 12, width, 12);
+                    context.fillStyle = '#fff';
+                    context.font = `bold ${Math.round(height * 0.52)}px system-ui, sans-serif`;
+                    context.textAlign = 'center';
+                    context.textBaseline = 'middle';
+                    context.fillText('ANIMATION VIDEOS', width / 2, height / 2, width * 0.9);
+                }, 1024, 160);
+                const header = new THREE.Mesh(
+                    new THREE.PlaneGeometry(3.8, 0.42),
+                    new THREE.MeshBasicMaterial({ map: texture })
+                );
+                header.rotation.y = Math.PI / 2;
+                header.position.set(-hallWidth / 2 + 0.04, 3.55, -38);
+                scene.add(header);
+            }
+
+            function populateVideoWall(videos) {
+                videoWallSlots.forEach((slot, index) => {
+                    const video = videos[index];
+                    if (!video) {
+                        if (videos.length) {
+                            slot.group.visible = false;
+                            return;
+                        }
+                        slot.group.visible = true;
+                        slot.exhibit.title = 'Videos unavailable';
+                        slot.exhibit.tag = 'ANIMATION VIDEOS';
+                        slot.exhibit.videoId = null;
+                        slot.exhibit.description = 'Browse the portfolio to view available animation videos.';
+                        slot.labelMaterial.map = makeLabel(slot.exhibit);
+                        slot.labelMaterial.needsUpdate = true;
+                        slot.screenMaterial.map = makeVideoPlaceholder('Browse the portfolio');
+                        slot.screenMaterial.needsUpdate = true;
+                        return;
+                    }
+
+                    slot.group.visible = true;
+                    slot.exhibit.title = video.title;
+                    slot.exhibit.tag = 'ANIMATION VIDEO';
+                    slot.exhibit.videoId = video.videoId;
+                    slot.exhibit.description = 'Press E or click this wall thumbnail to watch the video.';
+                    slot.labelMaterial.map = makeLabel(slot.exhibit);
+                    slot.labelMaterial.needsUpdate = true;
+                    if (!video.thumbnail) return;
+
+                    textureLoader.load(
+                        video.thumbnail,
+                        (texture) => {
+                            texture.colorSpace = THREE.SRGBColorSpace;
+                            slot.screenMaterial.map = texture;
+                            slot.screenMaterial.needsUpdate = true;
+                        },
+                        undefined,
+                        () => console.warn(`Could not load wall thumbnail for video ${video.videoId}.`)
+                    );
+                });
+            }
+
+            const objectPositions = [
+                { side: -1, z: -5.5 },
+                { side: 1, z: -14 },
+                { side: -1, z: -23 },
+                { side: 1, z: -31 }
+            ];
+            objectExhibits.forEach((exhibit, index) => {
+                const position = objectPositions[index];
+                addObjectExhibit(position.side, position.z, exhibit, index);
+            });
+
+            const videoWallZPositions = [-38, -47, -56];
+            videoWallZPositions.forEach((z) => {
+                [2.55, 1.25].forEach((y) => {
+                    addVideoWallScreen({ side: -1, z, y }, videoWallSlots.length);
+                });
+            });
+            addVideoWallHeader();
+            window.addEventListener('kabrownie:project-videos-loaded', (event) => {
+                if (Array.isArray(event.detail)) populateVideoWall(event.detail);
+            });
+            if (Array.isArray(window.kabrownieProjectVideos)) {
+                populateVideoWall(window.kabrownieProjectVideos);
+            }
+
+            const ctaProject = {
+                title: 'Start a project',
+                tag: 'Work with us',
+                href: '../start-project/',
+                description: 'Tell us about the animation or 3D project you want to create.'
+            };
+            const ctaTexture = makeTexture((context, width, height) => {
+                context.fillStyle = '#1a0e14';
+                context.fillRect(0, 0, width, height);
+                context.fillStyle = '#c084fc';
+                context.fillRect(0, 0, width, 12);
+                context.textAlign = 'center';
+                context.textBaseline = 'middle';
+                context.fillStyle = '#fff';
+                context.font = `bold ${Math.round(height * 0.26)}px system-ui, sans-serif`;
+                context.fillText('Start a project', width / 2, height * 0.42, width * 0.86);
+                context.fillStyle = 'rgba(192,132,252,.9)';
+                context.font = `600 ${Math.round(height * 0.11)}px system-ui, sans-serif`;
+                context.fillText('KABROWNIE.DIGITAL / NAIROBI', width / 2, height * 0.72, width * 0.86);
+            }, 1024, 512);
+            const cta = new THREE.Mesh(
+                new THREE.PlaneGeometry(4.4, 2.2),
+                new THREE.MeshBasicMaterial({ map: ctaTexture })
+            );
+            cta.position.set(0, 2, hallEnd + 0.06);
+            registerInteractive(cta, ctaProject, null);
+
+            let yaw = 0;
+            let pitch = 0;
+            let started = false;
+            let hoveredExhibit = null;
+            let lockRequestTimer;
+            const keys = new Set();
+            const velocity = new THREE.Vector3();
+            const raycaster = new THREE.Raycaster();
+            raycaster.far = 4.5;
+            const movementSpeed = 3.2;
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            let walkPhase = 0;
+
+            function showFallback() {
+                window.clearTimeout(lockRequestTimer);
+                started = false;
+                pauseScreen.hidden = true;
+                projectPanel.hidden = true;
+                fallback.hidden = false;
+            }
+
+            function isLocked() {
+                return document.pointerLockElement === canvas;
+            }
+
+            function requestLock() {
+                try {
+                    const result = canvas.requestPointerLock();
+                    window.clearTimeout(lockRequestTimer);
+                    lockRequestTimer = window.setTimeout(() => {
+                        if (!isLocked() && started) {
+                            console.warn('Pointer lock was not granted for the exhibition.');
+                            showFallback();
+                        }
+                    }, 3000);
+                    if (result && typeof result.catch === 'function') {
+                        result.catch((error) => {
+                            console.warn('Could not acquire pointer lock for the exhibition.', error);
+                            showFallback();
+                        });
+                    }
+                } catch (error) {
+                    console.warn('Could not acquire pointer lock for the exhibition.', error);
+                    showFallback();
+                }
+            }
+
+            function openProject(project) {
+                if (project.videoId) {
+                    if (isLocked()) document.exitPointerLock();
+                    velocity.set(0, 0, 0);
+                    window.dispatchEvent(new CustomEvent('kabrownie:play-project-video', {
+                        detail: { videoId: project.videoId }
+                    }));
+                    return;
+                }
+
+                panelTag.textContent = project.tag;
+                panelTitle.textContent = project.title;
+                panelCopy.textContent = project.description || '';
+                panelLink.href = project.href || '../projects/';
+                projectPanel.hidden = false;
+                if (isLocked()) document.exitPointerLock();
+                velocity.set(0, 0, 0);
+                document.querySelector('#panelClose').focus();
+            }
+
+            function closeProject() {
+                projectPanel.hidden = true;
+                requestLock();
+            }
+
+            function updateHover() {
+                raycaster.setFromCamera(new THREE.Vector2(0, 0), camera);
+                const hit = raycaster.intersectObjects(interactives, false)[0];
+                const nextProject = hit ? hit.object.userData.exhibit : null;
+                if (nextProject === hoveredExhibit) return;
+
+                if (hoveredExhibit) {
+                    for (const mesh of interactives) {
+                        if (mesh.userData.exhibit === hoveredExhibit && mesh.userData.highlightMaterial) {
+                            mesh.userData.highlightMaterial.emissiveIntensity = 0;
+                        }
+                    }
+                }
+
+                hoveredExhibit = nextProject;
+                if (hoveredExhibit) {
+                    for (const mesh of interactives) {
+                        if (mesh.userData.exhibit === hoveredExhibit && mesh.userData.highlightMaterial) {
+                            mesh.userData.highlightMaterial.emissiveIntensity = 0.9;
+                        }
+                    }
+                    prompt.textContent = `Press E or click — ${hoveredExhibit.title}`;
+                    prompt.classList.add('show');
+                    crosshair.classList.add('active');
+                } else {
+                    prompt.classList.remove('show');
+                    crosshair.classList.remove('active');
+                }
+            }
+
+            document.addEventListener('mousemove', (event) => {
+                if (!isLocked()) return;
+                yaw -= event.movementX * 0.0022;
+                pitch = THREE.MathUtils.clamp(pitch - event.movementY * 0.0022, -1.1, 1.1);
+            });
+
+            document.addEventListener('keydown', (event) => {
+                if (event.code === 'KeyE' && isLocked() && hoveredExhibit) {
+                    openProject(hoveredExhibit);
+                    return;
+                }
+                keys.add(event.code);
+                if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Space'].includes(event.code)) {
+                    event.preventDefault();
+                }
+            });
+
+            document.addEventListener('keyup', (event) => keys.delete(event.code));
+            window.addEventListener('blur', () => keys.clear());
+
+            document.querySelector('#startBtn').addEventListener('click', () => {
+                started = true;
+                startScreen.hidden = true;
+                requestLock();
+            });
+            document.querySelector('#resumeBtn').addEventListener('click', () => {
+                pauseScreen.hidden = true;
+                requestLock();
+            });
+            document.querySelector('#panelClose').addEventListener('click', closeProject);
+            canvas.addEventListener('click', () => {
+                if (isLocked() && hoveredExhibit) openProject(hoveredExhibit);
+            });
+
+            document.addEventListener('pointerlockchange', () => {
+                if (isLocked()) {
+                    window.clearTimeout(lockRequestTimer);
+                    startScreen.hidden = true;
+                    pauseScreen.hidden = true;
+                    return;
+                }
+                keys.clear();
+                if (!projectPanel.hidden) return;
+                if (started) pauseScreen.hidden = false;
+            });
+            document.addEventListener('pointerlockerror', () => {
+                if (started) showFallback();
+            });
+
+            const clock = new THREE.Clock();
+            function animate() {
+                requestAnimationFrame(animate);
+                const delta = Math.min(clock.getDelta(), 0.05);
+
+                if (isLocked()) {
+                    const forward = new THREE.Vector3(-Math.sin(yaw), 0, -Math.cos(yaw));
+                    const right = new THREE.Vector3(Math.cos(yaw), 0, -Math.sin(yaw));
+                    const wish = new THREE.Vector3();
+                    if (keys.has('KeyW') || keys.has('ArrowUp')) wish.add(forward);
+                    if (keys.has('KeyS') || keys.has('ArrowDown')) wish.sub(forward);
+                    if (keys.has('KeyD') || keys.has('ArrowRight')) wish.add(right);
+                    if (keys.has('KeyA') || keys.has('ArrowLeft')) wish.sub(right);
+                    if (wish.lengthSq() > 0) wish.normalize().multiplyScalar(movementSpeed);
+
+                    velocity.lerp(wish, 1 - Math.pow(0.0001, delta));
+                    camera.position.addScaledVector(velocity, delta);
+                    camera.position.x = THREE.MathUtils.clamp(camera.position.x, -hallWidth / 2 + 0.5, hallWidth / 2 - 0.5);
+                    camera.position.z = THREE.MathUtils.clamp(camera.position.z, hallEnd + 1.1, hallStart - 0.2);
+                    const speedRatio = Math.min(Math.hypot(velocity.x, velocity.z) / movementSpeed, 1);
+                    const bob = prefersReducedMotion ? 0 : speedRatio;
+                    walkPhase += delta * 9 * bob;
+                    camera.position.y = 1.65 + Math.sin(walkPhase * 2) * 0.035 * bob;
+                    camera.rotation.z = Math.cos(walkPhase * 2) * 0.005 * bob;
+                    updateHover();
+                } else {
+                    camera.position.y = 1.65;
+                    camera.rotation.z = 0;
+                }
+
+                camera.rotation.y = yaw;
+                camera.rotation.x = pitch;
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js" defer></script>
+    <script src="../assets/js/youtube-gallery.js" defer></script>
+</body>
+</html>
