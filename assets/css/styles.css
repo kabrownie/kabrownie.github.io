@@ -613,7 +613,7 @@ textarea.form-control { min-height: calc(1.5em + 28px + calc(var(--bs-border-wid
   max-width: 12ch;
   overflow-wrap: anywhere;
 }
-.studio-kicker {
+.hero-kicker {
   display: inline-flex;
   align-items: center;
   gap: 12px;
@@ -622,7 +622,7 @@ textarea.form-control { min-height: calc(1.5em + 28px + calc(var(--bs-border-wid
   font-weight: 800;
   color: var(--bs-accent) !important;
 }
-.studio-kicker::before {
+.hero-kicker::before {
   content: "";
   width: 36px;
   height: 3px;
@@ -692,7 +692,7 @@ textarea.form-control { min-height: calc(1.5em + 28px + calc(var(--bs-border-wid
 .stats-facts .animate-spin,
 .featured-projects .animate-spin,
 .services .animate-spin,
-.why-choose-us .animate-spin,
+.why-work-with-me .animate-spin,
 .get-in-touch .animate-spin {
   max-width: 50px !important;
   height: auto;
@@ -789,20 +789,20 @@ ul { list-style: none; padding-left: 0; }
 .service-list li { padding-left: 24px; position: relative; }
 .service-list li::before { content: ""; position: absolute; left: 0; top: 0.65em; width: 8px; height: 8px; background: #e0ffb9; border-radius: 50%; }
 
-/* ---------- WHY CHOOSE US CARDS ---------- */
-.why-choose-us .card.bg-primary {
+/* ---------- WHY WORK WITH ME CARDS ---------- */
+.why-work-with-me .card.bg-primary {
   background-color: #180329 !important;
 }
-.why-choose-us .card.bg-primary .text-secondary {
+.why-work-with-me .card.bg-primary .text-secondary {
   color: #694e46 !important;
 }
-.why-choose-us .card.bg-primary .text-white {
+.why-work-with-me .card.bg-primary .text-white {
   color: #ffffff !important;
 }
-.why-choose-us .card.bg-transparent .text-white {
+.why-work-with-me .card.bg-transparent .text-white {
   color: #ffffff !important;
 }
-.why-choose-us .card.bg-transparent .border-white {
+.why-work-with-me .card.bg-transparent .border-white {
   border-color: #ffffff !important;
 }
 
@@ -925,29 +925,12 @@ ul { list-style: none; padding-left: 0; }
         font-size: 28px;
     }
   }
-/* ====== TRUSTED LOGOS CAROUSEL ====== */
-.trusted-logos-carousel .item {
+/* ====== SELECTED CLIENT LOGOS ====== */
+.trusted-logos-track .item {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 10px 0;
-}
-
-.trusted-logos-carousel .item img {
-  max-height: 65px;
-  width: auto;
-  opacity: 0.7;
-  transition: all 0.3s ease;
-}
-
-.trusted-logos-carousel .item img:hover {
-  opacity: 1;
-  transform: scale(1.05);
-}
-
-.trusted-logos-carousel .owl-stage {
-  display: flex;
-  align-items: center;
 }
 
 .trusted-logos-viewport {
@@ -996,9 +979,6 @@ ul { list-style: none; padding-left: 0; }
 }
 
 @media (max-width: 576px) {
-  .trusted-logos-carousel .item img {
-    max-height: 40px;
-  }
   .trusted-logos-track {
     gap: 16px;
   }
@@ -1006,9 +986,69 @@ ul { list-style: none; padding-left: 0; }
     flex-basis: calc((100% - 16px) / 2);
   }
   .trusted-logos-track .item img {
-        max-height: 40px;
-    }
+    max-height: 40px;
+  }
 }
+
+section[id] { scroll-margin-top: 110px; }
+
+.visually-hidden-focusable:not(:focus):not(:focus-within) {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.visually-hidden-focusable:focus {
+  position: fixed;
+  z-index: 1000;
+  top: 12px;
+  left: 12px;
+  padding: 12px 18px;
+  color: #fff;
+  background: #180329;
+  border: 2px solid var(--bs-accent);
+  border-radius: 6px;
+}
+
+.text-decoration-underline { text-decoration: underline !important; }
+.display-4 { font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.1; font-weight: 700; }
+
+.banner-section {
+  background: #000 url("../images/backgrounds/fallback.webp") center / cover no-repeat;
+}
+
+@media (max-width: 767.98px) {
+  .banner-section > video { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  video { display: none !important; }
+  [data-aos] { opacity: 1 !important; transform: none !important; }
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+html:not(.aos-ready) [data-aos][data-aos] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.video-modal__close:focus-visible,
+.video-modal__nav:focus-visible {
+  outline: 2px solid var(--bs-accent);
+  outline-offset: 3px;
+}
+
 @keyframes spin {
     to { transform: rotate(360deg); }
 }

@@ -21,6 +21,9 @@
   let rendered = 0;
   let currentIndex = -1;
   let loadMore;
+  let lastTrigger = null;
+  let previousBodyOverflow = '';
+  const background = Array.from(document.querySelectorAll('header, main, footer, .floating-start-project, .whatsapp-float'));
 
   function setStatus(message) {
     if (statusEl) statusEl.textContent = message || '';
@@ -61,7 +64,7 @@
     card.className = 'video-card';
     card.dataset.videoId = videoId;
     card.setAttribute('aria-label', 'Play video: ' + title);
-    card.innerHTML = '<div class="video-card__thumb"><img src="' + escapeHtml(thumbnail(item)) + '" alt="' + escapeHtml(title) + '" loading="lazy" decoding="async"><div class="video-card__play" aria-hidden="true"><iconify-icon icon="lucide:play-circle"></iconify-icon></div></div><h3 class="video-card__title">' + escapeHtml(title) + '</h3>';
+    card.innerHTML = '<div class="video-card__thumb"><img src="' + escapeHtml(thumbnail(item)) + '" alt="' + escapeHtml(title) + '" loading="lazy" decoding="async"><div class="video-card__play" aria-hidden="true"><iconify-icon icon="lucide:play-circle" aria-hidden="true"></iconify-icon></div></div><h3 class="video-card__title">' + escapeHtml(title) + '</h3>';
     return card;
   }
 
@@ -79,7 +82,7 @@
       loadMore.addEventListener('click', renderNextPage);
       gallery.after(loadMore);
     }
-    loadMore.innerHTML = '<span>Load more (' + remaining + ' remaining)</span><iconify-icon icon="lucide:arrow-down"></iconify-icon>';
+    loadMore.innerHTML = '<span>Load more (' + remaining + ' remaining)</span><iconify-icon icon="lucide:arrow-down" aria-hidden="true"></iconify-icon>';
   }
 
   function renderNextPage() {
@@ -102,19 +105,28 @@
   function openModal(videoId) {
     currentIndex = videos.findIndex(item => item.snippet.resourceId.videoId === videoId);
     if (currentIndex < 0 || !modal) return;
+    lastTrigger = gallery.querySelector('[data-video-id="' + CSS.escape(videoId) + '"]');
+    previousBodyOverflow = document.body.style.overflow;
+    background.forEach(element => { element.inert = true; });
+    modal.inert = false;
     modal.classList.add('active');
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
     updateModal();
+    close?.focus();
   }
 
   function closeModal() {
     if (!modal) return;
     modal.classList.remove('active');
     modal.setAttribute('aria-hidden', 'true');
+    modal.inert = true;
     if (frame) frame.innerHTML = '';
-    document.body.style.overflow = '';
+    document.body.style.overflow = previousBodyOverflow;
+    background.forEach(element => { element.inert = false; });
     currentIndex = -1;
+    if (lastTrigger?.isConnected) lastTrigger.focus();
+    lastTrigger = null;
   }
 
   gallery.addEventListener('click', event => {
@@ -130,6 +142,20 @@
     if (event.key === 'Escape') closeModal();
     if (event.key === 'ArrowLeft' && currentIndex > 0) { currentIndex -= 1; updateModal(); }
     if (event.key === 'ArrowRight' && currentIndex < videos.length - 1) { currentIndex += 1; updateModal(); }
+    if (event.key === 'Tab') {
+      const focusable = Array.from(modal.querySelectorAll('button:not(:disabled), iframe, a[href], [tabindex]:not([tabindex="-1"])'))
+        .filter(element => element.getClientRects().length > 0);
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && (document.activeElement === first || document.activeElement === modal)) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
   });
 
   fetchVideos().then(data => {

@@ -1,4 +1,37 @@
 $(function () {
+    var heroVideo = document.querySelector('.banner-section video');
+    var heroVideoSource = heroVideo && heroVideo.querySelector('source[data-src]');
+    if (heroVideoSource && window.matchMedia &&
+        window.matchMedia('(min-width: 768px) and (prefers-reduced-motion: no-preference)').matches) {
+        heroVideoSource.src = heroVideoSource.dataset.src;
+        heroVideo.load();
+    }
+
+    var logoWhite = document.querySelector('.logo-white');
+    var logoDark = document.querySelector('.logo-dark');
+
+    function updateLogoAccessibility() {
+        var isScrolled = $("header").hasClass("fixed-header");
+        if (logoWhite) {
+            logoWhite.setAttribute('aria-hidden', String(isScrolled));
+            logoWhite.tabIndex = isScrolled ? -1 : 0;
+        }
+        if (logoDark) {
+            logoDark.setAttribute('aria-hidden', String(!isScrolled));
+            logoDark.tabIndex = isScrolled ? 0 : -1;
+        }
+    }
+
+    var menuToggle = document.querySelector('.toggle-menu');
+    var menuClose = document.querySelector('.header .btn-close');
+    if (menuToggle && menuClose && window.bootstrap) {
+        menuClose.addEventListener('click', function () {
+            window.bootstrap.Dropdown.getOrCreateInstance(menuToggle).hide();
+        });
+    }
+
+    var year = document.getElementById('year');
+    if (year) year.textContent = new Date().getFullYear();
 
     // ============================================================
     // HEADER SCROLL
@@ -10,7 +43,9 @@ $(function () {
         } else {
             $("header").removeClass("fixed-header");
         }
+        updateLogoAccessibility();
     });
+    updateLogoAccessibility();
 
     // ============================================================
     // COUNTERS
@@ -31,23 +66,10 @@ $(function () {
             );
     });
 
-    $('.trusted-logos-carousel').owlCarousel({
-        loop: true,
-        margin: 30,
-        nav: false,
-        dots: false,
-        autoplay: true,
-        autoplayTimeout: 3000,
-        autoplayHoverPause: true,
-        responsive: {
-            0: { items: 2 },
-            576: { items: 3 },
-            768: { items: 4 },
-            992: { items: 5 }
-        }
-    });
-
-    AOS.init({ once: true });
+    if (window.AOS) {
+        window.AOS.init({ once: true });
+        document.documentElement.classList.add('aos-ready');
+    }
 
     // ============================================================
     // FILE UPLOAD
