@@ -2,7 +2,7 @@ $(function () {
     var heroVideo = document.querySelector('.banner-section video');
     var heroVideoSource = heroVideo && heroVideo.querySelector('source[data-src]');
     if (heroVideoSource && window.matchMedia &&
-        window.matchMedia('(min-width: 768px) and (prefers-reduced-motion: no-preference)').matches) {
+        window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
         heroVideoSource.src = heroVideoSource.dataset.src;
         heroVideo.load();
     }

@@ -1020,11 +1020,7 @@ section[id] { scroll-margin-top: 110px; }
 .display-4 { font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.1; font-weight: 700; }
 
 .banner-section {
-  background: #000 url("../images/backgrounds/fallback.webp") center / cover no-repeat;
-}
-
-@media (max-width: 767.98px) {
-  .banner-section > video { display: none; }
+  background: #000 url("../images/backgrounds/fallback.png") center / cover no-repeat;
 }
 
 @media (prefers-reduced-motion: reduce) {
